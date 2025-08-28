@@ -6,6 +6,10 @@
     position: relative;
     overflow: hidden;
 
+    &__container {
+        padding-bottom: 0;
+    }
+
     &__left,
     &__right {
         position: relative;
@@ -68,11 +72,19 @@
         }
     }
 
+    &__stats-container {
+        margin-top: -50px;
+
+        @include bp.respond-to(xl) {
+            margin-top: 0;
+        }
+    }
+
     &__stats {
         background: $color-primary;
         position: relative;
 
-        @include bp.respond-to(xl) {
+        @include bp.respond-to(x2l) {
             z-index: 10;
         }
 

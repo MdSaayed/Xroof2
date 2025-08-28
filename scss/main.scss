@@ -1,6 +1,8 @@
-@use 'utils/index' as *;
-@use '../node_modules/bootstrap/scss/bootstrap' as *;   
+@use '../node_modules/bootstrap/scss/bootstrap' as *;
 
-// Layout 
+@use './components/services-card';
+@use 'utils/index' as *;
 @use './layout/header';
 @use './layout/hero';
+@use './layout/about';
+@use './layout/services'; 

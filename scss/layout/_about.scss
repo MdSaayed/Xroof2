@@ -1,0 +1,48 @@
+@use '../utils/mixin' as bp;
+
+.about {
+    overflow: hidden;
+
+    &__left {
+        position: relative;
+        display: flex;
+        justify-content: end;
+
+        @include bp.respond-to(x2l) {
+            justify-content: center;
+        }
+    }
+
+    &__img-wrap {
+        max-width: 560px;
+        width: 100%;
+        position: relative; 
+        z-index: 10;
+    }
+
+    &__img {
+        border-radius: 8px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__shape-wrap {
+        position: absolute;
+        top: 50%;
+        left: -4rem;
+        transform: translateY(-50%);
+        max-height: 100%;
+        overflow: hidden;
+
+        @include bp.respond-to(md) {
+            left: -50px;
+        }
+    }
+
+    &__shape {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}

@@ -1,14 +1,17 @@
+// breakpoints.scss file
 
-$xs: 350px;  
-$sm: 480px;   
-$md: 768px;  
-$lg: 1024px;  
-$xl: 1200px;   
-$x2l: 1440px; 
-$x3l: 1600px;  
-$x4l: 1800px;  
-$xxl: 1920px; 
+// Defining breakpoints
+$xs: 350px;
+$sm: 540px; //480px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1200px;
+$x2l: 1440px;
+$x3l: 1600px;
+$x4l: 1800px;
+$xxl: 1920px;
 
+// Creating a Sass map for breakpoints
 $grid-breakpoints: (
   xs: $xs,
   sm: $sm,
@@ -20,3 +23,47 @@ $grid-breakpoints: (
   x4l: $x4l,
   xxl: $xxl
 );
+
+// Grid column count (adjust as needed)
+$grid-columns: 12;
+
+// Import Sass math module
+@use 'sass:math';
+
+// --------------------------------------------------
+// Responsive Grid Utilities
+// --------------------------------------------------
+
+// Loop through each breakpoint to generate responsive classes
+@each $name, $breakpoint in $grid-breakpoints {
+  @media (min-width: $breakpoint) {
+
+    // Basic Column Classes
+    @for $i from 1 through $grid-columns {
+      .col-#{$name}-#{$i} {
+        flex: 0 0 auto;
+        width: math.div($i, $grid-columns) * 100%;
+      }
+    }
+
+    // Auto-width column
+    .col-#{$name} {
+      flex: 1 0 0%;
+    }
+
+    // Row-Col
+    .col-#{$name}-auto {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    // Column offsets
+    @for $i from 0 through $grid-columns - 1 {
+      @if ($i > 0) {
+        .offset-#{$name}-#{$i} {
+          margin-left: math.div($i, $grid-columns) * 100%;
+        }
+      }
+    }
+  }
+}
