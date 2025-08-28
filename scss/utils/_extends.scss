@@ -1,0 +1,27 @@
+@use './mixin' as *; 
+@use './variables' as *;
+
+@mixin btn-phn-white {
+    @include btn-phn;
+    background: $color-primary;
+    border: 1px solid $color-primary;
+
+    svg path {
+        fill: $color-white;
+    }
+
+    &:hover {
+        background: $color-white;
+
+
+        svg path {
+            fill: $color-primary;
+        }
+    }
+}
+
+@mixin subtitle-white {
+    @include subtitle;
+    color: $color-white;
+} 
+

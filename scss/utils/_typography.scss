@@ -1,0 +1,14 @@
+@use './variables' as *; 
+@use 'mixin' as *;
+
+h1 {
+  @include title-xxl; 
+  margin-bottom: 1rem; 
+}
+
+p,
+span,
+li,
+a {
+  @include body-text;
+}

@@ -1,0 +1,88 @@
+@use './variables' as *;
+@use './breakpoints' as *;
+@use 'sass:math';
+
+
+@for $i from 1 through 20 {
+  $gutter: $i * 4px;
+
+  // ------------------------
+  // Row gutter (Bootstrap compatible)
+  // ------------------------
+  .row.g-#{$i} {
+    margin-left: math.div(-$gutter, 2);
+    margin-right: math.div(-$gutter, 2);
+    margin-top: math.div(-$gutter, 2);
+    margin-bottom: math.div(-$gutter, 2);
+  }
+
+  // Column padding inside row
+  .row.g-#{$i} > [class*="col"] {
+    padding-left: math.div($gutter, 2);
+    padding-right: math.div($gutter, 2);
+    padding-top: math.div($gutter, 2);
+    padding-bottom: math.div($gutter, 2);
+  }
+
+  // Horizontal only
+  .row.gx-#{$i} {
+    margin-left: math.div(-$gutter, 2);
+    margin-right: math.div(-$gutter, 2);
+  }
+
+  .row.gx-#{$i} > [class*="col"] {
+    padding-left: math.div($gutter, 2);
+    padding-right: math.div($gutter, 2);
+  }
+
+  // Vertical only
+  .row.gy-#{$i} {
+    margin-top: math.div(-$gutter, 2);
+    margin-bottom: math.div(-$gutter, 2);
+  }
+
+  .row.gy-#{$i} > [class*="col"] {
+    padding-top: math.div($gutter, 2);
+    padding-bottom: math.div($gutter, 2);
+  }
+
+  // ------------------------
+  // Flex gap utilities
+  // ------------------------
+  .gap-#{$i} {
+    gap: $gutter !important;
+  }
+
+  // Responsive flex gap
+  @media (min-width: $sm) {
+    .gap-sm-#{$i} { gap: $gutter !important; }
+  }
+
+  @media (min-width: $md) {
+    .gap-md-#{$i} { gap: $gutter !important; }
+  }
+
+  @media (min-width: $lg) {
+    .gap-lg-#{$i} { gap: $gutter !important; }
+  }
+
+  @media (min-width: $xl) {
+    .gap-xl-#{$i} { gap: $gutter !important; }
+  }
+
+  @media (min-width: $x2l) {
+    .gap-x2l-#{$i} { gap: $gutter !important; }
+  }
+
+  @media (min-width: $x3l) {
+    .gap-x3l-#{$i} { gap: $gutter !important; }
+  }
+
+  @media (min-width: $x4l) {
+    .gap-x4l-#{$i} { gap: $gutter !important; }
+  }
+
+  @media (min-width: $xxl) {
+    .gap-xxl-#{$i} { gap: $gutter !important; }
+  }
+} 

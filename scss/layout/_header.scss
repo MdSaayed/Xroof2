@@ -1,0 +1,18 @@
+@use '../utils/variables' as *;
+
+.header {
+    $self : &;
+
+    &__top {
+        background: $color-primary;
+    }
+
+    &__container {
+        padding: 0 !important;
+    }
+
+    &__info-text {
+        color: $color-white;
+        margin-bottom: 0;
+    }
+}

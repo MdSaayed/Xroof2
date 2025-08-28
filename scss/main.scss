@@ -1,0 +1,6 @@
+@use 'utils/index' as *;
+@use '../node_modules/bootstrap/scss/bootstrap' as *;   
+
+// Layout 
+@use './layout/header';
+@use './layout/hero';

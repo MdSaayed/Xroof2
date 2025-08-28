@@ -1,0 +1,63 @@
+   @use './variables' as *;
+   @use './mixin' as *;
+   @use './extends' as*;
+
+   .text-center {
+     text-align: center;
+   }
+
+   .text-light {
+     color: $color-white;
+   }
+
+   .bg-primary {
+     background-color: $color-primary;
+   }
+
+   .flex-between {
+     display: flex;
+     justify-content: space-between;
+   }
+
+   .flex-items-center {
+     display: flex;
+     align-items: center;
+   }
+
+   .subtitle {
+     @include subtitle;
+   }
+
+   .subtitle-white {
+     @include subtitle-white;
+   }
+
+   .title-xxl {
+     @include title-xxl;
+   }
+
+   .title-xl {
+     @include title-xl;
+   }
+
+   .body-text {
+     @include body-text;
+   }
+
+
+   .btn-primary {
+     @include btn-primary;
+   }
+
+   .btn-phn {
+     @include btn-phn;
+   }
+
+   .btn-phn-white {
+     @include btn-phn-white;
+   }
+
+   .flex-items-center {
+     display: flex;
+     align-items: center;
+   }

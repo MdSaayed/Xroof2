@@ -1,0 +1,76 @@
+@use './variables' as *;
+@use './breakpoints' as *;
+
+// Define padding values for each breakpoint
+$container-padding: (
+    xs: 16px,
+    sm: 24px,
+    md: 32px,
+    lg: 60px,
+    xl: 120px,
+    xxl: 240px
+);
+
+// Define top-bottom padding values for each breakpoint
+$container-padding-y: (
+    xs: 60px,
+    sm: 80px,
+    md: 100px,
+    lg: 112px,
+    xl: 140px,
+    xxl: 160px
+);
+
+// Container
+.container {
+    width: 100%; // ভিউপোর্ট অনুযায়ী width
+    max-width: $xxl; // সর্বোচ্চ 1920px
+    margin-left: auto;
+    margin-right: auto;
+
+    // Mobile padding (xs)
+    padding-left: map-get($container-padding, xs);
+    padding-right: map-get($container-padding, xs);
+    padding-top: map-get($container-padding-y, xs);
+    padding-bottom: map-get($container-padding-y, xs);
+
+    // Small screens (sm)
+    @media (min-width: $sm) {
+        padding-left: map-get($container-padding, sm);
+        padding-right: map-get($container-padding, sm);
+        padding-top: map-get($container-padding-y, sm);
+        padding-bottom: map-get($container-padding-y, sm);
+    }
+
+    // Medium screens (md)
+    @media (min-width: $md) {
+        padding-left: map-get($container-padding, md);
+        padding-right: map-get($container-padding, md);
+        padding-top: map-get($container-padding-y, md);
+        padding-bottom: map-get($container-padding-y, md);
+    }
+
+    // Large screens (lg)
+    @media (min-width: $lg) {
+        padding-left: map-get($container-padding, lg);
+        padding-right: map-get($container-padding, lg);
+        padding-top: map-get($container-padding-y, lg);
+        padding-bottom: map-get($container-padding-y, lg);
+    }
+
+    // Extra Large screens (xl)
+    @media (min-width: $xl) {
+        padding-left: map-get($container-padding, xl);
+        padding-right: map-get($container-padding, xl);
+        padding-top: map-get($container-padding-y, xl);
+        padding-bottom: map-get($container-padding-y, xl);
+    }
+
+    // XXL screens
+    @media (min-width: $xxl) {
+        padding-left: map-get($container-padding, xxl);
+        padding-right: map-get($container-padding, xxl);
+        padding-top: map-get($container-padding-y, xxl);
+        padding-bottom: map-get($container-padding-y, xxl);
+    }
+}

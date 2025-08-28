@@ -1,0 +1,64 @@
+// Fonts
+$font-primary: 'Poppins', sans-serif;
+$font-heading: 'Outfit', sans-serif;
+
+// Colors
+$color-white: #ffffff;
+$color-primary: #EE212B;
+$color-black: #000;
+$color-dark: #0F0E0E;
+$color-gray-green: #8F9897;
+$color-dark-gray: #313131;
+
+// Line heights
+$line-height-body: 150%;
+$line-height-heading: 120%;
+$line-height-xl: 160%;
+
+// Letter spacing    
+$letter-spacing-body: 0.08px;
+$letter-spacing-h1: -0.8px;
+$letter-spacing-h2: -0.56px;
+$letter-spacing-h3: -0.24px;
+$letter-spacing-subtitle: 0.12px;
+$letter-spacing-primary: 0.16px;
+
+$btn-transition: all 0.3s ease;
+$primary-transition: 0.5s ease;   
+
+
+// Shadows
+$card-shadow1: 0 4px 8px 0 rgba(0, 0, 0, 0.08); 
+
+
+// ====================================================
+// Container max-width (Bootstrap-compatible)
+$container-max-widths: (
+  xs: 1920px,
+  sm: 1920px,
+  md: 1920px,
+  lg: 1920px,
+  xl: 1920px,
+  x2l: 1920px,
+  x3l: 1920px, 
+  x4l: 1920px, 
+  xxl: 1920px
+);
+
+// Bootstrap expects a scalar padding value
+$container-padding-x: 240px;
+
+// Grid gutter
+$grid-gutter-width: 1rem;
+
+// Bootstrap spacing scale
+$spacer: 0.25rem; // 4px
+$spacers: (
+  0: 0,
+  1: $spacer,
+  2: $spacer * 2,
+  3: $spacer * 3,
+  4: $spacer * 4,
+  5: $spacer * 5
+);
+

@@ -1,0 +1,36 @@
+@use '../utils/variables' as *;
+@use '../utils/mixin' as bp;
+
+@mixin card1 {
+    background: $color-white;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    box-shadow: $card-shadow1;
+    position: relative;
+    overflow: hidden;
+    transition: $primary-transition;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 0;
+        background: $color-primary;
+        transition: width 0.5s ease;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+
+        &::after {
+            width: 100%;
+        }
+    }
+
+    @include bp.respond-to(md) {
+        padding: 1.5rem;
+    }
+
+}
