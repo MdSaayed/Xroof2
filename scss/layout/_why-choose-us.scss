@@ -1,0 +1,18 @@
+@use '../utils/' as *;
+@use '../components/cards' as*;
+
+.why-choose-us {
+    &__title {
+        color: $color-white;
+    }
+
+    &__desc {
+        color: $color-white;
+    }
+
+    &__card {
+        @include card1; 
+         
+    }
+
+}
