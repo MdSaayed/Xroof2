@@ -88,3 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   counters.forEach(el => observer.observe(el));
 });
+
+/* =============================
+* 20. Pure Counter
+============================= */
+const lightbox = GLightbox({
+  selector: '.glightbox',
+  autoplayVideos: true  
+});
