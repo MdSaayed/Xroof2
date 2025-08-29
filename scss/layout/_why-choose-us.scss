@@ -1,18 +1,85 @@
 @use '../utils/' as *;
-@use '../components/cards' as*;
+@use '../components/cards' as *;
+@use '../components/card-centerd' as *;
+@use '../utils/mixin' as bp;
 
 .why-choose-us {
-    &__title {
+    // position: relative; 
+
+    &__title,
+    &__desc,
+    &__subtitle,
+    &__btn {
         color: $color-white;
+        position: relative;
+        z-index: 10;
+        padding-right: 10px;
     }
 
     &__desc {
-        color: $color-white;
+        max-width: 900px;
     }
 
     &__card {
-        @include card1; 
-         
+        @include card1;
+        position: relative;
+        z-index: 10;
+
+        &-icon-wrap {
+            @include card-icon-wrap;
+            background: $color-white;
+        }
+
+        &-title {
+            @include card-title;
+        }
     }
 
+    &__shape {
+        position: absolute;
+        width: 125%;
+        height: calc(100% + 7rem) !important;
+        top: 50%;
+        right: 0;
+        border-radius: 0 200px 200px 0;
+        transform: translateY(-43%);
+        background-position: center right;
+        background-size: contain;
+        z-index: 1 !important;
+
+        @include bp.respond-to(xxl) {
+            height: calc(100% + 5rem) !important;
+            transform: translateY(-50%);
+        }
+    }
+
+    &__award {
+        @include card-centered;
+        max-width: 120px;
+        max-height: 115px;
+        z-index: 15;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+
+        @include bp.respond-to(sm) {
+           display: none;
+        }
+
+        &-title {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.1px;
+            line-height: $line-height-heading;
+            text-align: center;
+        }
+
+        &-text {
+            font-size: 6px;
+            font-weight: 300;
+            letter-spacing: 0.03px;
+            text-align: center;
+        }
+    }
 }
