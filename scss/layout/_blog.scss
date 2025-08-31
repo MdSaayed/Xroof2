@@ -1,0 +1,106 @@
+@use '../utils/variables' as*;
+@use '../utils/mixin' as*;
+@use '../utils/mixin' as bp;
+
+.blog {
+    background: $color-white;
+
+    &__desc {
+        max-width: 510px;
+    }
+
+    &-card {
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: $card-shadow3;
+        transition: $btn-transition;
+
+        @include bp.respond-to(xs) {
+            padding: 1.5rem 10px;
+        }
+
+        &__header {
+            position: relative;
+        }
+
+        &__image-wrap {
+            max-height: 300px;
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+            border-radius: 0 8px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        &__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: $btn-transition;
+        }
+
+        &__badge {
+            position: absolute;
+            left: 1rem;
+            bottom: -1rem;
+            background: $color-primary;
+            max-width: 48px;
+            max-height: 48px;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 50%;
+            z-index: 10;
+            transition: $btn-transition;
+
+        }
+
+        &__date {
+            font-size: 18px;
+            color: $color-white;
+            font-weight: 500;
+        }
+
+        &__month {
+            color: $color-white;
+            font-size: 8px;
+        }
+
+        &__title {
+            @include card-title;
+            margin: 2rem 0 1rem 0;
+        }
+
+        &__text {
+            @include body-text;
+            color: $color-black;
+            margin-bottom: 1.5rem;
+        }
+
+        &__btn {
+            display: inline-block !important;
+            text-align: center;
+            transition: $btn-transition;
+        }
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+
+            .blog-card {
+                &__image {
+                    transform: scale(1.05);
+                }
+
+                &__badge {
+                    transform: scale(1.1);
+                    background-color: lighten($color-primary, 5%);
+                }
+            }
+        }
+    }
+}

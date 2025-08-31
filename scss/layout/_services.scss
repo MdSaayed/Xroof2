@@ -1,8 +1,8 @@
 @use '../utils/' as *;
 @use '../utils/mixin' as bp;
-@use '../components/cards' as*; 
+@use '../components/cards' as*;
 
-
+// Services Section Home One
 .services {
     &__item {
         &-icon-wrap {
@@ -31,109 +31,101 @@
             color: $color-dark-gray;
         }
     }
-}
 
-
-
-.services__top {
-    &-title {
+    &__top-title {
         text-align: center;
         color: $color-white;
         margin-bottom: 1rem;
     }
 
-    &-desc {
+    &__top-desc {
         color: $color-white;
         text-align: center;
         max-width: 560px;
         margin: 0 auto;
     }
-}
 
-.services__bottom {
-    margin-top: -300px;
-    padding-top: 0;
+    &__bottom {
+        margin-top: -300px;
+        padding-top: 0;
 
-    @include bp.respond-to(xl) {
-        margin-top: -240px;
+        @include bp.respond-to(xl) {
+            margin-top: -240px;
+        }
+
+        @include bp.respond-to(md) {
+            margin-top: -170px;
+        }
     }
 
-    @include bp.respond-to(md) {
-        margin-top: -170px;
-    }
+    &__card {
+        @include card1;
 
-}
-
-.services__card {
-    @include card1;
-
-    &-icon-wrap {
-        width: 50px;
-        height: 50px;
-        display: grid;
-        place-items: center;
-        border: 1px solid $color-primary;
-        border-radius: 50%;
-        margin-bottom: 1rem;
-        margin: 0 auto;
-        transition: $primary-transition;
-
-        svg path {
-            fill: $color-primary;
+        &-icon-wrap {
+            width: 50px;
+            height: 50px;
+            display: grid;
+            place-items: center;
+            border: 1px solid $color-primary;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            margin: 0 auto;
             transition: $primary-transition;
-        }
-    }
 
-    &-title {
-        font-size: clamp(1.2rem, 2vw + 6px, 1.5rem);
-        font-weight: 500;
-        line-height: $line-height-heading;
-        color: $color-black;
-        letter-spacing: $letter-spacing-h3;
-        margin-top: 1rem;
-        text-align: center;
-    }
-
-    &-text {
-        @extend .body-text;
-        text-align: center;
-        margin: 1.5rem 0;
-
-    }
-
-    &-btn {
-        display: block;
-        text-align: center !important;
-        width: 100%;
-        font-size: 1rem;
-        color: $color-primary;
-        font-family: $font-heading;
-        font-weight: 400;
-        letter-spacing: 0.08px;
-        text-decoration: none;
-        transition: transform $btn-transition;
-
-        svg {
-            transition: transform 0.5s ease;
-        }
-
-        &:hover {
-            text-decoration: underline;
-
-            svg {
-                transform: translateX(4px);
+            svg path {
+                fill: $color-primary;
+                transition: $primary-transition;
             }
         }
-    }
 
-    &:hover {
-        .services__card-icon-wrap {
+        &-title {
+            font-size: clamp(1.2rem, 1vw + 0.5rem, 1.5rem);
+            font-weight: 500;
+            line-height: $line-height-heading;
+            color: $color-black;
+            letter-spacing: $letter-spacing-h3;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        &-text {
+            @extend .body-text;
+            text-align: center;
+            margin: 1.5rem 0;
+
+        }
+
+        &-btn {
+            display: block;
+            text-align: center !important;
+            width: 100%;
+            font-size: 1rem;
+            color: $color-primary;
+            font-family: $font-heading;
+            font-weight: 400;
+            letter-spacing: 0.08px;
+            text-decoration: none;
+            transition: transform $btn-transition;
+
+            svg {
+                transition: transform 0.5s ease;
+            }
+
+            &:hover {
+                text-decoration: underline;
+
+                svg {
+                    transform: translateX(4px);
+                }
+            }
+        }
+
+        &:hover &-icon-wrap {
             background: $color-primary;
 
             svg path {
                 fill: $color-white;
             }
         }
-
     }
 }

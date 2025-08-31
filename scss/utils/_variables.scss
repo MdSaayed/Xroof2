@@ -10,6 +10,8 @@ $color-dark: #0F0E0E;
 $color-gray-green: #8F9897;
 $color-dark-gray: #313131;
 $color-light-gray: #F2F2F2;
+$color-light-pink: #FFF4F5;
+
 
 // Line heights
 $line-height-body: 150%;
@@ -31,10 +33,11 @@ $primary-transition: 0.5s ease;
 // Shadows
 $card-shadow1: 0 4px 8px 0 rgba(0, 0, 0, 0.08); 
 $card-shadow2: 0 4px 8px 0 rgba(0, 0, 0, 0.10);  
+$card-shadow3: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
 
 
 // ====================================================
-// Container max-width (Bootstrap-compatible)
+// Container max-width  
 $container-max-widths: (
   xs: 1920px,
   sm: 1920px,
@@ -46,20 +49,4 @@ $container-max-widths: (
   x4l: 1920px,
   xxl: 1920px
 );
-
-// Bootstrap expects a scalar padding value
-$container-padding-x: 240px;
-
-// Grid gutter
-$grid-gutter-width: 1rem;
-
-// Bootstrap spacing scale
-$spacer: 0.25rem;  
-$spacers: (
-  0: 0,
-  1: $spacer,
-  2: $spacer * 2,
-  3: $spacer * 3,
-  4: $spacer * 4,
-  5: $spacer * 5
-);
+ 

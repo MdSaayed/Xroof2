@@ -101,4 +101,20 @@
         font-weight: 400;
         color: $color-black;
     }
+
+    &__home-icon {
+        position: absolute;
+        left: 40%;
+        bottom: -2rem;
+        transform: translateX(-40%);
+
+        @include bp.respond-to(md) {
+            left: 20%;
+            transform: translateX(-20%);
+        }
+
+        @include bp.respond-to(xs) {
+            display: none;
+        }
+    }
 }

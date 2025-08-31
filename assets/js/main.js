@@ -90,9 +90,32 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* =============================
-* 20. Pure Counter
+* 20. Glightbox
 ============================= */
 const lightbox = GLightbox({
   selector: '.glightbox',
-  autoplayVideos: true  
+  autoplayVideos: true
+});
+
+/* =============================
+* 20. Faq
+============================= */
+
+document.querySelectorAll('.faq__item').forEach(item => {
+  const button = item.querySelector('.faq__question-wrap');
+  const answer = item.querySelector('.faq__answer');
+
+  button.addEventListener('click', () => {
+    const isActive = item.classList.contains('active');
+
+    document.querySelectorAll('.faq__item').forEach(i => {
+      i.classList.remove('active');
+      i.querySelector('.faq__answer').style.height = 0;
+    });
+
+    if (!isActive) {
+      item.classList.add('active');
+      answer.style.height = "auto";
+    }
+  });
 });

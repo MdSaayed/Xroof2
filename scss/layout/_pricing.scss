@@ -1,0 +1,123 @@
+@use '../utils/' as *;
+@use '../utils/mixin' as *;
+@use '../utils/mixin' as bp;
+
+.pricing {
+    &__title {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    &__desc {
+        text-align: center;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    &__card {
+        &:hover &-header {
+            background: $color-primary;
+
+            .pricing__card-title,
+            .pricing__price,
+            .pricing__unit,
+            .pricing__subtitle {
+                color: $color-white;
+                transition: $btn-transition;
+            }
+            .pricing__icon svg path{
+                fill: $color-white;
+                transition: $btn-transition;
+            }
+        }
+    }
+
+    &__card-header {
+        background: $color-light-pink;
+        padding: 1.5rem 2.5rem;
+        border-radius: 10px;
+        padding-bottom: 7rem;
+        position: relative;
+        transition: $btn-transition;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../../assets/img/shape/services-card-square-shape.png') center center / cover no-repeat;
+            z-index: 1;
+
+        }
+
+        &>*{
+            position: relative;
+            z-index: 15;
+        }
+
+        @include bp.respond-to(md) {
+            padding: 1.5rem 1rem;
+            padding-bottom: 7rem;
+        }
+    }
+
+    &__card-title {
+        @include card-title;
+    }
+
+    &__price {
+        @include title-sm;
+    }
+
+    &__unit {
+        @include body-text;
+    }
+
+    &__btn {
+        padding-left: 3rem;
+        padding-right: 3rem;
+        cursor: pointer;
+    }
+
+    &__features {
+        background: $color-white;
+        box-shadow: $card-shadow2;
+        padding: 2rem;
+        border-radius: 8px;
+        margin-top: -6rem !important;
+        width: calc(100% - 20%);
+        position: relative;
+        z-index: 10;
+
+        @include bp.respond-to(sm) {
+            padding: 1.5rem 10px;
+            width: calc(100% - 1rem);
+        }
+
+        @include bp.respond-to(md) {
+            padding: 1.5rem;
+            width: calc(100% - 10%);
+        }
+    }
+
+    &__item {
+        @include body-text;
+        position: relative;
+        list-style: none;
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.3rem; // vertically adjust
+            width: 17px;
+            height: 17px;
+            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 17 17' fill='none'><path d='M8.16675 0.205078C3.75572 0.205078 0.166748 3.79405 0.166748 8.20508C0.166748 12.6161 3.75572 16.2051 8.16675 16.2051C12.5778 16.2051 16.1667 12.6161 16.1667 8.20508C16.1667 3.79405 12.5778 0.205078 8.16675 0.205078ZM12.6379 6.09981L7.52514 11.1725C7.22439 11.4732 6.74319 11.4933 6.42239 11.1925L3.71562 8.72638C3.39482 8.42563 3.37477 7.92438 3.65547 7.60357C3.95622 7.28277 4.45747 7.26272 4.77828 7.56347L6.92364 9.52839L11.4951 4.95696C11.8159 4.63616 12.3171 4.63616 12.6379 4.95696C12.9587 5.27776 12.9587 5.77901 12.6379 6.09981Z' fill='%23EE212B'/></svg>") no-repeat center;
+            background-size: contain;
+        }
+    }
+}

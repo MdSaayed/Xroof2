@@ -1,21 +1,27 @@
 @use './breakpoints' as *;
 
 $container-padding: (
-    xs: 15px,
-    sm: 24px,
-    md: 32px,
-    lg: 60px,
-    xl: 120px,
-    xxl: 240px
+  xs: 15px,   
+  sm: 24px,  
+  md: 32px,  
+  lg: 60px,  
+  xl: 80px,   
+  x2l: 100px,  
+  x3l: 120px, 
+  x4l: 180px,  
+  xxl: 240px   
 );
 
 $container-padding-y: (
-    xs: 50px,
-    sm: 60px,
-    md: 80px,
-    lg: 100px,
-    xl: 112px,
-    xxl: 112px
+  xs: 40px,    
+  sm: 50px,
+  md: 60px,
+  lg: 65px,
+  xl: 70px,
+  x2l: 80px,
+  x3l: 90px,
+  x4l: 100px,
+  xxl: 112px   
 );
 
 
@@ -61,6 +67,30 @@ $container-padding-y: (
         padding-right: map-get($container-padding, xl);
         padding-top: map-get($container-padding-y, xl);
         padding-bottom: map-get($container-padding-y, xl);
+    }
+
+    // Extra Large screens (x2l)
+    @media (min-width: $x2l) {
+        padding-left: map-get($container-padding, x2l);
+        padding-right: map-get($container-padding, x2l);
+        padding-top: map-get($container-padding-y, x2l);
+        padding-bottom: map-get($container-padding-y, x2l);
+    }
+
+    // Extra Large screens (x2l)
+    @media (min-width: $x3l) {
+        padding-left: map-get($container-padding, x3l);
+        padding-right: map-get($container-padding, x3l);
+        padding-top: map-get($container-padding-y, x3l);
+        padding-bottom: map-get($container-padding-y, x3l);
+    }
+
+    // Extra Large screens (x2l)
+    @media (min-width: $x4l) {
+        padding-left: map-get($container-padding, x4l);
+        padding-right: map-get($container-padding, x4l);
+        padding-top: map-get($container-padding-y, x4l);
+        padding-bottom: map-get($container-padding-y, x4l);
     }
 
     // XXL screens
