@@ -38,6 +38,57 @@ document.addEventListener("DOMContentLoaded", function () {
 /* =============================
 * 20. Pure Counter
 ============================= */
+// document.addEventListener('DOMContentLoaded', () => {
+//   const counters = document.querySelectorAll('[data-start][data-end]');
+
+//   const animateCounter = (el) => {
+//     const start = parseFloat(el.dataset.start) || 0;
+//     const end = parseFloat(el.dataset.end) || 0;
+//     const duration = parseFloat(el.dataset.duration) || 2000; // ms
+//     const format = el.dataset.format || 'k'; // default to k
+//     let startTime = null;
+
+//     function animate(timestamp) {
+//       if (!startTime) startTime = timestamp;
+//       const progress = Math.min((timestamp - startTime) / duration, 1); // 0 → 1
+//       const value = start + (end - start) * progress;
+
+//       // Determine display based on format
+//       if (format === 'k') {
+//         el.innerText = (value / 1000).toFixed(1) + 'k';
+//       } else if (format === 'full') {
+//         el.innerText = Math.round(value);
+//       }
+
+//       if (progress < 1) {
+//         requestAnimationFrame(animate);
+//       } else {
+//         // Ensure exact final value
+//         if (format === 'k') {
+//           el.innerText = (end / 1000).toFixed(1) + 'k';
+//         } else if (format === 'full') {
+//           el.innerText = Math.round(end);
+//         }
+//       }
+//     }
+
+//     requestAnimationFrame(animate);
+//   };
+
+//   const observer = new IntersectionObserver((entries, observer) => {
+//     entries.forEach(entry => {
+//       if (entry.isIntersecting) {
+//         animateCounter(entry.target);
+//         observer.unobserve(entry.target); // animate only once
+//       }
+//     });
+//   }, {
+//     threshold: 0.5
+//   });
+
+//   counters.forEach(el => observer.observe(el));
+// });
+
 document.addEventListener('DOMContentLoaded', () => {
   const counters = document.querySelectorAll('[data-start][data-end]');
 
@@ -45,7 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const start = parseFloat(el.dataset.start) || 0;
     const end = parseFloat(el.dataset.end) || 0;
     const duration = parseFloat(el.dataset.duration) || 2000; // ms
-    const format = el.dataset.format || 'k'; // default to k
+    const format = el.dataset.format || 'short'; // default short (k)
+    const suffix = el.dataset.suffix || ''; // optional suffix
     let startTime = null;
 
     function animate(timestamp) {
@@ -54,20 +106,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const value = start + (end - start) * progress;
 
       // Determine display based on format
-      if (format === 'k') {
-        el.innerText = (value / 1000).toFixed(1) + 'k';
-      } else if (format === 'full') {
-        el.innerText = Math.round(value);
+      if (format === 'full') {
+        el.innerText = Math.round(value) + suffix;
+      } else {
+        el.innerText = (value / 1000).toFixed(1) + 'k' + suffix;
       }
 
       if (progress < 1) {
         requestAnimationFrame(animate);
       } else {
         // Ensure exact final value
-        if (format === 'k') {
-          el.innerText = (end / 1000).toFixed(1) + 'k';
-        } else if (format === 'full') {
-          el.innerText = Math.round(end);
+        if (format === 'full') {
+          el.innerText = Math.round(end) + suffix;
+        } else {
+          el.innerText = (end / 1000).toFixed(1) + 'k' + suffix;
         }
       }
     }
@@ -88,6 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   counters.forEach(el => observer.observe(el));
 });
+
+
 
 /* =============================
 * 20. Glightbox
@@ -128,7 +182,9 @@ const hero_two_slider = tns({
   container: '#hero-two-slider',
   items: 1,
   slideBy: 'page',
-  autoplay: false,
+  autoplay: true,
+  autoplayTimeout: 3000,
+  autoplayButtonOutput: false,
   controls: false,
   nav: false,
   loop: true,
