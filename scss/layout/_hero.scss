@@ -136,13 +136,12 @@
 
         .hero__content {
             position: relative;
-            // min-height: 90vh;
+            min-height: 90vh;
         }
 
         .hero__top {
             padding-bottom: 10rem;
         }
-
 
         .hero__title {
             max-width: 710px;
@@ -218,10 +217,12 @@
             // bottom: 2rem;
             // left: 50%;
             // transform: translateX(-50%);
-            font-size: 400px;
+            font-size: clamp(2rem, 8vw, 25rem);
+            text-align: center;
             color: $color-white;
             font-weight: 800;
             letter-spacing: -4px;
+            line-height: 90%;
             font-family: $font-heading;
             z-index: 999 !important;
         }
