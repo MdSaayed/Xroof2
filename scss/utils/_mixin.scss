@@ -1,63 +1,68 @@
 @use './variables' as *;
 @use './breakpoints' as *;
 
-// H1 heading mixin 
-@mixin title-xxl {
+@mixin title-xxl($size: clamp(48px, 5vw, 80px),
+  $color: $color-white,
+  $weight: 500,
+  $line-height: 120%,
+  $highlight-color: $color-primary) {
   font-family: $font-heading;
-  font-size: clamp(48px, 5vw, 80px);
+  font-size: $size;
   font-style: normal;
-  font-weight: 500;
-  line-height: 120%;
+  font-weight: $weight;
+  line-height: $line-height;
   letter-spacing: -0.8px;
-  color: $color-white;
+  color: $color;
+
+  .highlight {
+    color: $highlight-color;
+    font: inherit;  
+    line-height: inherit; 
+    letter-spacing: inherit;
+  }
 }
 
-// Heading XL
-@mixin title-xl {
+
+@mixin title-xl($color: $color-black) {
   font-family: $font-heading;
   font-weight: 500;
   font-style: normal;
   line-height: $line-height-heading;
   letter-spacing: $letter-spacing-subtitle;
   font-size: clamp(32px, 4vw + 12px, 56px);
+  color: $color;
 }
 
-// Subtitle
-@mixin subtitle {
-  font-family: $color-black;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  font-family: Poppins;
+@mixin subtitle($color: $color-black) {
+  font-family: $font-primary;
   font-size: clamp(16px, 1vw + 12px, 24px);
+  font-weight: 400;
   font-style: normal;
   line-height: 150%;
   letter-spacing: 0.12px;
+  color: $color;
 }
 
-@mixin title-sm {
-  font-size: clamp(18px, 2vw + 1rem, 32px); 
+@mixin title-sm($color: $color-black) {
+  font-size: clamp(18px, 2vw + 1rem, 32px);
   font-weight: 500;
   font-family: $font-heading;
   line-height: $line-height-heading;
   letter-spacing: 0.32px;
-  color: $color-black;
+  color: $color;
 }
 
-// Paragraph / Body Text
-@mixin body-text {
+@mixin body-text($color: $color-black) {
   font-family: $font-primary;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: $line-height-body;
   letter-spacing: $letter-spacing-body;
-  color: $color-black;
-  color: $color-dark-gray;
+  color: $color;
 }
 
-// Primary button mixin
-@mixin btn-primary {
+@mixin button($bg, $text, $hover-bg: transparent, $hover-text: $bg) {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -65,10 +70,10 @@
   font-size: clamp(14px, 1vw + 10px, 16px);
   font-weight: 400;
   padding: 10px 1.5rem;
-  border: none;
+  border: 2px solid $bg;
   border-radius: 98px;
-  color: $color-white;
-  background-color: $color-primary;
+  color: $text;
+  background-color: $bg;
   cursor: pointer;
   text-align: center;
   transition: $btn-transition;
@@ -79,36 +84,34 @@
   svg {
     width: 32px;
     height: 32px;
-    background-color: $color-white;
+    background-color: $text;
     border-radius: 50%;
     transition: $btn-transition;
     padding: 8px;
 
     path {
-      fill: $color-primary;
+      fill: $bg;
       transition: $btn-transition;
     }
   }
 
   &:hover {
-    background-color: $color-white;
-    color: $color-primary;
+    background-color: $hover-bg; // transparent
+    color: $hover-text; // primary
+    border-color: $hover-text; // primary
 
     svg {
-      background-color: $color-primary;
+      background-color: $hover-text; // circle = primary
 
       path {
-        fill: $color-white;
+        fill: $color-white; // arrow = white
       }
     }
   }
 }
 
-
-
-// Button Phone
-@mixin btn-phn {
-  background: $color-white;
+@mixin btn-phn($bg: $color-primary, $icon: $color-white) {
+  background: $bg;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -117,59 +120,47 @@
   place-items: center;
   margin: 0;
   flex-shrink: 0;
+  transition: $btn-transition;
 
+  svg path {
+    fill: $icon;
+    transition: $btn-transition;
+  }
+
+  // invert on hover
   &:hover {
-    background: $color-primary;
+    background: $icon;
 
     svg path {
-      fill: $color-white;
+      fill: $bg;
     }
   }
 }
 
-// Card Title
-@mixin card-title {
+@mixin card-title($color: $color-black) {
   font-size: clamp(1rem, 2vw + 6px, 1.5rem);
   font-weight: 500;
   line-height: $line-height-heading;
-  color: $color-black;
   letter-spacing: $letter-spacing-h3;
   margin-bottom: 1.5rem;
   font-family: $font-heading;
+  color: $color;
 }
 
-// Card desc
-@mixin card-text {
+@mixin card-text($color: $color-dark-gray) {
   font-size: clamp(14px, 1vw + 10px, 16px);
   line-height: $line-height-body;
   letter-spacing: $letter-spacing-body;
-  color: $color-dark-gray;
+  color: $color;
 }
 
-// card icon wrap
-@mixin card-icon-wrap {
+@mixin card-icon-wrap($bg: $color-primary) {
   width: 40px;
   height: 40px;
   display: grid;
   place-items: center;
-  background: $color-primary;
+  background: $bg;
   border-radius: 50%;
   margin-bottom: 1rem;
-}
-
-
-// Breakpoints
-
-@mixin respond-to($breakpoint) {
-  $value: map-get($grid-breakpoints, $breakpoint);
-
-  @if $value {
-    @media (max-width: $value) {
-      @content;
-    }
-  }
-
-  @else {
-    @warn "No value found for `#{$breakpoint}` in $grid-breakpoints map.";
-  }
+  transition: $btn-transition;
 }

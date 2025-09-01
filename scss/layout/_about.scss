@@ -1,4 +1,4 @@
-@use '../utils/mixin' as bp;
+@use '../utils/breakpoints' as bp;
 
 .about {
     overflow: hidden;
@@ -7,16 +7,26 @@
         position: relative;
         display: flex;
         justify-content: end;
+        margin-right: 1rem;
 
         @include bp.respond-to(x2l) {
             justify-content: center;
+            margin-right: 0;
+        }
+    }
+
+    &__right {
+        margin-left: 1rem;
+
+        @include bp.respond-to(x2l) {
+            padding-left: 0;
         }
     }
 
     &__img-wrap {
         max-width: 560px;
         width: 100%;
-        position: relative; 
+        position: relative;
         z-index: 10;
     }
 

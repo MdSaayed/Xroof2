@@ -24,7 +24,6 @@ $grid-breakpoints: (
   xxl: $xxl
 );
 
-// Grid column count (adjust as needed)
 $grid-columns: 12;
 
 // Import Sass math module
@@ -34,11 +33,9 @@ $grid-columns: 12;
 // Responsive Grid Utilities
 // --------------------------------------------------
 
-// Loop through each breakpoint to generate responsive classes
 @each $name, $breakpoint in $grid-breakpoints {
   @media (min-width: $breakpoint) {
 
-    // Basic Column Classes
     @for $i from 1 through $grid-columns {
       .col-#{$name}-#{$i} {
         flex: 0 0 auto;
@@ -46,18 +43,15 @@ $grid-columns: 12;
       }
     }
 
-    // Auto-width column
     .col-#{$name} {
       flex: 1 0 0%;
     }
 
-    // Row-Col
     .col-#{$name}-auto {
       flex: 0 0 auto;
       width: auto;
     }
 
-    // Column offsets
     @for $i from 0 through $grid-columns - 1 {
       @if ($i > 0) {
         .offset-#{$name}-#{$i} {
@@ -67,3 +61,18 @@ $grid-columns: 12;
     }
   }
 } 
+
+
+ @mixin respond-to($breakpoint) {
+  $value: map-get($grid-breakpoints, $breakpoint);
+
+  @if $value {
+    @media (max-width: $value) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "No value found for `#{$breakpoint}` in $grid-breakpoints map.";
+  }
+}

@@ -1,18 +1,18 @@
 @use '../utils/' as *;
-@use '../components/cards' as *;
 @use '../components/card-centerd' as *;
-@use '../utils/mixin' as bp;
+@use '../utils/breakpoints' as bp;
 
 .why-choose-us {
-    // position: relative; 
+    &__left {
+        position: relative;
+        z-index: 10;
+    }
 
     &__title,
     &__desc,
     &__subtitle,
     &__btn {
         color: $color-white;
-        position: relative;
-        z-index: 10;
         padding-right: 10px;
     }
 
@@ -21,7 +21,7 @@
     }
 
     &__card {
-        @include card1;
+        @extend %card1;
         position: relative;
         z-index: 10;
 
@@ -45,7 +45,7 @@
         transform: translateY(-43%);
         background-position: center right;
         background-size: contain;
-        z-index: 1 !important;
+        z-index: -1 !important;
 
         @include bp.respond-to(xxl) {
             height: calc(100% + 5rem) !important;
@@ -64,7 +64,7 @@
         align-items: center;
 
         @include bp.respond-to(sm) {
-           display: none;
+            display: none;
         }
 
         &-title {

@@ -119,3 +119,41 @@ document.querySelectorAll('.faq__item').forEach(item => {
     }
   });
 });
+
+
+/* =============================
+* 20. Hero Two Slider
+============================= */
+// const hero_tow_slider = new Swiper("#hero-two-slider", {
+//   lazy: true,
+//   pagination: {
+//     el: ".swiper-pagination",
+//     clickable: true,
+//   },
+//   navigation: {
+//     nextEl: ".hero__btn--next",
+//     prevEl: ".hero__btn--prev",
+//   },
+//   loop: true,
+// });
+
+// Initialize Tiny Slider
+const heroSlider = tns({
+  container: '#hero-two-slider',
+  items: 1,
+  slideBy: 'page',
+  autoplay: false,
+  controls: false,       // disable default prev/next
+  nav: true,             // dots pagination
+  loop: true,
+  lazyload: true,
+});
+
+// Link custom buttons
+const prevBtn = document.querySelector('.hero__btn--prev');
+const nextBtn = document.querySelector('.hero__btn--next');
+
+prevBtn.addEventListener('click', () => heroSlider.goTo('prev'));
+nextBtn.addEventListener('click', () => heroSlider.goTo('next'));
+
+

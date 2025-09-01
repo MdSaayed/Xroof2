@@ -1,6 +1,5 @@
 @use '../utils/' as *;
-@use '../utils/mixin' as bp;
-@use '../components/cards' as*;
+@use '../utils/breakpoints' as bp;
 
 // Services Section Home One
 .services {
@@ -34,7 +33,6 @@
 
     &__top-title {
         text-align: center;
-        color: $color-white;
         margin-bottom: 1rem;
     }
 
@@ -59,7 +57,7 @@
     }
 
     &__card {
-        @include card1;
+        @extend %card1; 
 
         &-icon-wrap {
             width: 50px;

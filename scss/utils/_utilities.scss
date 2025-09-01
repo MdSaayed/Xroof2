@@ -29,7 +29,7 @@
    }
 
    .subtitle-white {
-     @include subtitle-white;
+     @include subtitle($color-white);
    }
 
    .title-xxl {
@@ -40,13 +40,12 @@
      @include title-xl;
    }
 
-   .body-text {
-     @include body-text;
+   .title-xl-white {
+     @include title-xl($color-white);
    }
 
-
-   .btn-primary {
-     @include btn-primary;
+   .body-text {
+     @include body-text;
    }
 
    .btn-phn {
@@ -54,12 +53,24 @@
    }
 
    .btn-phn-white {
-     @include btn-phn-white;
+     @include btn-phn($bg: $color-white, $icon: $color-primary);
+   }
+
+   .btn-primary {
+     @include button($color-primary, $color-white, transparent, $color-primary);
+   }
+
+   .btn-secondary {
+     @include button('#fff', $color-white);
+   }
+
+   .btn-light {
+     @include button($color-white, $color-primary);
    }
 
    .flex-items-center {
      display: flex;
-     align-items: center; 
+     align-items: center;
    }
 
    //  For equal height
@@ -75,4 +86,3 @@
    section {
      overflow-x: hidden;
    }
-

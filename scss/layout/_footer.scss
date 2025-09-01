@@ -1,9 +1,17 @@
 @use '../utils/variables' as *;
 @use '../utils/mixin' as *;
-@use '../utils/mixin' as bp;
+@use '../utils/breakpoints' as bp;
 
 .footer {
-    background: $color-black;
+
+
+    &__cta-container {
+        margin-bottom: -12rem;
+
+        @include bp.respond-to(md) {
+            margin-bottom: -8rem;
+        }
+    }
 
     &__cta {
         background: $color-primary;
@@ -18,8 +26,6 @@
     }
 
     &__cta-title {
-        @include title-xl;
-        color: $color-white;
         max-width: 555px;
         letter-spacing: -0.56px;
     }
@@ -43,6 +49,117 @@
 
         @include bp.respond-to(xl) {
             max-width: 700px;
+        }
+    }
+
+    &__content {
+        background: $color-black;
+        padding-top: 7rem;
+    }
+
+    &__desc-small {
+        color: $color-white;
+        max-width: 92%;
+    }
+
+    &__social-link {
+        @include card-icon-wrap;
+        margin-bottom: 0;
+        border-radius: 50%;
+        flex-shrink: 0;
+
+        &:hover {
+            background: $color-white;
+
+            svg path {
+                fill: $color-primary
+            }
+        }
+    }
+
+    &__title {
+        @include card-title;
+        color: $color-white;
+    }
+
+    &__nav-link,
+    &__hour,
+    &__newsletter-text {
+        color: $color-white;
+    }
+
+    &__newsletter-form-group {
+        position: relative;
+        max-width: 400px;
+
+    }
+
+    .newsletter-form {
+        border: 1px solid $color-white;
+        border-radius: 8px;
+        background: transparent;
+        padding: 12px 1.2rem;
+        color: $color-white !important;
+
+        &:focus {
+            border-color: $color-primary;
+            outline: none;
+            box-shadow: none;
+            background: transparent;
+        }
+
+        &::placeholder {
+            @include body-text;
+            color: $color-white;
+        }
+
+        &-btn {
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            transform: translateY(-50%);
+            background: $color-white;
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin: 0;
+
+            &:hover svg {
+                transform: translateX(2px);
+                transition: $primary-transition;
+            }
+        }
+    }
+
+    &__bottom {
+        border-top: 0.3px solid $color-white;
+        padding-top: 1.5rem;
+        color: $color-white;
+
+        &-text {
+            color: $color-white !important;
+        }
+
+        &-nav-link {
+            list-style: none;
+            position: relative;
+            color: $color-white;
+            padding-left: 20px;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 8px;
+                height: 8px;
+                background: $color-white;
+                border-radius: 50%;
+            }
         }
     }
 }

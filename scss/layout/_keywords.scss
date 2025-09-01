@@ -1,0 +1,73 @@
+@use '../utils/variables' as *;
+@use '../utils/mixin' as *;
+@use '../utils/breakpoints' as bp;
+
+
+.keywords {
+    background-color: $color-primary;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &__container {
+        padding: 2rem 0 !important;
+    }
+
+    &__wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+
+    &__track {
+        display: flex;
+        width: fit-content;
+        animation: scroll 20s linear infinite;
+    }
+
+    &__group {
+        display: flex;
+        flex-shrink: 0;
+    }
+
+    &__item {
+        @include card-title($color-white);
+        display: inline-block;
+        text-transform: uppercase;
+        margin: 0 3rem;
+        white-space: nowrap;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: -14px;
+            background: $color-white;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+
+        @include bp.respond-to(xl){
+             margin: 0 2rem;
+        }
+
+        @include bp.respond-to(lg){
+             margin: 0 1.5rem;
+        }
+
+        @include bp.respond-to(sm){
+             margin: 0 1rem;
+        }
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0%);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+}

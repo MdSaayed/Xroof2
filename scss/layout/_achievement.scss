@@ -1,5 +1,5 @@
 @use '../utils/variables' as*;
-@use '../utils/mixin' as bp;
+@use '../utils/breakpoints' as bp;
 
 .achievement {
     &__img-wrap {

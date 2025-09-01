@@ -1,5 +1,5 @@
 @use '../utils/' as*;
-@use '../utils/mixin' as bp;
+@use '../utils/breakpoints' as bp;
 
 .team__member {
     max-height: 460px;
@@ -63,7 +63,7 @@
     &-social-links {
         position: absolute;
         right: 1.5rem;
-        bottom: 0;
+        bottom: 2rem;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -88,6 +88,15 @@
         width: 40px;
         border-radius: 50%;
         padding: 5px;
+        transition: $primary-transition;
+
+        &:hover{
+            background: $color-white;
+
+            svg path{
+                fill:$color-primary; 
+            }
+        }
 
         @include bp.respond-to(xs) {
             height: 30px;
