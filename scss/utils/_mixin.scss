@@ -16,21 +16,27 @@
 
   .highlight {
     color: $highlight-color;
-    font: inherit;  
-    line-height: inherit; 
+    font: inherit;
+    line-height: inherit;
     letter-spacing: inherit;
   }
 }
 
-
-@mixin title-xl($color: $color-black) {
+@mixin title-xl($color: $color-black, $highlight-color: $color-primary) {
   font-family: $font-heading;
   font-weight: 500;
   font-style: normal;
   line-height: $line-height-heading;
-  letter-spacing: $letter-spacing-subtitle;
+  letter-spacing: $letter-spacing-h2;
   font-size: clamp(32px, 4vw + 12px, 56px);
   color: $color;
+
+  .highlight {
+    color: $highlight-color;
+    font: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+  }
 }
 
 @mixin subtitle($color: $color-black) {

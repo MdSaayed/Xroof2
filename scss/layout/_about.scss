@@ -1,3 +1,4 @@
+@use '../utils/variables' as *;
 @use '../utils/breakpoints' as bp;
 
 .about {
@@ -54,5 +55,86 @@
         height: 100%;
         width: 100%;
         object-fit: cover;
+    }
+
+
+    &--style-2 {
+        .about__title {
+            max-width: 720px;
+        }
+
+        .about__desc {
+            color: $color-dark-gray;
+        }
+
+        .about__solutions {
+            background: $color-light-pink;
+            padding: 1.5em;
+            border-radius: 20px;
+        }
+
+        .about__solution-text {
+            color: $color-dark-charcoal;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 150%;
+            letter-spacing: 0.09px;
+        }
+
+        .about__features {
+            margin-right: -200px;
+            z-index: 999 !important;
+            position: relative;
+            background: $color-white;
+            border-radius: 8px;
+            border-bottom: 3px solid $color-primary;
+
+            @include bp.respond-to(lg) {
+                margin-right: 0;
+            }
+        }
+
+        .about__feature-text {
+            color: $color-dark-gray;
+        }
+
+        .about__image {
+            max-width: 660px;
+            max-height: 775px;
+            border-radius: 20px;
+
+            @include bp.respond-to(lg) {
+                max-width: 100%;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .about__stat {
+            position: absolute;
+            right: -2rem;
+            top: -2rem;
+            background: $color-primary;
+            border-radius: 10px;
+            color: $color-white;
+            max-width: 300px;
+
+            @include bp.respond-to(lg) {
+                right: 10px;
+                top: 10px;
+            }
+        }
+
+        .about__stat-text {
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 150%;
+            letter-spacing: 0.095px;
+            color: $color-white;
+        }
     }
 }

@@ -141,8 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
   counters.forEach(el => observer.observe(el));
 });
 
-
-
 /* =============================
 * 20. Glightbox
 ============================= */
@@ -154,7 +152,6 @@ const lightbox = GLightbox({
 /* =============================
 * 20. Faq
 ============================= */
-
 document.querySelectorAll('.faq__item').forEach(item => {
   const button = item.querySelector('.faq__question-wrap');
   const answer = item.querySelector('.faq__answer');
@@ -174,7 +171,6 @@ document.querySelectorAll('.faq__item').forEach(item => {
   });
 });
 
-
 /* =============================
 * 20. Hero Two Slider
 ============================= */
@@ -192,11 +188,92 @@ const hero_two_slider = tns({
   gutter: 10
 });
 
-// Link custom buttons
-const prevBtn = document.querySelector('.hero__btn--prev');
-const nextBtn = document.querySelector('.hero__btn--next');
 
-prevBtn.addEventListener('click', () => hero_two_slider.goTo('prev'));
-nextBtn.addEventListener('click', () => hero_two_slider.goTo('next'));
+/* =============================
+* 20. Projects Two Slider
+============================= */
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('.projects__slider').forEach(slider => {
+    const slides = slider.querySelectorAll('.projects__slide');
+    const prevBtn = slider.parentElement.querySelector('#prevButton');
+    const nextBtn = slider.parentElement.querySelector('#nextButton');
+
+    if (!slider || slides.length === 0 || !prevBtn || !nextBtn) return;
+    let currentIndex = 0;
+    let visibleCount = 3;
+    let gap = 32;
+
+    function updateVisibleCount() {
+      const width = window.innerWidth;
+      if (width < 540) {
+        visibleCount = 1;
+        gap = 8;
+      } else if (width < 768) {
+        visibleCount = 2;
+        gap = 16;
+      } else {
+        visibleCount = 3;
+        gap = 32;
+      }
+    }
+
+    // Update slider position
+    function updateSlider() {
+      updateVisibleCount();
+      const slideWidth = slides[0].offsetWidth + gap;
+      const maxIndex = slides.length - visibleCount;
+      if (currentIndex < 0) currentIndex = 0;
+      if (currentIndex > maxIndex) currentIndex = maxIndex;
+      slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
+      slides.forEach(s => s.style.flex = `0 0 calc(100% / ${visibleCount})`);
+    }
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex += 1;
+      updateSlider();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex -= 1;
+      updateSlider();
+    });
+
+    slides.forEach((slide) => {
+      slide.addEventListener("mouseenter", () => {
+        if (visibleCount === 1) return; // no hover effect if only 1 visible
+
+        const groupStart = currentIndex;
+        const groupSlides = Array.from(slides).slice(groupStart, groupStart + visibleCount);
+
+        // Reset only visible slides
+        groupSlides.forEach(s => s.style.flex = `0 0 calc(100% / ${visibleCount})`);
+
+        // Determine hovered width
+        let hoverWidth;
+        if (visibleCount === 2) hoverWidth = "0 0 75%";
+        else hoverWidth = "0 0 50%"; // default for 3 slides
+
+        slide.style.flex = hoverWidth;
+
+        // Shrink others proportionally
+        groupSlides.forEach(s => {
+          if (s !== slide) {
+            if (visibleCount === 2) s.style.flex = "0 0 25%";
+            else s.style.flex = `0 0 ${50 / (visibleCount - 1)}%`;
+          }
+        });
+      });
+
+      slide.addEventListener("mouseleave", () => {
+        const groupStart = currentIndex;
+        const groupSlides = Array.from(slides).slice(groupStart, groupStart + visibleCount);
+        groupSlides.forEach(s => s.style.flex = `0 0 calc(100% / ${visibleCount})`);
+      });
+    });
 
 
+    window.addEventListener('resize', updateSlider);
+    updateSlider();
+  });
+});

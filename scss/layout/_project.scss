@@ -1,5 +1,6 @@
 @use '../utils/' as *;
 @use '../utils/mixin' as*;
+@use '../utils/breakpoints' as bp;
 
 .projects {
     background: $color-light-gray;
@@ -8,10 +9,10 @@
         background: $color-white;
         border-radius: 0 0 4px 4px;
 
-        &-thumb{
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
+        &-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         &-title-wrap {
@@ -28,4 +29,224 @@
     &__desc {
         max-width: 510px;
     }
+
+    &--style-2 {
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg,
+                    rgba(15, 14, 14, 0.8) 0%,
+                    rgba(15, 14, 14, 0.8) 100%);
+            z-index: 0;
+        }
+
+        .projects__subtitle {
+            position: relative;
+            z-index: 10;
+        }
+
+        .projects__header {
+            max-width: 1190px;
+            position: relative;
+            margin-right: 0;
+            margin-left: auto;
+            z-index: 10;
+        }
+
+        .projects__title {
+            max-width: 790px;
+        }
+
+        .projects__desc {
+            color: $color-white;
+            margin-right: 0;
+            margin-left: auto;
+            padding-right: 3rem;
+
+            @include bp.respond-to(lg) {
+                padding-right: 0;
+            }
+        }
+
+        .projects__slider-wrap {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .projects__slider {
+            display: flex;
+            gap: 15px;
+            transition: transform 0.5s ease, flex-basis 0.4s ease;
+            border-radius: 10px;
+        }
+
+        .projects__slide {
+            flex: 0 0 calc(100% / 3);
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: flex-basis 0.4s ease, width 0.4s ease;
+            height: 500px;
+
+            &:hover .slider__content {
+                opacity: 1;
+                bottom: 2rem;
+            }
+
+            &:hover .slider__arrow {
+                transform: translate(-50%, -50%);
+            }
+
+
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(180deg,
+                        rgba(0, 0, 0, 0) 0%,
+                        rgba(0, 0, 0, 0.7) 77.88%);
+                transition: opacity 0.3s ease;
+                opacity: 0;
+                z-index: 5;
+            }
+
+            &:hover::after {
+                opacity: 1;
+            }
+        }
+
+        .slider__content {
+            position: absolute;
+            bottom: -400px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 600px;
+            width: calc(100% - 4rem);
+            padding: 2rem;
+            background: $color-white;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease, bottom 0.5s ease;
+            z-index: 10;
+
+            @include bp.respond-to(xl) {
+                width: calc(100% - 2rem);
+                padding: 1rem;
+            }
+        }
+
+        .slider__subtitle {
+            font-size: clamp(16px, 2vw, 20px);
+            font-weight: 400;
+            letter-spacing: 0.1px;
+            line-height: 150%;
+            display: block;
+        }
+
+        .slider__title {
+            @include title-sm($color-primary);
+            line-height: 120%;
+        }
+
+        .slider__arrow {
+            @include card-icon-wrap;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -1000px);
+            transition: transform 0.5s ease;
+            z-index: 10;
+        }
+
+        .projects__slider-btn.prev {
+            left: 10px;
+        }
+
+        .projects__slider-btn.next {
+            right: 10px;
+        }
+
+        // Slider nav
+        .slider__nav {
+            display: flex;
+            justify-content: space-between;
+            border-radius: 10px;
+            background-color: $color-white;
+            padding: 2rem 3rem;
+
+            @include bp.respond-to(xl) {
+                padding: 1rem 1.5rem;
+            }
+
+            @include bp.respond-to(sm) {
+                padding: 10px 1rem;
+
+            }
+        }
+
+        .slider__nav-btn {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            width: 100%;
+            max-width: 480px;
+            align-items: center;
+            border: none;
+
+            svg {
+                cursor: pointer;
+                background-color: $color-black;
+                padding: 8px 10px;
+                border-radius: 2px;
+                width: 35px;
+                height: 35px;
+                transition: $btn-transition;
+
+                path {
+                    fill: $color-white;
+                }
+
+                &:hover {
+                    background: $color-primary;
+                }
+            }
+
+            &:first-child {
+                border-right: 1px solid $color-black;
+                padding-right: 2rem;
+            }
+
+            &:last-child {
+                border-left: 1px solid $color-black;
+                padding-left: 2rem;
+
+                @include bp.respond-to(sm) {
+                    justify-content: end;
+                }
+
+            }
+        }
+
+        .nav__btn-text {
+            @include card-title;
+            margin-bottom: 0;
+
+            @include bp.respond-to(sm) {
+                display: none;
+            }
+        }
+
+
+    }
+
 }
