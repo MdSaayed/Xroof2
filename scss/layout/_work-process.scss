@@ -1,0 +1,91 @@
+@use '../utils/variables' as*;
+@use '../utils/mixin' as*;
+
+.work-process {
+    background: $color-dark;
+
+    &__title {
+        max-width: 690px;
+    }
+
+    &__desc {
+        color: $color-white;
+        max-width: 580px;
+    }
+
+    .step-card {
+        border-left: 1px solid rgba(255, 255, 255, 0.30);
+        border-right: 1px solid rgba(255, 255, 255, 0.30);
+        padding: 5px 1.5rem;
+        color: $color-white;
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: background $primary-transition;
+        overflow: hidden;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        &__content {
+            text-align: center
+        }
+
+        &__title {
+            @include title-sm($color-primary);
+            color: $color-white;
+            margin-bottom: 1rem;
+        }
+
+        &__number,
+        &__desc,
+        &__subtitle {
+            color: $color-white;
+        }
+
+        &__bottom {
+            opacity: 0;
+            visibility: hidden;
+            max-height: 0;
+            overflow: hidden;
+            transform: translateY(100%);
+            transition:
+                max-height 0.5s ease,
+                opacity 0.5s ease,
+                transform 0.5s ease;
+        }
+
+        &:hover {
+            .step-card__bottom {
+                margin-top: 3rem;
+                padding-bottom: 2rem;
+                opacity: 1;
+                visibility: visible;
+                max-height: 500px;
+                transform: translateY(0);
+            }
+        }
+
+        &__link {
+            background-color: $color-primary;
+            color: $color-white;
+            padding: 8px 1rem;
+            border-radius: 50%;
+            font-family: $font-heading;
+            margin-left: 0;
+            margin-right: 0;
+            display: inline-block;
+            border: 1px solid $color-primary;
+            transition: $btn-transition;
+
+            &:hover {
+                background: transparent;
+                color: $color-primary;
+            }
+        }
+
+
+    }
+}
