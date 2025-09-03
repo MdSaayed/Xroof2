@@ -1,0 +1,78 @@
+@use '../utils/' as *;
+@use '../utils/breakpoints' as bp;
+@use '../utils/mixin' as *;
+
+.started {
+    background: $color-white;
+
+    &__title {
+        max-width: 570px;
+    }
+
+
+    .statistics__item-wrap {
+        min-height: 1250px;
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 0.8px;
+            left: -4px;
+            top: 0;
+            background: $color-black;
+
+            @include bp.respond-to(sm) {
+                left: 4px;
+
+            }
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 0.8px;
+            left: 8px;
+            top: 0;
+            background: $color-black;
+        }
+
+        @include bp.respond-to (sm) {
+            min-height: 500px;
+        }
+    }
+
+    .statistics__number {
+        font-size: clamp(2rem, 6vw + 3rem, 120px);
+        font-family: $font-heading;
+        color: $color-black;
+        font-weight: 600;
+        line-height: 120%;
+        letter-spacing: -1.2px;
+    }
+
+    .statistics__description {
+        @include card-title;
+        font-weight: 400;
+    }
+
+    .statistics__item-wrap:last-child .statistics__item {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+    }
+
+    .statistics__item {
+        display: flex;
+        flex-direction: column;
+
+        @include bp.respond-to(sm) {
+            padding-left: 15px;
+            justify-content: center;
+
+        }
+    }
+
+}

@@ -287,8 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!slider || slides.length === 0 || !prevBtn || !nextBtn) return;
     let currentIndex = 0;
     let visibleCount = 3;
-    let gap = 32; // Default gap
-
+    let gap = 32; 
     function updateVisibleCountAndGap() {
       const width = window.innerWidth;
       if (width < 540) {
