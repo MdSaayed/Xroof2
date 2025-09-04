@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Col-6 Slider</title>
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+body { font-family: Arial, sans-serif; padding:50px; }
+
+.row { display:flex; gap:20px; }
+.col-6 { flex:0 0 50%; }
+
+.projects {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.projects__wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.projects__slide {
+    flex-shrink: 0;
+    height: 200px;
+    background: #ddd;
+    border-radius: 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:bold;
+    margin-right:16px;
+}
+
+.projects__slide:last-child { margin-right:0; }
+
+/* Arrow buttons */
+.projects__nav {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    background:#000;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:2;
+}
+#prevButton { left:-20px; }
+#nextButton { right:-20px; }
+
+#prevButton::after,
+#nextButton::after {
+    content:'';
+    display:inline-block;
+    width:10px;
+    height:10px;
+    border-top:2px solid #fff;
+    border-right:2px solid #fff;
+}
+#prevButton::after { transform:rotate(-135deg); }
+#nextButton::after { transform:rotate(45deg); }
+</style>
+</head>
+<body>
+
+<div class="row">
+  <div class="col-6">
+    <section class="projects">
+      <button id="prevButton" class="projects__nav"></button>
+      <div class="projects__slider">
+        <div class="projects__wrapper">
+          <div class="projects__slide">1</div>
+          <div class="projects__slide">2</div>
+          <div class="projects__slide">3</div>
+          <div class="projects__slide">4</div>
+          <div class="projects__slide">5</div>
+          <div class="projects__slide">6</div>
+          <div class="projects__slide">7</div>
+          <div class="projects__slide">8</div>
+        </div>
+      </div>
+      <button id="nextButton" class="projects__nav"></button>
+    </section>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+    const wrapper = document.querySelector('.projects__wrapper');
+    const slides = document.querySelectorAll('.projects__slide');
+    const prevBtn = document.getElementById("prevButton");
+    const nextBtn = document.getElementById("nextButton");
+
+    let currentIndex = 0;
+    let visibleCount = 3;
+    let gap = 16;
+
+    function updateVisibleCount(){
+        const w = window.innerWidth;
+        if(w<540){ visibleCount=1; gap=8; }
+        else if(w<768){ visibleCount=2; gap=12; }
+        else { visibleCount=3; gap=16; }
+    }
+
+    function updateSlider(){
+        updateVisibleCount();
+        const containerWidth = wrapper.parentElement.offsetWidth;
+        const slideWidth = (containerWidth - gap*(visibleCount-1))/visibleCount;
+
+        slides.forEach(slide => slide.style.flexBasis = slideWidth+'px');
+
+        let offset = 0;
+        for(let i=0;i<currentIndex;i++){
+            offset += parseFloat(slides[i].style.flexBasis) + gap;
+        }
+
+        wrapper.style.transform = `translateX(-${offset}px)`;
+    }
+
+    nextBtn.addEventListener('click', ()=>{
+        currentIndex++;
+        if(currentIndex > slides.length - visibleCount) currentIndex = slides.length - visibleCount;
+        updateSlider();
+    });
+
+    prevBtn.addEventListener('click', ()=>{
+        currentIndex--;
+        if(currentIndex<0) currentIndex=0;
+        updateSlider();
+    });
+
+    window.addEventListener('resize', updateSlider);
+
+    updateSlider();
+});
+</script>
+
+</body>
+</html>
