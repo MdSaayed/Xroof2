@@ -387,6 +387,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = 0;
     let visibleCount = 3;
     let gap = 32;
+    let isHovering = false;
 
     function updateVisibleCountAndGap() {
         const width = window.innerWidth;
@@ -396,11 +397,11 @@ document.addEventListener("DOMContentLoaded", function () {
         } 
         else if (width >= 541 && width <= 1024) {
             visibleCount = 2;
-            gap = 12; 
+            gap = 16; 
         } 
         else {
             visibleCount = 1;
-            gap = 8;  
+            gap = 10;  
         }
     }
 
@@ -425,68 +426,73 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Set flex-basis for all slides
             if (index >= currentIndex && index < currentIndex + visibleCount) {
-                // Visible slides get a specific width based on the active state
                 if (visibleCount === 3) {
                     slide.style.flexBasis = (availableWidth * (index === currentIndex ? 0.5 : 0.25)) + 'px';
                 } else if (visibleCount === 2) {
                     slide.style.flexBasis = (availableWidth * (index === currentIndex ? 0.6 : 0.4)) + 'px';
-                } else { // visibleCount === 1
+                } else {
                     slide.style.flexBasis = availableWidth + 'px';
                 }
             } else {
-                // Non-visible slides get a proportional width
                 slide.style.flexBasis = (availableWidth / visibleCount) + 'px';
             }
         });
 
-        // Add active class to the first visible slide
-        if (slides[currentIndex]) {
+        // Add active class to the first visible slide only when not hovering
+        if (!isHovering && slides[currentIndex]) {
             slides[currentIndex].classList.add('active');
         }
 
-        // Now, calculate the offset based on the intended widths
         let offset = 0;
         for (let i = 0; i < currentIndex; i++) {
-            // The widths of the non-visible slides are based on a fixed proportion
-            // This is the most reliable way to calculate the total offset
             const nonVisibleBaseWidth = (containerWidth - gap * (visibleCount - 1)) / visibleCount;
             offset += nonVisibleBaseWidth + gap;
         }
         
-        // Apply the transform
         wrapper.style.transform = `translateX(-${offset}px)`;
     }
+    
+    // Function to handle hover state
+    function handleHover(hoveredSlide) {
+        const containerWidth = wrapper.parentElement.offsetWidth;
+        const totalGapWidth = gap * (visibleCount - 1);
+        const availableWidth = containerWidth - totalGapWidth;
+        
+        const hoveredIndex = Array.from(slides).indexOf(hoveredSlide);
+        const startOfVisibleGroup = currentIndex;
 
-    // Handle mouse events to override default states
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+        });
+
+        const group = Array.from(slides).slice(startOfVisibleGroup, startOfVisibleGroup + visibleCount);
+        if (visibleCount === 2) {
+            group.forEach(s => s.style.flexBasis = (s === hoveredSlide ? availableWidth * 0.6 : availableWidth * 0.4) + 'px');
+        } else if (visibleCount === 3) {
+            group.forEach(s => s.style.flexBasis = (s === hoveredSlide ? availableWidth * 0.5 : availableWidth * 0.25) + 'px');
+        }
+    }
+
     slides.forEach(slide => {
         slide.addEventListener('mouseenter', () => {
-            const hoveredIndex = Array.from(slides).indexOf(slide);
-            const startOfVisibleGroup = currentIndex;
-
-            // Only apply hover effect within the visible group
-            if (hoveredIndex >= startOfVisibleGroup && hoveredIndex < startOfVisibleGroup + visibleCount) {
-                const containerWidth = wrapper.parentElement.offsetWidth;
-                const totalGapWidth = gap * (visibleCount - 1);
-                const availableWidth = containerWidth - totalGapWidth;
-
-                const group = Array.from(slides).slice(startOfVisibleGroup, startOfVisibleGroup + visibleCount);
-                if (visibleCount === 2) {
-                    group.forEach(s => s.style.flexBasis = (s === slide ? availableWidth * 0.6 : availableWidth * 0.4) + 'px');
-                } else if (visibleCount === 3) {
-                    group.forEach(s => s.style.flexBasis = (s === slide ? availableWidth * 0.5 : availableWidth * 0.25) + 'px');
-                }
-            }
+            isHovering = true;
+            handleHover(slide);
         });
-        slide.addEventListener('mouseleave', () => updateSlider());
+
+        slide.addEventListener('mouseleave', () => {
+            isHovering = false;
+            updateSlider();
+        });
     });
     
-    // Add event listeners for navigation buttons
     nextBtn.addEventListener('click', () => {
+        isHovering = false;
         currentIndex++;
         updateSlider();
     });
 
     prevBtn.addEventListener('click', () => {
+        isHovering = false;
         currentIndex--;
         updateSlider();
     });

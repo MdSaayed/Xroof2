@@ -2,11 +2,14 @@
 @use '../utils/variables' as*;
 @use '../utils/breakpoints' as bp;
 @use '../utils/mixin' as *;
- 
+
 .testimonials {
     position: relative;
     overflow: visible;
-    margin-bottom: 300px;
+
+    &--style-1 {
+        margin-bottom: 300px;
+    }
 
     &__title,
     &__desc {
@@ -22,6 +25,9 @@
 
     &__card {
         @extend %card1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
         padding: 2rem;
 
@@ -75,7 +81,6 @@
             margin-bottom: 4px;
         }
     }
-
 
     .services--secondary {
         & .services__container {
@@ -178,6 +183,78 @@
                     height: 100%;
                     object-fit: cover;
                 }
+            }
+        }
+    }
+
+    &--style-2 {
+        background: $color-dark;
+
+        .testimonials {
+            &__title {
+                text-align: left;
+                margin-left: 0;
+            }
+
+            &__subtitle {
+                position: relative;
+                padding-left: 20px;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    width: 6px;
+                    height: 5px;
+                    border-radius: 50%;
+                    top: 50%;
+                    left: 0;
+                    background: $color-white;
+                }
+            }
+
+            &__card {
+                position: relative;
+                overflow: hidden;
+                z-index: 5;
+                height: auto;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 80px;
+                    height: 100px;
+                    top: -10px;
+                    left: 1rem;
+                    background: $color-dark;
+                    background: $color-dark url('../../assets/img/testimonials/quoate.png') no-repeat center;
+                    background-size: 40px;
+                    z-index: 10;
+                    border-radius: 0 0 32px 32px;
+
+                    @include bp.respond-to(md) {
+                        width: 65px;
+                        height: 80px;
+                    }
+
+                    @include bp.respond-to(xs) {
+                        display: none;
+                    }
+                }
+
+                &-shift-down {
+                    margin-top: 150px;
+
+                    @include bp.respond-to(md) {
+                        margin-top: 0;
+                    }
+                }
+
+            }
+
+            &__card-rating {
+                display: flex;
+                justify-content: end;
+                max-width: 100%;
             }
         }
     }

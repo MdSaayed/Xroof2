@@ -121,6 +121,13 @@
                 max-width: 635px;
             }
 
+            &__left {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between !important;
+                height: 100%;
+            }
+
             &__right {
                 position: relative;
                 overflow: hidden;
@@ -140,16 +147,18 @@
                 overflow: hidden;
                 position: relative;
 
-                &.active {
-
-                    .team__card-content {
-                        bottom: 1rem;
-                    }
+                &.active .team__card-content {
+                    bottom: 1rem;
                 }
 
+                &:hover .team__card-content {
+                    bottom: 1rem;
+                }
+
+                &:hover .active .team__card-content {
+                    bottom: -150% !important;
+                }
             }
-
-
 
             &__img-wrap {
                 width: 100%;
@@ -210,6 +219,12 @@
                         fill: $color-white;
                     }
                 }
+            }
+        }
+
+        .slider__nav {
+            @include bp.respond-to(xl) {
+                justify-content: end;
             }
         }
 

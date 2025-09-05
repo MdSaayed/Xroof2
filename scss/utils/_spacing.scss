@@ -1,19 +1,25 @@
-
-@use "breakpoints" as *; 
+@use "breakpoints" as *;
 
 $space-properties: (
+  // Margin
   m:  margin,
   mt: margin-top,
   mb: margin-bottom,
-  ms: margin-left,
-  me: margin-right,
+  ml: margin-left,
+  mr: margin-right,
+  ms: margin-inline-start, // logical
+  me: margin-inline-end,   // logical
   mx: (margin-left, margin-right),
   my: (margin-top, margin-bottom),
+
+  // Padding
   p:  padding,
   pt: padding-top,
   pb: padding-bottom,
-  ps: padding-left,
-  pe: padding-right,
+  pl: padding-left,
+  pr: padding-right,
+  ps: padding-inline-start, // logical
+  pe: padding-inline-end,   // logical
   px: (padding-left, padding-right),
   py: (padding-top, padding-bottom)
 );
@@ -21,9 +27,10 @@ $space-properties: (
 @for $i from 1 through 20 {
   $space: $i * 4px;
 
+  // Base spacing
   @each $abbr, $prop in $space-properties {
     .#{$abbr}-#{$i} {
-      @if type-of($prop) == 'list' {
+      @if type-of($prop) == 'list' or type-of($prop) == 'tuple' {
         @each $p in $prop {
           #{$p}: $space !important;
         }
@@ -33,12 +40,13 @@ $space-properties: (
     }
   }
 
+  // Responsive spacing
   @each $breakpoint, $value in $grid-breakpoints {
     @if $value != 0 {
       @media (min-width: $value) {
         @each $abbr, $prop in $space-properties {
           .#{$abbr}-#{$breakpoint}-#{$i} {
-            @if type-of($prop) == 'list' {
+            @if type-of($prop) == 'list' or type-of($prop) == 'tuple' {
               @each $p in $prop {
                 #{$p}: $space !important;
               }
