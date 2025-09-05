@@ -3,8 +3,6 @@
 @use '../utils/breakpoints' as bp;
 
 .footer {
-
-
     &__cta-container {
         margin-bottom: -12rem;
 
@@ -136,7 +134,8 @@
 
     &__bottom {
         border-top: 0.3px solid $color-white;
-        padding-top: 1.5rem;
+        padding-top: 2rem;
+        padding-bottom: 1rem;
         color: $color-white;
 
         &-text {
@@ -159,6 +158,65 @@
                 height: 8px;
                 background: $color-white;
                 border-radius: 50%;
+            }
+        }
+    }
+
+    &--style-2 {
+        background: $color-black;
+
+        .footer {
+            &__action-btn {
+                @include body-text;
+                background: $color-white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                transition: $btn-transition;
+
+                &:hover {
+                    background: $color-primary;
+                    color: $color-white;
+                }
+            }
+
+            &__nav-link,
+            &__hour,
+            &__address {
+                color: rgba(255, 255, 255, 0.54);
+                letter-spacing: 0.08px;
+                font-size: 1rem;
+            }
+
+            &__container {
+                position: relative;
+
+                &--top {
+                    border-bottom: 8px solid $color-white;
+
+                    @include bp.respond-to(lg) {
+                        border-bottom: 5px solid $color-white;
+                    }
+                }
+
+                &--bottom {
+                    border-top: 8px solid $color-primary;
+
+                    @include bp.respond-to(lg) {
+                        border-top: 5px solid $color-primary;
+                    }
+                }
+            }
+
+            &__bottom {
+                padding-bottom: 2rem;
+                border: 0;
+            }
+
+            &__back-to-top {
+                color: $color-white;
+                margin-bottom: 0;
+                text-decoration: underline;
+                flex-shrink: 0;
             }
         }
     }

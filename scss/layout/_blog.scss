@@ -118,6 +118,11 @@
                 text-align: center;
             }
 
+            &__desc {
+                max-width: 600px;
+                color: $color-white;
+            }
+
             &__btn {
                 background: $color-primary;
                 color: $color-white;
@@ -157,10 +162,7 @@
                 }
             }
 
-            &__desc {
-                max-width: 600px;
-                color: $color-white;
-            }
+
 
             &__card-title {
                 @include card-title;

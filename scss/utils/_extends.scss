@@ -33,6 +33,10 @@
     @include bp.respond-to(md) {
         padding: 1.5rem;
     }
+
+    @include bp.respond-to(sm) {
+        padding: 1rem;
+    }
 }
 
 %card2 {
