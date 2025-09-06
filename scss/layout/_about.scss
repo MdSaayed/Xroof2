@@ -4,57 +4,84 @@
 .about {
     overflow: hidden;
 
-    &__left {
-        position: relative;
-        display: flex;
-        justify-content: end;
-        margin-right: 1rem;
-
-        @include bp.respond-to(x2l) {
-            justify-content: center;
-            margin-right: 0;
-        }
-    }
-
-    &__right {
-        margin-left: 1rem;
-
-        @include bp.respond-to(x2l) {
-            padding-left: 0;
-        }
-    }
-
-    &__img-wrap {
-        max-width: 560px;
-        width: 100%;
-        position: relative;
-        z-index: 10;
-    }
-
-    &__img {
-        border-radius: 8px;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    &__shape-wrap {
-        position: absolute;
-        top: 50%;
-        left: -4rem;
-        transform: translateY(-50%);
-        max-height: 100%;
-        overflow: hidden;
-
-        @include bp.respond-to(md) {
-            left: -50px;
-        }
-    }
-
     &__shape {
         height: 100%;
         width: 100%;
         object-fit: cover;
+    }
+
+    &__stat {
+        position: absolute;
+        right: -2rem;
+        top: -2rem;
+        background: $color-primary;
+        border-radius: 10px;
+        color: $color-white;
+        max-width: 300px;
+
+        @include bp.respond-to(lg) {
+            right: 10px;
+            top: 10px;
+        }
+    }
+
+    &__stat-text {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 150%;
+        letter-spacing: 0.095px;
+        color: $color-white;
+    }
+
+    &--style-1 {
+        .about {
+            &__left {
+                position: relative;
+                display: flex;
+                justify-content: end;
+                margin-right: 1rem;
+
+                @include bp.respond-to(x2l) {
+                    justify-content: center;
+                    margin-right: 0;
+                }
+            }
+
+            &__right {
+                margin-left: 1rem;
+
+                @include bp.respond-to(x2l) {
+                    padding-left: 0;
+                }
+            }
+
+            &__img-wrap {
+                max-width: 560px;
+                width: 100%;
+                position: relative;
+                z-index: 10;
+            }
+
+            &__img {
+                border-radius: 8px;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            &__shape-wrap {
+                position: absolute;
+                top: 50%;
+                left: -4rem;
+                transform: translateY(-50%);
+                max-height: 100%;
+                overflow: hidden;
+
+                @include bp.respond-to(md) {
+                    left: -50px;
+                }
+            }
+        }
     }
 
     &--style-2 {
@@ -113,28 +140,108 @@
                     object-fit: cover;
                 }
             }
+        }
+    }
 
-            &__stat {
-                position: absolute;
-                right: -2rem;
-                top: -2rem;
-                background: $color-primary;
-                border-radius: 10px;
-                color: $color-white;
-                max-width: 300px;
+    &--style-3 {
+        .about {
 
-                @include bp.respond-to(lg) {
-                    right: 10px;
-                    top: 10px;
+            &__desc,
+            &__title {
+                max-width: 770px;
+            }
+
+            &__solutions {
+
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                li {
+                    font-size: 18px;
+                    position: relative;
+                    padding-left: 2rem;
+                    letter-spacing: 0.09px;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        top: 0.3rem;
+                        width: 17px;
+                        height: 17px;
+                        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='9' viewBox='0 0 10 9' fill='none'><path d='M9.35425 0.601318C9.35425 0.325176 9.13039 0.101318 8.85425 0.101318L4.35425 0.101318C4.0781 0.101318 3.85425 0.325176 3.85425 0.601318C3.85425 0.877461 4.0781 1.10132 4.35425 1.10132L8.35425 1.10132L8.35425 5.10132C8.35425 5.37746 8.57811 5.60132 8.85425 5.60132C9.13039 5.60132 9.35425 5.37746 9.35425 5.10132L9.35425 0.601318ZM8.85425 0.601318L8.50069 0.247765L0.646568 8.10189L1.00012 8.45544L1.35368 8.809L9.2078 0.954872L8.85425 0.601318Z' fill='%23EE212B'/></svg>") no-repeat center center;
+                        background-size: contain;
+                    }
                 }
             }
 
-            &__stat-text {
-                font-size: 18px;
-                font-weight: 300;
-                line-height: 150%;
-                letter-spacing: 0.095px;
-                color: $color-white;
+            &__img {
+                max-width: 100%;
+                width: 100%;
+                border-radius: 8px;
+            }
+
+            &__stat {
+                position: static;
+                max-width: 100%;
+            }
+
+            &__avatar-wrap {
+                max-width: 50px;
+                max-height: 50px;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 1px solid $color-white;
+
+                &:not(:first-child) {
+                    margin-left: -25px;
+                }
+
+                @include bp.respond-to(lg) {
+                    width: 40px;
+                    height: 40px;
+
+                    &:not(:first-child) {
+                        margin-left: -20px;
+                    }
+                }
+            }
+
+            &__left {
+                display: block;
+
+                &-middle {
+                    @include bp.respond-to(xl) {
+                        flex-wrap: wrap;
+                    }
+                }
+            }
+
+            &__right {
+                display: flex;
+                align-items: center;
+
+                @include bp.respond-to(xl){
+                    flex-wrap: wrap;
+                    gap: 1rem;
+                }
+            }
+
+            &__img-wrap{
+                max-width: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                @include bp.respond-to(xl){
+                    flex-direction: row;
+                }
+
+                @include bp.respond-to(md){
+                    flex-wrap:wrap ;
+                }
             }
         }
     }
