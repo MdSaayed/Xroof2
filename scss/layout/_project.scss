@@ -249,4 +249,113 @@
 
 
     }
+
+    &--style-3 {
+        background: $color-dark;
+
+        .projects {
+            &__title {
+                max-width: 695px;
+                color: $color-white;
+            }
+
+            &__desc {
+                max-width: 665px;
+                color: $color-white;
+            }
+
+            &__header-btn {
+                @extend %btn--square;
+                background: $color-white;
+                color: $color-black;
+                border-color: $color-white;
+
+                span {
+                    background-color: $color-black;
+                }
+
+                &:hover {
+                    background: $color-primary;
+                    color: $color-white;
+                    border-color: $color-primary;
+
+                    span {
+                        background: $color-white;
+                    }
+                }
+            }
+
+            &__masonry {
+                margin-top: 2rem;
+
+                &>[class*=col] {
+                    gap: 1.5rem;
+
+                    @include bp.respond-to(sm) {
+                        gap: 1rem;
+                    }
+                }
+            }
+
+            &__col {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+
+                @include bp.respond-to(sm) {
+                    gap: 1rem;
+                }
+            }
+
+            &__row {
+                display: flex;
+                gap: 1.5rem;
+                height: auto;
+
+                @include bp.respond-to(sm) {
+                    gap: 1rem;
+                    flex-direction: column;
+                }
+            }
+
+            &__item {
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+
+                img {
+                    width: 100%;
+                    display: block;
+                    border-radius: 10px;
+                }
+
+                &-title {
+                    @include title-sm;
+                }
+            }
+
+            &__content {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                background: rgba(255, 255, 255, 0.9);
+                color: $color-black;
+                padding: 1rem 1.5rem;
+                border-radius: 0 0 10px 10px;
+                width: calc(100% - 4rem);
+                transform: translateX(-50%);
+
+                @media (max-width: 450px) {
+                    & {
+                        display: none;
+                    }
+                }
+
+                @include bp.respond-to(sm) {
+                    padding: 1rem;
+                    width: calc(100% - 2rem);
+                }
+            }
+        }
+    }
 }

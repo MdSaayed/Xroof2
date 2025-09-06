@@ -1,149 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Col-6 Slider</title>
-<style>
-* { box-sizing: border-box; margin:0; padding:0; }
-body { font-family: Arial, sans-serif; padding:50px; }
-
-.row { display:flex; gap:20px; }
-.col-6 { flex:0 0 50%; }
-
-.projects {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-}
-
-.projects__wrapper {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-.projects__slide {
-    flex-shrink: 0;
-    height: 200px;
-    background: #ddd;
-    border-radius: 10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
-    font-weight:bold;
-    margin-right:16px;
-}
-
-.projects__slide:last-child { margin-right:0; }
-
-/* Arrow buttons */
-.projects__nav {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
-    background:#000;
-    color:#fff;
-    border:none;
-    cursor:pointer;
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    z-index:2;
-}
-#prevButton { left:-20px; }
-#nextButton { right:-20px; }
-
-#prevButton::after,
-#nextButton::after {
-    content:'';
-    display:inline-block;
-    width:10px;
-    height:10px;
-    border-top:2px solid #fff;
-    border-right:2px solid #fff;
-}
-#prevButton::after { transform:rotate(-135deg); }
-#nextButton::after { transform:rotate(45deg); }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roof Projects Section</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #111;
+            color: #fff;
+        }
+    </style>
 </head>
+
 <body>
+    <section class="py-5">
+        <div class="container">
+            <!-- Title Row -->
+            <div class="row mb-5">
+                <div class="col-lg-7">
+                    <h2 class="fw-bold">Our Craftsmanship Through Every Roof We Build</h2>
+                </div>
+                <div class="col-lg-5">
+                    <p>Our projects speak louder than words — each one a testament to our commitment to quality,
+                        precision, and customer satisfaction. From residential roof replacements to large-scale
+                        commercial installations.</p>
+                    <a href="#" class="btn btn-light btn-sm mt-2">View All Project</a>
+                </div>
+            </div>
 
-<div class="row">
-  <div class="col-6">
-    <section class="projects">
-      <button id="prevButton" class="projects__nav"></button>
-      <div class="projects__slider">
-        <div class="projects__wrapper">
-          <div class="projects__slide">1</div>
-          <div class="projects__slide">2</div>
-          <div class="projects__slide">3</div>
-          <div class="projects__slide">4</div>
-          <div class="projects__slide">5</div>
-          <div class="projects__slide">6</div>
-          <div class="projects__slide">7</div>
-          <div class="projects__slide">8</div>
+            <!-- Grid Section -->
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-lg-6 d-flex flex-column project-col">
+                    <div class="project-row d-flex">
+                        <div class="project-item flex-fill">
+                            <img src="https://picsum.photos/600/250?random=5" alt="Project 5">
+                        </div>
+                        <div class="project-item flex-fill">
+                            <img src="https://picsum.photos/600/250?random=6" alt="Project 6">
+                        </div>
+                    </div>
+                    <div class="project-item">
+                        <img src="https://picsum.photos/600/400?random=2" alt="Project 2">
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-lg-6 d-flex flex-column project-col">
+                    <div class="project-item">
+                        <img src="https://picsum.photos/600/300?random=3" alt="Project 3">
+                        <div class="project-text">
+                            <h5 class="fw-bold">Commercial Flat Roof Installation</h5>
+                            <p>A well-built flat roof is essential for protecting your commercial property and ensuring
+                                long-term performance.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-row d-flex">
+                        <div class="project-item flex-fill">
+                            <img src="https://picsum.photos/600/250?random=7" alt="Project 7">
+                        </div>
+                        <div class="project-item flex-fill">
+                            <img src="https://picsum.photos/600/250?random=8" alt="Project 8">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <button id="nextButton" class="projects__nav"></button>
     </section>
-  </div>
-</div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-    const wrapper = document.querySelector('.projects__wrapper');
-    const slides = document.querySelectorAll('.projects__slide');
-    const prevBtn = document.getElementById("prevButton");
-    const nextBtn = document.getElementById("nextButton");
-
-    let currentIndex = 0;
-    let visibleCount = 3;
-    let gap = 16;
-
-    function updateVisibleCount(){
-        const w = window.innerWidth;
-        if(w<540){ visibleCount=1; gap=8; }
-        else if(w<768){ visibleCount=2; gap=12; }
-        else { visibleCount=3; gap=16; }
-    }
-
-    function updateSlider(){
-        updateVisibleCount();
-        const containerWidth = wrapper.parentElement.offsetWidth;
-        const slideWidth = (containerWidth - gap*(visibleCount-1))/visibleCount;
-
-        slides.forEach(slide => slide.style.flexBasis = slideWidth+'px');
-
-        let offset = 0;
-        for(let i=0;i<currentIndex;i++){
-            offset += parseFloat(slides[i].style.flexBasis) + gap;
+    <style>
+        :root {
+            --project-gap: 2rem;
+            /* default desktop gap */
         }
 
-        wrapper.style.transform = `translateX(-${offset}px)`;
-    }
+        .project-col {
+            display: flex;
+            flex-direction: column;
+            gap: var(--project-gap);
+            /* vertical gap between items */
+        }
 
-    nextBtn.addEventListener('click', ()=>{
-        currentIndex++;
-        if(currentIndex > slides.length - visibleCount) currentIndex = slides.length - visibleCount;
-        updateSlider();
-    });
+        .project-row {
+            display: flex;
+            gap: var(--project-gap);
+            /* horizontal gap between items */
+        }
 
-    prevBtn.addEventListener('click', ()=>{
-        currentIndex--;
-        if(currentIndex<0) currentIndex=0;
-        updateSlider();
-    });
+        .project-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #222;
+        }
 
-    window.addEventListener('resize', updateSlider);
+        .project-item img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
 
-    updateSlider();
-});
-</script>
+        .project-text {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        /* 🔑 Responsive gap sizes */
+        @media (max-width: 992px) {
+            :root {
+                --project-gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            :root {
+                --project-gap: 1rem;
+            }
+
+            .project-row {
+                flex-direction: column;
+                /* stack side by side items */
+            }
+        }
+    </style>
 
 </body>
+
 </html>
