@@ -1,0 +1,148 @@
+@use '../utils/variables' as *;
+@use '../utils/mixin' as *;
+@use '../utils/breakpoints' as bp;
+
+.contact {
+    position: relative;
+    z-index: 2;
+
+    ::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $color-primary;
+        width: 45%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    &__left {
+        background: $color-white;
+        border-radius: 20px;
+        padding: 3.5rem 3rem;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+
+        @include bp.respond-to(xl) {
+            padding: 3rem 2.5rem;
+        }
+
+        @include bp.respond-to(lg) {
+            padding: 3rem 2rem;
+        }
+
+        @include bp.respond-to(sm) {
+            padding: 3rem 1rem;
+        }
+    }
+
+    &__title {
+        max-width: 765px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        &-input,
+        &-message {
+            border: 0.5px solid #8F9897;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+        }
+
+        &-submit::placeholder,
+        &-input::placeholder {
+            color: $color-dark-gray;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 150%;
+            letter-spacing: 0.08px;
+        }
+
+        &-submit {
+            background: $color-black;
+            color: $color-white;
+            padding: 1rem 1.5rem;
+            border-radius: 80px;
+            transition: $btn-transition;
+            border: none;
+
+            &:hover {
+                background: $color-primary;
+            }
+        }
+    }
+
+    &__right {
+        background: $color-white;
+        border-radius: 20px;
+        padding: 3.5rem 2rem;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+
+        @include bp.respond-to(xl) {
+            padding: 3rem 2rem;
+        }
+
+        @include bp.respond-to(sm) {
+            padding: 3rem 1rem;
+        }
+    }
+
+    &__info-title {
+        color: $color-black;
+        font-size: clamp(20px, 2vw + 1rem, 2.5rem);
+        font-weight: 500;
+        line-height: 120%;
+        letter-spacing: -0.4px;
+    }
+
+    .info-card {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+
+        @include bp.respond-to(md) {
+            gap: 1rem;
+        }
+
+        &__list {
+            gap: 2.2rem;
+
+            @include bp.respond-to(xl) {
+                gap: 1.5rem;
+            }
+
+            @include bp.respond-to(md) {
+                gap: 1rem;
+            }
+        }
+
+        &__icon {
+            background: $color-black;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+
+            @include bp.respond-to(xl) {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        &__link {
+            @include card-title;
+        }
+
+        &__text {
+            color: $color-dark-gray;
+            margin-bottom: 0;
+            margin-top: 5px;
+        }
+    }
+}
