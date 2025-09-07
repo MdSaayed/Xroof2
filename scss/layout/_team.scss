@@ -237,4 +237,95 @@
             }
         }
     }
+
+    &--style-3 {
+        background: $color-light-pink;
+
+        .team {
+
+            &__title,
+            &__desc {
+                max-width: 630px;
+            }
+
+            &__slider-btn {
+                @include card-icon-wrap;
+                display: grid !important;
+                cursor: pointer;
+                transition: $btn-transition;
+                margin-bottom: 0;
+
+                &:hover {
+                    background: $color-black;
+                }
+            }
+        }
+
+        .team-slider {
+            overflow: hidden;
+            margin: 0 -80px;
+
+            @include bp.respond-to(x4l) {
+                margin: 0 -30px;
+            }
+
+            @include bp.respond-to(xl) {
+                margin: 0;
+            }
+
+            &__item {
+                padding: 2rem;
+                border-radius: 20px;
+                background: #F8FAF7;
+
+                @include bp.respond-to(md) {
+                    padding: 1.5rem;
+                }
+
+                @include bp.respond-to(sm) {
+                    padding: 1rem;
+                }
+
+                &:hover {
+                    background: $color-black;
+
+                    .team-slider__title,
+                    .team-slider__role {
+                        color: $color-white;
+                    }
+
+                    .team-slider__image-wrap {
+                        transform: rotate(3deg);
+                    }
+                }
+            }
+
+            &__image-wrap {
+                border-radius: 20px;
+                overflow: hidden;
+                transition: $btn-transition;
+            }
+
+            &__image {
+                width: 100%;
+            }
+
+            &__title {
+                @include title-sm;
+                transition: $btn-transition;
+                margin-top: 1rem;
+            }
+
+            &__role {
+                color: $color-black;
+                transition: $btn-transition;
+                margin-top: 12px;
+                margin-bottom: 0;
+            }
+        }
+
+        .tns-liveregion.tns-visually-hidden {
+            display: none;
+        }
+    }
 }

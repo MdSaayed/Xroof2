@@ -174,211 +174,133 @@ document.querySelectorAll('.faq__item').forEach(item => {
 /* =============================
 * 20. Hero Two Slider
 ============================= */
-const hero_two_slider = tns({
-  container: '#hero-two-slider',
-  items: 1,
-  slideBy: 'page',
-  autoplay: true,
-  autoplayTimeout: 3000,
-  autoplayButtonOutput: false,
-  controls: false,
-  nav: false,
-  loop: true,
-  lazyload: true,
-  gutter: 10
-});
+const hero_two_slider = document.querySelector('#hero-two-slider');
 
+if (hero_two_slider) {
+  const hero_two_slider = tns({
+    container: '#hero-two-slider',
+    items: 1,
+    slideBy: 'page',
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayButtonOutput: false,
+    controls: false,
+    nav: false,
+    loop: true,
+    lazyload: true,
+    gutter: 10
+  });
+}
 
 /* =============================
 * 20. Projects Two Slider
 ============================= */
-// document.addEventListener("DOMContentLoaded", function () {
-//   document.querySelectorAll('.projects__slider').forEach(slider => {
-//     const slides = slider.querySelectorAll('.projects__slide');
-//     const prevBtn = slider.parentElement.querySelector('#prevButton');
-//     const nextBtn = slider.parentElement.querySelector('#nextButton');
-
-//     if (!slider || slides.length === 0 || !prevBtn || !nextBtn) return;
-//     let currentIndex = 0;
-//     let visibleCount = 3;
-//     let gap = 32;
-
-//     function updateVisibleCount() {
-//       const width = window.innerWidth;
-//       if (width < 540) {
-//         visibleCount = 1;
-//         // gap = 8;
-//       } else if (width < 768) {
-//         visibleCount = 2;
-//         gap = 16;
-//       } else {
-//         visibleCount = 3;
-//         // gap = 32;
-//       }
-//     }
-
-//     // Update slider position
-//     function updateSlider() {
-//       updateVisibleCount();
-//       const slideWidth = slides[0].offsetWidth + gap;
-//       const maxIndex = slides.length - visibleCount;
-//       if (currentIndex < 0) currentIndex = 0;
-//       if (currentIndex > maxIndex) currentIndex = maxIndex;
-//       slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-//       slides.forEach(s => s.style.flex = `0 0 calc(100% / ${visibleCount})`);
-//     }
-
-//     nextBtn.addEventListener('click', () => {
-//       currentIndex += 1;
-//       updateSlider();
-//     });
-
-//     prevBtn.addEventListener('click', () => {
-//       currentIndex -= 1;
-//       updateSlider();
-//     });
-
-//     slides.forEach((slide) => {
-//       slide.addEventListener("mouseenter", () => {
-//         if (visibleCount === 1) return; // no hover effect if only 1 visible
-
-//         const groupStart = currentIndex;
-//         const groupSlides = Array.from(slides).slice(groupStart, groupStart + visibleCount);
-
-//         // Reset only visible slides
-//         groupSlides.forEach(s => s.style.flex = `0 0 calc(100% / ${visibleCount})`);
-
-//         // Determine hovered width
-//         let hoverWidth;
-//         if (visibleCount === 2) hoverWidth = "0 0 75%";
-//         else hoverWidth = "0 0 50%"; // default for 3 slides
-
-//         slide.style.flex = hoverWidth;
-
-//         // Shrink others proportionally
-//         groupSlides.forEach(s => {
-//           if (s !== slide) {
-//             if (visibleCount === 2) s.style.flex = "0 0 25%";
-//             else s.style.flex = `0 0 ${50 / (visibleCount - 1)}%`;
-//           }
-//         });
-//       });
-
-//       slide.addEventListener("mouseleave", () => {
-//         const groupStart = currentIndex;
-//         const groupSlides = Array.from(slides).slice(groupStart, groupStart + visibleCount);
-//         groupSlides.forEach(s => s.style.flex = `0 0 calc(100% / ${visibleCount})`);
-//       });
-//     });
-
-
-//     window.addEventListener('resize', updateSlider);
-//     updateSlider();
-//   });
-// });
-
+const project_slider_element = document.querySelector('.projects__slider');
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll('.projects__slider').forEach(slider => {
-    const slides = slider.querySelectorAll('.projects__slide');
-    const prevBtn = slider.parentElement.querySelector('#prevButton');
-    const nextBtn = slider.parentElement.querySelector('#nextButton');
+  if (project_slider_element) {
+    project_slider_element.forEach(slider => {
+      const slides = slider.querySelectorAll('.projects__slide');
+      const prevBtn = slider.parentElement.querySelector('#prevButton');
+      const nextBtn = slider.parentElement.querySelector('#nextButton');
 
-    if (!slider || slides.length === 0 || !prevBtn || !nextBtn) return;
-    let currentIndex = 0;
-    let visibleCount = 3;
-    let gap = 32;
-    function updateVisibleCountAndGap() {
-      const width = window.innerWidth;
-      if (width < 540) {
-        visibleCount = 1;
-        gap = 8;
-      } else if (width < 768) {
-        visibleCount = 2;
-      } else if (width < 1200) {
-        gap = 16;
-      } else {
-        visibleCount = 3;
-        gap = 32;
-      }
-    }
-
-    function updateSlider() {
-      updateVisibleCountAndGap();
-
-      const slideOuterWidth = slides[0].offsetWidth + gap;
-      const maxIndex = slides.length - visibleCount;
-
-      if (currentIndex < 0) currentIndex = 0;
-      if (currentIndex > maxIndex) currentIndex = maxIndex;
-
-      slider.style.transform = `translateX(-${currentIndex * slideOuterWidth}px)`;
-
-      slides.forEach(s => {
-        s.style.flexBasis = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
-        s.style.marginRight = `${gap}px`;
-      });
-      const lastVisibleSlideInGroup = Array.from(slides)[currentIndex + visibleCount - 1];
-      if (lastVisibleSlideInGroup) {
-        lastVisibleSlideInGroup.style.marginRight = '0px';
-      }
-    }
-
-    nextBtn.addEventListener('click', () => {
-      currentIndex += 1;
-      updateSlider();
-    });
-
-    prevBtn.addEventListener('click', () => {
-      currentIndex -= 1;
-      updateSlider();
-    });
-
-    slides.forEach((slide) => {
-      slide.addEventListener("mouseenter", () => {
-        if (visibleCount === 1) return;
-
-        const groupStart = currentIndex;
-        const groupSlides = Array.from(slides).slice(groupStart, groupStart + visibleCount);
-
-        let hoveredSlideGrowthPercentage = 0;
-        if (visibleCount === 2) {
-          hoveredSlideGrowthPercentage = 25;
-        } else if (visibleCount === 3) {
-          hoveredSlideGrowthPercentage = 25;
+      if (!slider || slides.length === 0 || !prevBtn || !nextBtn) return;
+      let currentIndex = 0;
+      let visibleCount = 3;
+      let gap = 32;
+      function updateVisibleCountAndGap() {
+        const width = window.innerWidth;
+        if (width < 540) {
+          visibleCount = 1;
+          gap = 8;
+        } else if (width < 768) {
+          visibleCount = 2;
+        } else if (width < 1200) {
+          gap = 16;
+        } else {
+          visibleCount = 3;
+          gap = 32;
         }
+      }
 
-        const baseFlexBasisCalc = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
+      function updateSlider() {
+        updateVisibleCountAndGap();
 
-        const hoveredFlexBasisCalc = `calc(${baseFlexBasisCalc} + ${hoveredSlideGrowthPercentage}%)`;
+        const slideOuterWidth = slides[0].offsetWidth + gap;
+        const maxIndex = slides.length - visibleCount;
 
-        const nonHoveredFlexBasisCalc = `calc(${baseFlexBasisCalc} - ${hoveredSlideGrowthPercentage / (visibleCount - 1)}%)`;
+        if (currentIndex < 0) currentIndex = 0;
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
 
+        slider.style.transform = `translateX(-${currentIndex * slideOuterWidth}px)`;
 
-        groupSlides.forEach(s => {
-          if (s === slide) {
-            s.style.flexBasis = hoveredFlexBasisCalc;
-          } else {
-            s.style.flexBasis = nonHoveredFlexBasisCalc;
+        slides.forEach(s => {
+          s.style.flexBasis = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
+          s.style.marginRight = `${gap}px`;
+        });
+        const lastVisibleSlideInGroup = Array.from(slides)[currentIndex + visibleCount - 1];
+        if (lastVisibleSlideInGroup) {
+          lastVisibleSlideInGroup.style.marginRight = '0px';
+        }
+      }
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex += 1;
+        updateSlider();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        currentIndex -= 1;
+        updateSlider();
+      });
+
+      slides.forEach((slide) => {
+        slide.addEventListener("mouseenter", () => {
+          if (visibleCount === 1) return;
+
+          const groupStart = currentIndex;
+          const groupSlides = Array.from(slides).slice(groupStart, groupStart + visibleCount);
+
+          let hoveredSlideGrowthPercentage = 0;
+          if (visibleCount === 2) {
+            hoveredSlideGrowthPercentage = 25;
+          } else if (visibleCount === 3) {
+            hoveredSlideGrowthPercentage = 25;
           }
+
+          const baseFlexBasisCalc = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
+
+          const hoveredFlexBasisCalc = `calc(${baseFlexBasisCalc} + ${hoveredSlideGrowthPercentage}%)`;
+
+          const nonHoveredFlexBasisCalc = `calc(${baseFlexBasisCalc} - ${hoveredSlideGrowthPercentage / (visibleCount - 1)}%)`;
+
+
+          groupSlides.forEach(s => {
+            if (s === slide) {
+              s.style.flexBasis = hoveredFlexBasisCalc;
+            } else {
+              s.style.flexBasis = nonHoveredFlexBasisCalc;
+            }
+          });
+        });
+
+        slide.addEventListener("mouseleave", () => {
+          updateSlider();
         });
       });
 
-      slide.addEventListener("mouseleave", () => {
-        updateSlider();
-      });
+      window.addEventListener('resize', updateSlider);
+      updateSlider();
     });
-
-    window.addEventListener('resize', updateSlider);
-    updateSlider();
-  });
+  }
 });
 
 
 /* =============================
 * 20. Team Two
 ============================= */
+const team_slider_element = document.querySelector('.team__cards');
 document.addEventListener("DOMContentLoaded", function () {
+  if (team_slider_element) {
     const wrapper = document.querySelector('.team__cards');
     const slides = document.querySelectorAll('.team__card');
     const prevBtn = document.getElementById("team-prev-btn");
@@ -390,113 +312,148 @@ document.addEventListener("DOMContentLoaded", function () {
     let isHovering = false;
 
     function updateVisibleCountAndGap() {
-        const width = window.innerWidth;
-        if (width >= 1025) {
-            visibleCount = 3;
-            gap = 32;
-        } 
-        else if (width >= 541 && width <= 1024) {
-            visibleCount = 2;
-            gap = 16; 
-        } 
-        else {
-            visibleCount = 1;
-            gap = 10;  
-        }
+      const width = window.innerWidth;
+      if (width >= 1025) {
+        visibleCount = 3;
+        gap = 32;
+      }
+      else if (width >= 541 && width <= 1024) {
+        visibleCount = 2;
+        gap = 16;
+      }
+      else {
+        visibleCount = 1;
+        gap = 10;
+      }
     }
 
     function updateSlider() {
-        updateVisibleCountAndGap();
-        const containerWidth = wrapper.parentElement.offsetWidth;
-        const totalGapWidth = gap * (visibleCount - 1);
-        const availableWidth = containerWidth - totalGapWidth;
+      updateVisibleCountAndGap();
+      const containerWidth = wrapper.parentElement.offsetWidth;
+      const totalGapWidth = gap * (visibleCount - 1);
+      const availableWidth = containerWidth - totalGapWidth;
 
-        if (currentIndex > slides.length - visibleCount) {
-            currentIndex = slides.length - visibleCount;
+      if (currentIndex > slides.length - visibleCount) {
+        currentIndex = slides.length - visibleCount;
+      }
+      if (currentIndex < 0) {
+        currentIndex = 0;
+      }
+
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+
+        // Set margins
+        slide.style.marginRight = (index < slides.length - 1) ? gap + 'px' : '0';
+
+        // Set flex-basis for all slides
+        if (index >= currentIndex && index < currentIndex + visibleCount) {
+          if (visibleCount === 3) {
+            slide.style.flexBasis = (availableWidth * (index === currentIndex ? 0.5 : 0.25)) + 'px';
+          } else if (visibleCount === 2) {
+            slide.style.flexBasis = (availableWidth * (index === currentIndex ? 0.6 : 0.4)) + 'px';
+          } else {
+            slide.style.flexBasis = availableWidth + 'px';
+          }
+        } else {
+          slide.style.flexBasis = (availableWidth / visibleCount) + 'px';
         }
-        if (currentIndex < 0) {
-            currentIndex = 0;
-        }
+      });
 
-        slides.forEach((slide, index) => {
-            slide.classList.remove('active');
-            
-            // Set margins
-            slide.style.marginRight = (index < slides.length - 1) ? gap + 'px' : '0';
+      // Add active class to the first visible slide only when not hovering
+      if (!isHovering && slides[currentIndex]) {
+        slides[currentIndex].classList.add('active');
+      }
 
-            // Set flex-basis for all slides
-            if (index >= currentIndex && index < currentIndex + visibleCount) {
-                if (visibleCount === 3) {
-                    slide.style.flexBasis = (availableWidth * (index === currentIndex ? 0.5 : 0.25)) + 'px';
-                } else if (visibleCount === 2) {
-                    slide.style.flexBasis = (availableWidth * (index === currentIndex ? 0.6 : 0.4)) + 'px';
-                } else {
-                    slide.style.flexBasis = availableWidth + 'px';
-                }
-            } else {
-                slide.style.flexBasis = (availableWidth / visibleCount) + 'px';
-            }
-        });
+      let offset = 0;
+      for (let i = 0; i < currentIndex; i++) {
+        const nonVisibleBaseWidth = (containerWidth - gap * (visibleCount - 1)) / visibleCount;
+        offset += nonVisibleBaseWidth + gap;
+      }
 
-        // Add active class to the first visible slide only when not hovering
-        if (!isHovering && slides[currentIndex]) {
-            slides[currentIndex].classList.add('active');
-        }
-
-        let offset = 0;
-        for (let i = 0; i < currentIndex; i++) {
-            const nonVisibleBaseWidth = (containerWidth - gap * (visibleCount - 1)) / visibleCount;
-            offset += nonVisibleBaseWidth + gap;
-        }
-        
-        wrapper.style.transform = `translateX(-${offset}px)`;
+      wrapper.style.transform = `translateX(-${offset}px)`;
     }
-    
+
     // Function to handle hover state
     function handleHover(hoveredSlide) {
-        const containerWidth = wrapper.parentElement.offsetWidth;
-        const totalGapWidth = gap * (visibleCount - 1);
-        const availableWidth = containerWidth - totalGapWidth;
-        
-        const hoveredIndex = Array.from(slides).indexOf(hoveredSlide);
-        const startOfVisibleGroup = currentIndex;
+      const containerWidth = wrapper.parentElement.offsetWidth;
+      const totalGapWidth = gap * (visibleCount - 1);
+      const availableWidth = containerWidth - totalGapWidth;
 
-        slides.forEach((slide, index) => {
-            slide.classList.remove('active');
-        });
+      const hoveredIndex = Array.from(slides).indexOf(hoveredSlide);
+      const startOfVisibleGroup = currentIndex;
 
-        const group = Array.from(slides).slice(startOfVisibleGroup, startOfVisibleGroup + visibleCount);
-        if (visibleCount === 2) {
-            group.forEach(s => s.style.flexBasis = (s === hoveredSlide ? availableWidth * 0.6 : availableWidth * 0.4) + 'px');
-        } else if (visibleCount === 3) {
-            group.forEach(s => s.style.flexBasis = (s === hoveredSlide ? availableWidth * 0.5 : availableWidth * 0.25) + 'px');
-        }
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+      });
+
+      const group = Array.from(slides).slice(startOfVisibleGroup, startOfVisibleGroup + visibleCount);
+      if (visibleCount === 2) {
+        group.forEach(s => s.style.flexBasis = (s === hoveredSlide ? availableWidth * 0.6 : availableWidth * 0.4) + 'px');
+      } else if (visibleCount === 3) {
+        group.forEach(s => s.style.flexBasis = (s === hoveredSlide ? availableWidth * 0.5 : availableWidth * 0.25) + 'px');
+      }
     }
 
     slides.forEach(slide => {
-        slide.addEventListener('mouseenter', () => {
-            isHovering = true;
-            handleHover(slide);
-        });
+      slide.addEventListener('mouseenter', () => {
+        isHovering = true;
+        handleHover(slide);
+      });
 
-        slide.addEventListener('mouseleave', () => {
-            isHovering = false;
-            updateSlider();
-        });
-    });
-    
-    nextBtn.addEventListener('click', () => {
+      slide.addEventListener('mouseleave', () => {
         isHovering = false;
-        currentIndex++;
         updateSlider();
+      });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      isHovering = false;
+      currentIndex++;
+      updateSlider();
     });
 
     prevBtn.addEventListener('click', () => {
-        isHovering = false;
-        currentIndex--;
-        updateSlider();
+      isHovering = false;
+      currentIndex--;
+      updateSlider();
     });
 
     window.addEventListener('resize', updateSlider);
     updateSlider();
+  }
 });
+
+/* =============================
+* 20. Team Three
+============================= */
+
+const team_slider_three = document.querySelector('#team-slider-3');
+
+if (team_slider_three) {
+  const teamSliderThree = tns({
+    container: '#team-slider-3 .team-slider__wrapper',  
+    items: 1,
+    slideBy: 1,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayButtonOutput: false,
+    controls: true, 
+    nav: false,      
+    loop: true,
+    lazyload: true,
+    gutter: 32,
+    prevButton: document.getElementById('team-slider-3-prev'),
+    nextButton: document.getElementById('team-slider-3-next'),
+    responsive: {
+      0: { items: 1 },
+      768: { items: 2 },
+      1200: { items: 3 },
+      1920: { items: 4 }
+    }
+  });
+}
+
+
+
+
