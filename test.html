@@ -3,154 +3,485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Slider</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-            },
-        };
-    </script>
-    <!-- Tiny Slider CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+    <title>XRoot Awards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* This rule ensures the custom navigation buttons are always visible. */
-        #team-slider-3-prev,
-        #team-slider-3-next {
-            display: flex !important;
-            opacity: 1 !important;
+        :root {
+            --color-dark: #0A1514;
+            --color-white: #ffffff;
+            --color-gold: #fdbb2d;
+            --color-light-bg: #f8f9fa;
+            --transition-speed: 0.4s;
         }
-
-        /* General button styling */
-        .team__slider-btn {
-            background-color: #3b82f6; /* Tailwind's blue-500 */
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px; /* rounded-full */
-            transition: all 0.2s ease-in-out;
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem 0;
+        }
+        
+        .award {
+            background: var(--color-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .award__title {
+            max-width: 745px;
+            color: var(--color-white);
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+        
+        .award__desc {
+            max-width: 615px;
+            color: var(--color-white);
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+        
+        .award__list {
+            display: flex;
+            gap: 0;
+            margin-top: 2.5rem;
+            height: 500px;
+        }
+        
+        @media (max-width: 992px) {
+            .award__list {
+                flex-direction: column;
+                height: auto;
+            }
+        }
+        
+        .award__item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-radius: 0;
+            overflow: hidden;
+            transition: flex var(--transition-speed) ease;
+            cursor: pointer;
+            position: relative;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--color-dark);
+        }
+        
+        .award__item:last-child {
+            border-right: none;
+        }
+        
+        .award__item-title {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            color: var(--color-white);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            margin: 0;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            flex: 1;
+            display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
         }
-
-        .team__slider-btn:hover {
-            background-color: #2563eb; /* Tailwind's blue-600 */
+        
+        .award__item-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            min-height: 100%;
+        }
+        
+        .award__item-arrow {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-white);
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            transition: transform var(--transition-speed) ease;
+        }
+        
+        .award__item--active .award__item-arrow {
+            transform: rotate(90deg);
+        }
+        
+        .award__item-body {
+            display: none;
+            padding: 2rem;
+            color: var(--color-white);
+            background: var(--color-light-bg);
+            color: var(--color-dark);
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .award__item--active {
+            flex: 4;
+        }
+        
+        .award__item--active .award__item-header {
+            display: none;
+        }
+        
+        .award__item--active .award__item-body {
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn var(--transition-speed) ease;
+        }
+        
+        .award__item-body-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .award__item-heading {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin: 0;
+            flex: 1;
+        }
+        
+        .award__item-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 1200px) {
+            .award__item-content {
+                flex-direction: row;
+            }
+        }
+        
+        .award__item-text {
+            flex: 1;
+        }
+        
+        .award__item-badge {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .award__item-badge-img {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .award__item-year {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin: 0;
+        }
+        
+        .award__item-desc {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #444;
+        }
+        
+        .award__item-img {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .award__item-img-el {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Animation for smooth content appearance */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .award__list {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .award__item {
+                flex: 1;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                min-height: 80px;
+            }
+            
+            .award__item-header {
+                flex-direction: row;
+                padding: 1rem;
+                justify-content: flex-start;
+            }
+            
+            .award__item-title {
+                writing-mode: horizontal-tb;
+                transform: none;
+                padding: 0 0 0 1rem;
+                text-align: left;
+                justify-content: flex-start;
+            }
+            
+            .award__item-arrow {
+                margin-bottom: 0;
+                margin-right: 0.5rem;
+            }
+            
+            .award__item--active {
+                flex: 1;
+                min-height: 500px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .award__item-body-top {
+                flex-direction: column;
+            }
+            
+            .award__item-heading {
+                font-size: 1.5rem;
+            }
+            
+            .award__item-year {
+                font-size: 1.5rem;
+            }
+        }
+        
+        .container-xl {
+            max-width: 1200px;
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
-
-    <section class="team team--style-3 py-16">
-        <div class="container mx-auto px-4 max-w-7xl">
-            <div class="flex justify-between items-end flex-wrap gap-4">
-                <div class="max-w-xl">
-                    <h2 class="text-4xl font-bold">Meet the Skilled Roofing Experts</h2>
-                    <p class="mt-4 text-lg text-gray-600">
-                        Our team is made up of experienced, certified roofing professionals who take pride in
-                        delivering exceptional results.
-                    </p>
-                </div>
-                <div class="flex flex-wrap gap-4 mt-4">
-                    <div id="team-slider-3-prev" class="team__slider-btn team__slider-btn--prev bg-blue-500 text-white rounded-full p-3 hover:bg-blue-600 transition-colors cursor-pointer">
-                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0.752942 5.12806C0.4553 5.42571 0.4553 5.90828 0.752942 6.20592L5.6033 11.0563C5.90094 11.3539 6.38351 11.3539 6.68115 11.0563C6.9788 10.7586 6.9788 10.2761 6.68115 9.97842L2.36973 5.66699L6.68115 1.35556C6.9788 1.05792 6.9788 0.575349 6.68115 0.277708C6.38351 -0.0199347 5.90094 -0.0199347 5.6033 0.277708L0.752942 5.12806ZM1.29187 5.66699V6.42915L15.4867 6.42915V5.66699V4.90483L1.29187 4.90483V5.66699Z" fill="white" />
-                        </svg>
-                    </div>
-
-                    <div id="team-slider-3-next" class="team__slider-btn team__slider-btn--next bg-blue-500 text-white rounded-full p-3 hover:bg-blue-600 transition-colors cursor-pointer">
-                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.2471 6.4276C15.5447 6.12996 15.5447 5.64739 15.2471 5.34974L10.3967 0.499387C10.0991 0.201745 9.61652 0.201745 9.31888 0.499387C9.02123 0.797029 9.02123 1.2796 9.31888 1.57724L13.6303 5.88867L9.31888 10.2001C9.02123 10.4977 9.02123 10.9803 9.31888 11.278C9.61652 11.5756 10.0991 11.5756 10.3967 11.278L15.2471 6.4276ZM14.7082 5.88867V5.12651L0.513304 5.12651V5.88867V6.65083L14.7082 6.65083V5.88867Z" fill="white" />
-                        </svg>
-                    </div>
+<body>
+    <div class="container-xl">
+        <div class="award p-4 p-md-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="award__title">Awards & Recognition</h1>
+                    <p class="award__desc mt-3">Celebrating excellence in service and community recognition since 2018</p>
                 </div>
             </div>
-
-            <div id="team-slider-3" class="team-slider team-slider--3 mt-10">
-                <div class="team-slider__wrapper tns-inner d-flex">
-                    <div class="team-slider__slide px-4">
-                        <div class="team-slider__item">
-                            <div class="team-slider__image-wrap">
-                                <img src="https://placehold.co/400x500/A3A3A3/ffffff?text=Olivia+Brooks" alt="Olivia Brooks" class="team-slider__image rounded-lg w-full">
+            
+            <div class="award__list">
+                <!-- Award Item 1 -->
+                <div class="award__item award__item--active">
+                    <div class="award__item-header">
+                        <div class="award__item-arrow">
+                            <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
+                            </svg>
+                        </div>
+                        <h3 class="award__item-title">//.. 01. Best Local XRoot 2024</h3>
+                    </div>
+                    <div class="award__item-body">
+                        <div class="award__item-body-top">
+                            <h3 class="award__item-heading">..// 05. Customer's Choice for Outstanding Service</h3>
+                            <div class="award__item-arrow">
+                                <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                    <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
+                                </svg>
                             </div>
-                            <div class="team-slider__info text-center mt-4">
-                                <h3 class="text-xl font-semibold">Olivia Brooks</h3>
-                                <p class="text-gray-500">General Maintenance Technician</p>
+                        </div>
+                        
+                        <div class="award__item-content">
+                            <div class="award__item-text">
+                                <div class="award__item-badge">
+                                    <div class="award__item-badge-img">
+                                        <i class="fas fa-award" style="font-size: 50px; color: #fdbb2d;"></i>
+                                    </div>
+                                    <p class="award__item-year">//.. 2024 ..//</p>
+                                </div>
+                                <p class="award__item-desc">
+                                    At XRoot, every guest is family — and our commitment to warm, attentive
+                                    service has made us a proud winner of the Customer's Choice for Outstanding Service
+                                    award. From the moment you walk through our doors to your last delicious bite,
+                                    we strive to make your experience unforgettable.
+                                </p>
+                            </div>
+                            
+                            <div class="award__item-img">
+                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" alt="Award" class="award__item-img-el">
                             </div>
                         </div>
                     </div>
-                    <div class="team-slider__slide px-4">
-                        <div class="team-slider__item">
-                            <div class="team-slider__image-wrap">
-                                <img src="https://placehold.co/400x500/525252/ffffff?text=John+Doe" alt="John Doe" class="team-slider__image rounded-lg w-full">
+                </div>
+                
+                <!-- Award Item 2 -->
+                <div class="award__item">
+                    <div class="award__item-header">
+                        <div class="award__item-arrow">
+                            <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
+                            </svg>
+                        </div>
+                        <h3 class="award__item-title">//.. 02. Top Choice Authentic 2022</h3>
+                    </div>
+                    <div class="award__item-body">
+                        <div class="award__item-body-top">
+                            <h3 class="award__item-heading">..// 02. Top Choice Authentic 2022</h3>
+                            <div class="award__item-arrow">
+                                <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                    <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
+                                </svg>
                             </div>
-                            <div class="team-slider__info text-center mt-4">
-                                <h3 class="text-xl font-semibold">John Doe</h3>
-                                <p class="text-gray-500">Roofing Specialist</p>
+                        </div>
+                        
+                        <div class="award__item-content">
+                            <div class="award__item-text">
+                                <div class="award__item-badge">
+                                    <div class="award__item-badge-img">
+                                        <i class="fas fa-star" style="font-size: 50px; color: #fdbb2d;"></i>
+                                    </div>
+                                    <p class="award__item-year">//.. 2022 ..//</p>
+                                </div>
+                                <p class="award__item-desc">
+                                    Recognized for our authentic cuisine and traditional cooking methods that have been
+                                    passed down through generations. We take pride in using locally sourced ingredients
+                                    to create dishes that represent the true flavors of our region.
+                                </p>
+                            </div>
+                            
+                            <div class="award__item-img">
+                                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" alt="Award" class="award__item-img-el">
                             </div>
                         </div>
                     </div>
-                    <div class="team-slider__slide px-4">
-                        <div class="team-slider__item">
-                            <div class="team-slider__image-wrap">
-                                <img src="https://placehold.co/400x500/A3A3A3/ffffff?text=Emma+Watson" alt="Emma Watson" class="team-slider__image rounded-lg w-full">
+                </div>
+                
+                <!-- Award Item 3 -->
+                <div class="award__item">
+                    <div class="award__item-header">
+                        <div class="award__item-arrow">
+                            <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
+                            </svg>
+                        </div>
+                        <h3 class="award__item-title">//.. 03. Recognized as Community</h3>
+                    </div>
+                    <div class="award__item-body">
+                        <div class="award__item-body-top">
+                            <h3 class="award__item-heading">..// 03. Recognized as Community</h3>
+                            <div class="award__item-arrow">
+                                <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                    <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
+                                </svg>
                             </div>
-                            <div class="team-slider__info text-center mt-4">
-                                <h3 class="text-xl font-semibold">Emma Watson</h3>
-                                <p class="text-gray-500">Electrical Engineer</p>
+                        </div>
+                        
+                        <div class="award__item-content">
+                            <div class="award__item-text">
+                                <div class="award__item-badge">
+                                    <div class="award__item-badge-img">
+                                        <i class="fas fa-users" style="font-size: 50px; color: #fdbb2d;"></i>
+                                    </div>
+                                    <p class="award__item-year">//.. 2020-2023 ..//</p>
+                                </div>
+                                <p class="award__item-desc">
+                                    Honored for our contributions to the local community and supporting local farmers
+                                    and producers. We believe in giving back to the community that has supported us
+                                    throughout our journey and making a positive impact through various initiatives.
+                                </p>
+                            </div>
+                            
+                            <div class="award__item-img">
+                                <img src="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" alt="Award" class="award__item-img-el">
                             </div>
                         </div>
                     </div>
-                    <div class="team-slider__slide px-4">
-                        <div class="team-slider__item">
-                            <div class="team-slider__image-wrap">
-                                <img src="https://placehold.co/400x500/525252/ffffff?text=Liam+Smith" alt="Liam Smith" class="team-slider__image rounded-lg w-full">
+                </div>
+                
+                <!-- Award Item 4 -->
+                <div class="award__item">
+                    <div class="award__item-header">
+                        <div class="award__item-arrow">
+                            <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
+                            </svg>
+                        </div>
+                        <h3 class="award__item-title">//.. 05. Customer's Choice for Outstanding Service</h3>
+                    </div>
+                    <div class="award__item-body">
+                        <div class="award__item-body-top">
+                            <h3 class="award__item-heading">..// 05. Customer's Choice for Outstanding Service</h3>
+                            <div class="award__item-arrow">
+                                <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                    <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
+                                </svg>
                             </div>
-                            <div class="team-slider__info text-center mt-4">
-                                <h3 class="text-xl font-semibold">Liam Smith</h3>
-                                <p class="text-gray-500">Project Manager</p>
+                        </div>
+                        
+                        <div class="award__item-content">
+                            <div class="award__item-text">
+                                <div class="award__item-badge">
+                                    <div class="award__item-badge-img">
+                                        <i class="fas fa-heart" style="font-size: 50px; color: #fdbb2d;"></i>
+                                    </div>
+                                    <p class="award__item-year">//.. 2018-2025 ..//</p>
+                                </div>
+                                <p class="award__item-desc">
+                                    Voted by our customers for providing exceptional service and making every guest
+                                    feel like family. We pride ourselves on our attentive staff and welcoming atmosphere
+                                    that keeps our customers coming back time and time again.
+                                </p>
+                            </div>
+                            
+                            <div class="award__item-img">
+                                <img src="https://images.unsplash.com/photo-1576854284880-3200b1c6d614?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHJlc3RhdXJhbnR8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60" alt="Award" class="award__item-img-el">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Tiny Slider JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
     <script>
-        const team_slider_three = document.querySelector('#team-slider-3');
-
-        if (team_slider_three) {
-            const teamSliderThree = tns({
-                container: '#team-slider-3 .team-slider__wrapper',
-                items: 4,
-                slideBy: 1,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                autoplayButtonOutput: false,
-                controls: true,
-                nav: false,
-                loop: true,
-                lazyload: true,
-                gutter: 32,
-                prevButton: document.getElementById('team-slider-3-prev'),
-                nextButton: document.getElementById('team-slider-3-next'),
-                responsive: {
-                    0: { items: 1 },
-                    768: { items: 2 },
-                    1200: { items: 3 },
-                    1440: { items: 4 }
-                }
+        document.addEventListener('DOMContentLoaded', function() {
+            const awardItems = document.querySelectorAll('.award__item');
+            
+            awardItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Close all items
+                    awardItems.forEach(el => {
+                        el.classList.remove('award__item--active');
+                        // Reset the flex value to ensure smooth transition
+                        el.style.flex = '1';
+                    });
+                    
+                    // Open the clicked item
+                    item.classList.add('award__item--active');
+                    // Set a larger flex value for the active item
+                    item.style.flex = '4';
+                });
             });
-        }
+            
+            // Initialize the first item as active
+            if (awardItems.length > 0) {
+                awardItems[0].style.flex = '4';
+            }
+        });
     </script>
-
 </body>
 </html>

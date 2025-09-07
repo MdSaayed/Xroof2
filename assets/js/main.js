@@ -432,14 +432,14 @@ const team_slider_three = document.querySelector('#team-slider-3');
 
 if (team_slider_three) {
   const teamSliderThree = tns({
-    container: '#team-slider-3 .team-slider__wrapper',  
+    container: '#team-slider-3 .team-slider__wrapper',
     items: 1,
     slideBy: 1,
     autoplay: true,
     autoplayTimeout: 3000,
     autoplayButtonOutput: false,
-    controls: true, 
-    nav: false,      
+    controls: true,
+    nav: false,
     loop: true,
     lazyload: true,
     gutter: 32,
@@ -455,5 +455,17 @@ if (team_slider_three) {
 }
 
 
+/* =============================
+* 20. Award Area
+============================= */
+const awardItems = document.querySelectorAll('.award__item');
 
+if (awardItems) {
+  awardItems.forEach(item => {
+    item.addEventListener('click', () => {
+      awardItems.forEach(el => el.classList.remove('award__item--active'));
+      item.classList.add('award__item--active');
+    });
+  });
+}
 

@@ -1,0 +1,205 @@
+@use '../utils/variables' as*;
+@use '../utils/mixin' as*;
+@use '../utils/breakpoints' as bp;
+
+.award {
+    background: $color-dark;
+
+    &__title {
+        max-width: 745px;
+    }
+
+    &__desc {
+        max-width: 615px;
+        color: $color-white;
+    }
+
+    &__list {
+        display: flex;
+        gap: 2rem;
+        height: 575px;
+        transition: all 0.5s ease;
+
+        @include bp.respond-to(lg) {
+            flex-direction: column;
+            height: auto;
+            gap: 1.5rem;
+        }
+    }
+
+    &__item {
+        flex: 1 1 0%;
+        min-width: 100px;
+        display: flex;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: flex-basis 0.5s ease;
+        cursor: pointer;
+        position: relative;
+        border: 1px solid $color-white;
+
+        @include bp.respond-to(lg) {
+            min-width: unset;
+            flex-direction: column;
+            height: auto;
+        }
+
+        &-title {
+            @include card-title($color-white);
+
+            @include bp.respond-to(xs) {
+                text-align: left;
+            }
+        }
+
+        &-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            color: $color-white;
+            padding: 3rem 1rem;
+            flex: 1;
+            text-align: center;
+            font-weight: 500;
+
+            @include bp.respond-to(lg) {
+                writing-mode: horizontal-tb;
+                transform: rotate(0deg);
+                padding: 1.5rem;
+                flex-direction: row-reverse; 
+                flex: none;
+            }
+
+            @include bp.respond-to(xs) {
+                flex-wrap: wrap;
+                gap: 10px !important;
+                flex-direction: column-reverse !important;
+                align-items: start !important;
+                padding: 1rem;
+
+            }
+        }
+
+        &-arrow {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            opacity: 0.7;
+            background: $color-white;
+            border-radius: 50%;
+            transform: rotate(180deg);
+            flex-shrink: 0;
+
+            @include bp.respond-to(lg) {
+                transform: rotate(0deg);
+            }
+        }
+
+        &-body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 30px;
+            color: $color-white;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 3px;
+                background-color: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $color-white;
+                border-radius: 5px;
+            }
+
+            @include bp.respond-to(lg) {
+                position: static;
+                padding: 0 1.5rem;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease;
+                display: block;
+            }
+
+            &-top {
+                @include bp.respond-to(sm) {
+                    flex-wrap: wrap;
+                    gap: 10px !important;
+                }
+            }
+
+            .award__item-heading {
+                @include title-sm($color-white);
+            }
+
+            .award__item-badge-img {
+                max-width: 120px;
+
+                @include bp.respond-to(sm) {
+                    max-width: 80px;
+                }
+            }
+
+            .award__item-year {
+                font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+                color: $color-white;
+                margin-bottom: 10px;
+                font-weight: 500;
+                line-height: 120%;
+                letter-spacing: -0.4px;
+            }
+
+            .award__item-text {
+                color: $color-white;
+            }
+
+            .award__item-img {
+                max-width: 375px;
+                max-height: 500px;
+                overflow: hidden;
+                border-radius: 10px;
+                flex-shrink: 0;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        &--active {
+            flex-basis: 75%;
+
+            @include bp.respond-to(lg) {
+                flex-basis: auto;
+                height: auto;
+            }
+
+            .award__item-header {
+                display: none;
+            }
+
+            .award__item-body {
+                display: block;
+
+                @include bp.respond-to(lg) {
+                    max-height: 2000px;
+                    padding: 1.5rem;
+                }
+            }
+        }
+    }
+
+    &__item-arrow-content {
+        transform: rotate(-90deg);
+        flex-shrink: 0;
+    }
+}
