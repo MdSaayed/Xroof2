@@ -71,11 +71,14 @@
 @mixin button($bg, $text, $hover-bg: transparent, $hover-text: $bg) {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  // gap: 12px;
   font-family: $font-heading;
   font-size: clamp(14px, 1vw + 10px, 16px);
   font-weight: 400;
-  padding: 10px 1.5rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  padding-left: 1.5rem;
   border: 2px solid $bg;
   border-radius: 98px;
   color: $text;
@@ -94,6 +97,7 @@
     border-radius: 50%;
     transition: $btn-transition;
     padding: 8px;
+    margin-left: 12px;
 
     path {
       fill: $bg;
@@ -102,15 +106,15 @@
   }
 
   &:hover {
-    background-color: $hover-bg; // transparent
-    color: $hover-text; // primary
-    border-color: $hover-text; // primary
+    background-color: $hover-bg;  
+    color: $hover-text; 
+    border-color: $hover-text;  
 
     svg {
-      background-color: $hover-text; // circle = primary
+      background-color: $hover-text;  
 
       path {
-        fill: $color-white; // arrow = white
+        fill: $color-white;  
       }
     }
   }

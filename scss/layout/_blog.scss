@@ -162,8 +162,6 @@
                 }
             }
 
-
-
             &__card-title {
                 @include card-title;
                 margin-top: 1rem;
@@ -180,6 +178,169 @@
             &__date,
             &__reading-time {
                 @include body-text;
+            }
+        }
+    }
+
+    &--style-3 {
+        background: $color-black;
+
+        .blog {
+            &__title {
+                text-align: center;
+                max-width: 780px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            &__desc {
+                color: $color-white;
+                max-width: 720px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+
+            &__list {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+
+                @include bp.respond-to(xl) {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1.5rem;
+                }
+
+                @include bp.respond-to(md) {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            &__list-item {
+                border-radius: 10px;
+                border: 1px solid rgba(255, 255, 255, 0.30);
+                padding: 2rem;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                align-items: center;
+                grid-template-areas: "item1 item2 item3";
+
+                @include bp.respond-to(xl) {
+                    gap: 1.5rem;
+                    padding: 1.5rem;
+                    grid-template-columns: 1fr;
+                    grid-template-areas:
+                        "item2"
+                        "item1"
+                        "item3";
+                }
+
+                @include bp.respond-to(xs) {
+                    padding: 1.5rem 1rem;
+                }
+
+                > :nth-child(1) {
+                    grid-area: item1;
+                }
+
+                > :nth-child(2) {
+                    grid-area: item2;
+                }
+
+                > :nth-child(3) {
+                    grid-area: item3;
+                }
+            }
+
+            &__left {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+
+                @include bp.respond-to(md) {
+                    gap: 1rem;
+                }
+            }
+
+            &__meta {
+                gap: 12px;
+                color: $color-white;
+                align-items: end;
+            }
+
+            &__date {
+                line-height: 100%;
+            }
+
+            &__month-year {
+                color: $color-white;
+                max-width: 60px;
+                font-size: 12px;
+                margin-bottom: -5px;
+                font-family: $font-heading;
+            }
+
+            &__item-title {
+                color: $color-white;
+            }
+
+            &__author {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap:wrap;
+                gap: 1rem;
+            }
+
+            &__author-name,
+            &__author-company {
+                color: $color-white;
+            }
+
+            &__thumb-wrap {
+                max-width: 300px;
+                max-height: 250px;
+                margin: 0 auto;
+                border-radius: 8px;
+                overflow: hidden;
+
+                @include bp.respond-to(xl) {
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            &__excerpt {
+                margin-top: 1rem;
+                color: $color-white;
+                line-height: 150%;
+                letter-spacing: 0.08px;
+            }
+
+            &__link {
+                @include card-icon-wrap($color-white);
+                transition: $btn-transition;
+                border: 1px solid $color-white;
+
+                svg path {
+                    fill: $color-black;
+                    transition: $btn-transition;
+                }
+
+                &:hover {
+                    background: $color-primary;
+                    border: 1px solid $color-primary;
+
+                    svg path {
+                        fill: $color-white
+                    }
+                }
             }
         }
     }
