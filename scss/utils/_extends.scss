@@ -94,6 +94,17 @@
     }
 }
 
+%card3 {
+    background: $color-light-pink;
+    padding: 2rem;
+    border-radius: 20px;
+
+    @include bp.respond-to(xl) {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+}
+
 %btn--square {
     display: inline-flex;
     align-items: center;
@@ -107,7 +118,7 @@
     letter-spacing: 0.08px;
     transition: $btn-transition;
     border: 1px solid $color-primary;
- 
+
 
     span {
         display: inline-block;
@@ -118,7 +129,7 @@
         margin: 0;
         margin-right: 10px;
         flex-shrink: 0;
-     
+
     }
 
     &:hover {

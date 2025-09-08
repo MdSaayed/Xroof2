@@ -15,6 +15,7 @@
 @use './layout/pricing';
 @use './layout/faq';
 @use './layout/blog';
+@use './layout/blog-details';
 @use './layout/footer';
 
 @use './layout/keywords';
@@ -26,4 +27,6 @@
 
 
 
+@use './layout/sidebar';    
+@use './layout/breadcrumbs';    
 @use './layout/error'; 

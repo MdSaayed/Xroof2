@@ -1,0 +1,143 @@
+@use '../utils/variables' as*;
+@use '../utils/' as *;
+@use '../utils/mixin' as *;
+
+.blog-details {
+    &__content {
+        padding-right: 3rem;
+    }
+
+    &__text {
+        @extend .body-text;
+        font-size: 16px;
+        line-height: 150%;
+        color: $color-dark-gray;
+    }
+
+    &__highlight {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+
+        &-thumb {
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 8px;
+                object-fit: cover;
+            }
+        }
+
+        &-content {
+            flex: 1;
+        }
+
+        &-title {
+            font-family: $font-heading;
+            font-size: 40px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%;
+            letter-spacing: -0.4px;
+        }
+
+        &-text {
+            @extend .body-text;
+            font-size: 16px;
+            line-height: 150%;
+            color: $color-dark-gray;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-left: 0;
+
+        &-item {
+            font-family: $font-primary;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 150%;
+            letter-spacing: 0.09px;
+            position: relative;
+            padding-left: 2rem;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 50%;
+                width: 12px;
+                height: 12px;
+                transform: translateY(-50%);
+                background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='9' viewBox='0 0 10 9' fill='none'><path d='M9.35352 0.589661C9.35352 0.313518 9.12966 0.0896605 8.85352 0.0896606L4.35351 0.0896603C4.07737 0.0896603 3.85351 0.313518 3.85351 0.58966C3.85351 0.865803 4.07737 1.08966 4.35351 1.08966L8.35352 1.08966L8.35352 5.08966C8.35352 5.3658 8.57737 5.58966 8.85352 5.58966C9.12966 5.58966 9.35352 5.3658 9.35352 5.08966L9.35352 0.589661ZM8.85352 0.589661L8.49996 0.236107L0.645836 8.09023L0.999389 8.44379L1.35294 8.79734L9.20707 0.943214L8.85352 0.589661Z' fill='%23EE212B'/></svg>") no-repeat center;
+                background-size: contain;
+            }
+        }
+    }
+
+    &__quote {
+        background: $color-light-pink;
+        border-left: 5px solid $color-primary;
+        border-radius: 8px;
+
+        p {
+            font-size: 18px;
+            color: $color-dark-charcoal;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+            letter-spacing: 0.09px;
+            margin-bottom: 0;
+        }
+    }
+
+    &__share {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        background: $color-light-pink;
+        border-radius: 8px;
+
+        &-title {
+            @include title-sm;
+        }
+
+        &-links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+
+            a {
+                @include card-icon-wrap($color-primary);
+                width: 25px;
+                height: 25px;
+                margin-bottom: 0;
+                border: 1px solid $color-primary;
+                transition: $btn-transition;
+
+                svg {
+                    width: 15px;
+                    height: 15px;
+                    transition: $btn-transition;
+                }
+
+                &:hover {
+                    background: transparent;
+                    color: $color-primary;
+
+                    svg path {
+                        fill: $color-primary;
+                    }
+                }
+            }
+        }
+    }
+}
