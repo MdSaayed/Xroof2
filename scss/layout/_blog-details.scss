@@ -1,10 +1,15 @@
 @use '../utils/variables' as*;
 @use '../utils/' as *;
 @use '../utils/mixin' as *;
+@use '../utils/breakpoints' as bp;
 
 .blog-details {
     &__content {
-        padding-right: 3rem;
+        padding-right: 2.5rem;
+
+        @include bp.respond-to(xxl){
+            padding-right: 0;
+        }
     }
 
     &__text {
