@@ -79,11 +79,11 @@
 
    //  For equal height
    .row>[class*="col"] {
-     display: flex;
-     flex-direction: column;
+    //  display: flex;
+    //  flex-direction: column;
 
      >* {
-       height: 100%;
+      //  height: 100%;
      }
    } 
 

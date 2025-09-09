@@ -10,6 +10,7 @@
     position: relative;
     overflow: hidden;
     transition: $primary-transition;
+    height: 100%;
 
     &::after {
         content: "";
@@ -42,6 +43,7 @@
 %card2 {
     @extend %card1;
     padding: 2rem;
+    height: 100%;
 
     &::after {
         display: none !important;
@@ -98,6 +100,7 @@
     background: $color-light-pink;
     padding: 2rem;
     border-radius: 20px;
+    height: 100%;
 
     @include bp.respond-to(xl) {
         padding: 1.5rem;
