@@ -4,7 +4,12 @@
 @use '../utils/breakpoints' as bp;
 
 .services-details {
-    back
+    &__row {
+        @include bp.respond-to(lg) {
+            flex-direction: column-reverse;
+        }
+    }
+
     &__text {
         @extend .body-text;
         font-size: 16px;
@@ -36,7 +41,7 @@
 
         &-title {
             font-family: $font-heading;
-            font-size: 40px;
+            font-size: clamp(1.5rem, 2vw + 1rem, 40px);
             font-style: normal;
             font-weight: 500;
             line-height: 120%;

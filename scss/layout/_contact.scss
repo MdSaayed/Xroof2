@@ -1,148 +1,328 @@
 @use '../utils/variables' as *;
 @use '../utils/mixin' as *;
 @use '../utils/breakpoints' as bp;
+@use '../utils/extends' as *;
+@use '../utils' as *;
 
 .contact {
-    position: relative;
-    z-index: 2;
+    &--style-1 {
+        position: relative;
+        z-index: 2;
 
-    ::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: $color-primary;
-        width: 45%;
-        height: 100%;
-        z-index: -1;
-    }
-
-    &__left {
-        background: $color-white;
-        border-radius: 20px;
-        padding: 3.5rem 3rem;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
-
-        @include bp.respond-to(xl) {
-            padding: 3rem 2.5rem;
+        ::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $color-primary;
+            width: 45%;
+            height: 100%;
+            z-index: -1;
         }
 
-        @include bp.respond-to(lg) {
-            padding: 3rem 2rem;
-        }
+        .contact {
+            &__left {
+                background: $color-white;
+                border-radius: 20px;
+                padding: 3.5rem 3rem;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
 
-        @include bp.respond-to(sm) {
-            padding: 3rem 1rem;
-        }
-    }
+                @include bp.respond-to(xl) {
+                    padding: 3rem 2.5rem;
+                }
 
-    &__title {
-        max-width: 765px;
-    }
+                @include bp.respond-to(lg) {
+                    padding: 3rem 2rem;
+                }
 
-    &__form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-
-        &-input,
-        &-message {
-            border: 0.5px solid #8F9897;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-        }
-
-        &-submit::placeholder,
-        &-input::placeholder {
-            color: $color-dark-gray;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 150%;
-            letter-spacing: 0.08px;
-        }
-
-        &-submit {
-            background: $color-black;
-            color: $color-white;
-            padding: 1rem 1.5rem;
-            border-radius: 80px;
-            transition: $btn-transition;
-            border: none;
-
-            &:hover {
-                background: $color-primary;
+                @include bp.respond-to(sm) {
+                    padding: 3rem 1rem;
+                }
             }
-        }
-    }
 
-    &__right {
-        background: $color-white;
-        border-radius: 20px;
-        padding: 3.5rem 2rem;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+            &__title {
+                max-width: 765px;
+            }
 
-        @include bp.respond-to(xl) {
-            padding: 3rem 2rem;
-        }
-
-        @include bp.respond-to(sm) {
-            padding: 3rem 1rem;
-        }
-    }
-
-    &__info-title {
-        color: $color-black;
-        font-size: clamp(20px, 2vw + 1rem, 2.5rem);
-        font-weight: 500;
-        line-height: 120%;
-        letter-spacing: -0.4px;
-    }
-
-    .info-card {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        flex-wrap: wrap;
-
-        @include bp.respond-to(md) {
-            gap: 1rem;
-        }
-
-        &__list {
-            gap: 2.2rem;
-
-            @include bp.respond-to(xl) {
+            &__form {
+                display: flex;
+                flex-direction: column;
                 gap: 1.5rem;
+
+                &-input,
+                &-message {
+                    border: 0.5px solid #8F9897;
+                    padding: 1rem 1.5rem;
+                    border-radius: 10px;
+                }
+
+                &-submit::placeholder,
+                &-input::placeholder {
+                    color: $color-dark-gray;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 150%;
+                    letter-spacing: 0.08px;
+                }
+
+                &-submit {
+                    background: $color-black;
+                    color: $color-white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 80px;
+                    transition: $btn-transition;
+                    border: none;
+
+                    &:hover {
+                        background: $color-primary;
+                    }
+                }
             }
 
-            @include bp.respond-to(md) {
-                gap: 1rem;
+            &__right {
+                background: $color-white;
+                border-radius: 20px;
+                padding: 3.5rem 2rem;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+
+                @include bp.respond-to(xl) {
+                    padding: 3rem 2rem;
+                }
+
+                @include bp.respond-to(sm) {
+                    padding: 3rem 1rem;
+                }
+            }
+
+            &__info-title {
+                color: $color-black;
+                font-size: clamp(20px, 2vw + 1rem, 2.5rem);
+                font-weight: 500;
+                line-height: 120%;
+                letter-spacing: -0.4px;
+            }
+
+            .info-card {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                flex-wrap: wrap;
+
+                @include bp.respond-to(md) {
+                    gap: 1rem;
+                }
+
+                &__list {
+                    gap: 2.2rem;
+
+                    @include bp.respond-to(xl) {
+                        gap: 1.5rem;
+                    }
+
+                    @include bp.respond-to(md) {
+                        gap: 1rem;
+                    }
+                }
+
+                &__icon {
+                    background: $color-black;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    display: grid;
+                    place-items: center;
+                    flex-shrink: 0;
+
+                    @include bp.respond-to(xl) {
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+
+                &__link {
+                    @include card-title;
+                }
+
+                &__text {
+                    color: $color-dark-gray;
+                    margin-bottom: 0;
+                    margin-top: 5px;
+                }
             }
         }
+    }
 
-        &__icon {
-            background: $color-black;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            flex-shrink: 0;
-
-            @include bp.respond-to(xl) {
-                width: 40px;
-                height: 40px;
+    // Contact Page
+    &--style-2 {
+        .contact {
+            &__title {
+                text-align: center;
+                max-width: 640px;
+                margin-left: auto;
+                margin-right: auto;
             }
-        }
 
-        &__link {
-            @include card-title;
-        }
+            &__desc {
+                text-align: center;
+                max-width: 640px;
+                margin-left: auto;
+                margin-right: auto;
+            }
 
-        &__text {
-            color: $color-dark-gray;
-            margin-bottom: 0;
-            margin-top: 5px;
+            &__card {
+                @extend %card1;
+                background: $color-light-pink;
+                box-shadow: none;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+
+                &-icon-wrap {
+                    width: 50px;
+                    height: 50px;
+                    display: grid;
+                    place-items: center;
+                    border: 1px solid $color-primary;
+                    border-radius: 50%;
+                    margin-bottom: 1rem;
+                    margin: 0 auto;
+                    transition: $primary-transition;
+
+                    svg path {
+                        fill: $color-primary;
+                        transition: $primary-transition;
+                    }
+                }
+
+                &-title {
+                    font-size: clamp(1.2rem, 1vw + 0.5rem, 1.5rem);
+                    font-weight: 500;
+                    line-height: $line-height-heading;
+                    color: $color-black;
+                    letter-spacing: $letter-spacing-h3;
+                    margin-top: 1rem;
+                    text-align: center;
+                }
+
+                &-text {
+                    @extend .body-text;
+                    text-align: center;
+                    margin: 1.5rem 0;
+                    max-width: 390px;
+                    margin-left: auto;
+                    margin-right: auto;
+
+                }
+
+                &-link {
+                    @include card-title($color-primary);
+                    display: block;
+                    text-align: center !important;
+                    text-decoration: none;
+                    transition: transform $btn-transition;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                &-icon-wrap {
+                    background: $color-primary;
+
+                    svg path {
+                        fill: $color-white;
+                    }
+                }
+            }
+
+            &__map {
+                margin-right: 1rem;
+
+                @include bp.respond-to(xxl) {
+                    margin-right: 0;
+                }
+
+                &-title {
+                    font-family: $font-heading;
+                    font-size: clamp(1.5rem, 2vw + 1rem, 40px);
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 120%;
+                    letter-spacing: -0.4px;
+                }
+
+                &-text {
+                    color: $color-dark-gray;
+                }
+            }
+
+            &-form {
+                display: flex;
+                flex-direction: column;
+                background: $color-light-pink;
+                padding: 3.5rem 3rem;
+                border-radius: 8px;
+                gap: 1.5rem;
+                height: 100%;
+                margin-left: 1rem;
+
+                @include bp.respond-to(xxl) {
+                    margin-left: 0;
+                }
+
+                @include bp.respond-to(lg) {
+                    gap: 1rem;
+                    padding: 3.5rem 2.5rem;
+                }
+
+                @include bp.respond-to(xs) {
+                    gap: 8px;
+                    padding: 3.5rem 1.5rem;
+                }
+
+                &__row {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 1.5rem;
+
+                    @include bp.respond-to(lg) {
+                        gap: 1rem;
+                    }
+
+                    @include bp.respond-to(xs) {
+                        gap: 8px;
+                    }
+
+                    input {
+                        flex: 270px 1 1;
+                    }
+
+                }
+
+                &__input,
+                &__textarea {
+                    background: $color-white;
+                    border-radius: 8px;
+                    border: 0.5px solid rgba(143, 152, 151, 0.50);
+                    width: 100%;
+                    padding: 1rem 1.5rem;
+                }
+
+                &__btn {
+                    background: $color-primary;
+                    border-radius: 8px;
+                    color: $color-white;
+                    transition: $btn-transition;
+                    padding: 1rem 1.5rem;
+                    display: block;
+                    border: 1px solid $color-primary;
+                    width: 100%;
+
+                    &:hover {
+                        background-color: transparent;
+                        color: $color-primary;
+                    }
+                }
+            }
         }
     }
 }

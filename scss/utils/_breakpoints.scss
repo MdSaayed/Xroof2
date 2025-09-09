@@ -1,8 +1,7 @@
-// breakpoints.scss file
 
 // Defining breakpoints
 $xs: 350px;
-$sm: 540px; //480px;
+$sm: 540px;  
 $md: 768px; 
 $lg: 1024px;
 $xl: 1200px;
@@ -11,7 +10,6 @@ $x3l: 1600px;
 $x4l: 1800px;
 $xxl: 1920px;
 
-// Creating a Sass map for breakpoints
 $grid-breakpoints: (
   xs: $xs,
   sm: $sm,
