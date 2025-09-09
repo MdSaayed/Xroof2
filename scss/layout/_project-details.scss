@@ -18,11 +18,12 @@
 
         &-thumb {
             overflow: hidden;
+            max-height: 475px;
+            border-radius: 8px;
 
             img {
                 width: 100%;
                 height: 100%;
-                border-radius: 8px;
                 object-fit: cover;
             }
         }
