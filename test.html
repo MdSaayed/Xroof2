@@ -1,487 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XRoot Awards</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --color-dark: #0A1514;
-            --color-white: #ffffff;
-            --color-gold: #fdbb2d;
-            --color-light-bg: #f8f9fa;
-            --transition-speed: 0.4s;
-        }
-        
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem 0;
-        }
-        
-        .award {
-            background: var(--color-dark);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .award__title {
-            max-width: 745px;
-            color: var(--color-white);
-            font-weight: 700;
-            font-size: 2.5rem;
-        }
-        
-        .award__desc {
-            max-width: 615px;
-            color: var(--color-white);
-            opacity: 0.8;
-            font-size: 1.1rem;
-        }
-        
-        .award__list {
-            display: flex;
-            gap: 0;
-            margin-top: 2.5rem;
-            height: 500px;
-        }
-        
-        @media (max-width: 992px) {
-            .award__list {
-                flex-direction: column;
-                height: auto;
-            }
-        }
-        
-        .award__item {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            border-radius: 0;
-            overflow: hidden;
-            transition: flex var(--transition-speed) ease;
-            cursor: pointer;
-            position: relative;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            background: var(--color-dark);
-        }
-        
-        .award__item:last-child {
-            border-right: none;
-        }
-        
-        .award__item-title {
-            writing-mode: vertical-lr;
-            transform: rotate(180deg);
-            color: var(--color-white);
-            font-weight: 500;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            margin: 0;
-            padding: 1rem 0.5rem;
-            text-align: center;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .award__item-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.5rem 1rem;
-            min-height: 100%;
-        }
-        
-        .award__item-arrow {
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--color-white);
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            transition: transform var(--transition-speed) ease;
-        }
-        
-        .award__item--active .award__item-arrow {
-            transform: rotate(90deg);
-        }
-        
-        .award__item-body {
-            display: none;
-            padding: 2rem;
-            color: var(--color-white);
-            background: var(--color-light-bg);
-            color: var(--color-dark);
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        .award__item--active {
-            flex: 4;
-        }
-        
-        .award__item--active .award__item-header {
-            display: none;
-        }
-        
-        .award__item--active .award__item-body {
-            display: flex;
-            flex-direction: column;
-            animation: fadeIn var(--transition-speed) ease;
-        }
-        
-        .award__item-body-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            margin-bottom: 1.5rem;
-        }
-        
-        .award__item-heading {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--color-dark);
-            margin: 0;
-            flex: 1;
-        }
-        
-        .award__item-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        
-        @media (min-width: 1200px) {
-            .award__item-content {
-                flex-direction: row;
-            }
-        }
-        
-        .award__item-text {
-            flex: 1;
-        }
-        
-        .award__item-badge {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .award__item-badge-img {
-            width: 60px;
-            height: 60px;
-        }
-        
-        .award__item-year {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--color-dark);
-            margin: 0;
-        }
-        
-        .award__item-desc {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #444;
-        }
-        
-        .award__item-img {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .award__item-img-el {
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Animation for smooth content appearance */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .award__list {
-                flex-direction: column;
-                height: auto;
-            }
-            
-            .award__item {
-                flex: 1;
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                min-height: 80px;
-            }
-            
-            .award__item-header {
-                flex-direction: row;
-                padding: 1rem;
-                justify-content: flex-start;
-            }
-            
-            .award__item-title {
-                writing-mode: horizontal-tb;
-                transform: none;
-                padding: 0 0 0 1rem;
-                text-align: left;
-                justify-content: flex-start;
-            }
-            
-            .award__item-arrow {
-                margin-bottom: 0;
-                margin-right: 0.5rem;
-            }
-            
-            .award__item--active {
-                flex: 1;
-                min-height: 500px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .award__item-body-top {
-                flex-direction: column;
-            }
-            
-            .award__item-heading {
-                font-size: 1.5rem;
-            }
-            
-            .award__item-year {
-                font-size: 1.5rem;
-            }
-        }
-        
-        .container-xl {
-            max-width: 1200px;
-        }
-    </style>
+    <title>XRoof - Home</title>
+    <!-- Glightbox CSS -->
+    <link rel="stylesheet" href="./assets/css/glightbox.min.css">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
-<body>
-    <div class="container-xl">
-        <div class="award p-4 p-md-5">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1 class="award__title">Awards & Recognition</h1>
-                    <p class="award__desc mt-3">Celebrating excellence in service and community recognition since 2018</p>
-                </div>
-            </div>
-            
-            <div class="award__list">
-                <!-- Award Item 1 -->
-                <div class="award__item award__item--active">
-                    <div class="award__item-header">
-                        <div class="award__item-arrow">
-                            <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
-                                <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
-                            </svg>
-                        </div>
-                        <h3 class="award__item-title">//.. 01. Best Local XRoot 2024</h3>
-                    </div>
-                    <div class="award__item-body">
-                        <div class="award__item-body-top">
-                            <h3 class="award__item-heading">..// 05. Customer's Choice for Outstanding Service</h3>
-                            <div class="award__item-arrow">
-                                <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
-                                    <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
-                                </svg>
-                            </div>
-                        </div>
-                        
-                        <div class="award__item-content">
-                            <div class="award__item-text">
-                                <div class="award__item-badge">
-                                    <div class="award__item-badge-img">
-                                        <i class="fas fa-award" style="font-size: 50px; color: #fdbb2d;"></i>
-                                    </div>
-                                    <p class="award__item-year">//.. 2024 ..//</p>
-                                </div>
-                                <p class="award__item-desc">
-                                    At XRoot, every guest is family — and our commitment to warm, attentive
-                                    service has made us a proud winner of the Customer's Choice for Outstanding Service
-                                    award. From the moment you walk through our doors to your last delicious bite,
-                                    we strive to make your experience unforgettable.
-                                </p>
-                            </div>
-                            
-                            <div class="award__item-img">
-                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" alt="Award" class="award__item-img-el">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Award Item 2 -->
-                <div class="award__item">
-                    <div class="award__item-header">
-                        <div class="award__item-arrow">
-                            <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
-                                <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
-                            </svg>
-                        </div>
-                        <h3 class="award__item-title">//.. 02. Top Choice Authentic 2022</h3>
-                    </div>
-                    <div class="award__item-body">
-                        <div class="award__item-body-top">
-                            <h3 class="award__item-heading">..// 02. Top Choice Authentic 2022</h3>
-                            <div class="award__item-arrow">
-                                <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
-                                    <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
-                                </svg>
-                            </div>
-                        </div>
-                        
-                        <div class="award__item-content">
-                            <div class="award__item-text">
-                                <div class="award__item-badge">
-                                    <div class="award__item-badge-img">
-                                        <i class="fas fa-star" style="font-size: 50px; color: #fdbb2d;"></i>
-                                    </div>
-                                    <p class="award__item-year">//.. 2022 ..//</p>
-                                </div>
-                                <p class="award__item-desc">
-                                    Recognized for our authentic cuisine and traditional cooking methods that have been
-                                    passed down through generations. We take pride in using locally sourced ingredients
-                                    to create dishes that represent the true flavors of our region.
-                                </p>
-                            </div>
-                            
-                            <div class="award__item-img">
-                                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" alt="Award" class="award__item-img-el">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Award Item 3 -->
-                <div class="award__item">
-                    <div class="award__item-header">
-                        <div class="award__item-arrow">
-                            <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
-                                <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
-                            </svg>
-                        </div>
-                        <h3 class="award__item-title">//.. 03. Recognized as Community</h3>
-                    </div>
-                    <div class="award__item-body">
-                        <div class="award__item-body-top">
-                            <h3 class="award__item-heading">..// 03. Recognized as Community</h3>
-                            <div class="award__item-arrow">
-                                <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
-                                    <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
-                                </svg>
-                            </div>
-                        </div>
-                        
-                        <div class="award__item-content">
-                            <div class="award__item-text">
-                                <div class="award__item-badge">
-                                    <div class="award__item-badge-img">
-                                        <i class="fas fa-users" style="font-size: 50px; color: #fdbb2d;"></i>
-                                    </div>
-                                    <p class="award__item-year">//.. 2020-2023 ..//</p>
-                                </div>
-                                <p class="award__item-desc">
-                                    Honored for our contributions to the local community and supporting local farmers
-                                    and producers. We believe in giving back to the community that has supported us
-                                    throughout our journey and making a positive impact through various initiatives.
-                                </p>
-                            </div>
-                            
-                            <div class="award__item-img">
-                                <img src="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" alt="Award" class="award__item-img-el">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Award Item 4 -->
-                <div class="award__item">
-                    <div class="award__item-header">
-                        <div class="award__item-arrow">
-                            <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
-                                <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
-                            </svg>
-                        </div>
-                        <h3 class="award__item-title">//.. 05. Customer's Choice for Outstanding Service</h3>
-                    </div>
-                    <div class="award__item-body">
-                        <div class="award__item-body-top">
-                            <h3 class="award__item-heading">..// 05. Customer's Choice for Outstanding Service</h3>
-                            <div class="award__item-arrow">
-                                <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
-                                    <path d="M0.487755 3.81637C0.292493 4.01163 0.292493 4.32821 0.487755 4.52348L3.66974 7.70546C3.865 7.90072 4.18158 7.90072 4.37684 7.70546C4.5721 7.51019 4.5721 7.19361 4.37684 6.99835L1.54842 4.16992L4.37684 1.34149C4.5721 1.14623 4.5721 0.82965 4.37684 0.634388C4.18158 0.439126 3.865 0.439126 3.66974 0.634388L0.487755 3.81637ZM11.6911 4.66992C11.9672 4.66992 12.1911 4.44606 12.1911 4.16992C12.1911 3.89378 11.9672 3.66992 11.6911 3.66992V4.16992V4.66992ZM0.841309 4.16992V4.66992H11.6911V4.16992V3.66992H0.841309V4.16992Z" fill="#0A1514"/>
-                                </svg>
-                            </div>
-                        </div>
-                        
-                        <div class="award__item-content">
-                            <div class="award__item-text">
-                                <div class="award__item-badge">
-                                    <div class="award__item-badge-img">
-                                        <i class="fas fa-heart" style="font-size: 50px; color: #fdbb2d;"></i>
-                                    </div>
-                                    <p class="award__item-year">//.. 2018-2025 ..//</p>
-                                </div>
-                                <p class="award__item-desc">
-                                    Voted by our customers for providing exceptional service and making every guest
-                                    feel like family. We pride ourselves on our attentive staff and welcoming atmosphere
-                                    that keeps our customers coming back time and time again.
-                                </p>
-                            </div>
-                            
-                            <div class="award__item-img">
-                                <img src="https://images.unsplash.com/photo-1576854284880-3200b1c6d614?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHJlc3RhdXJhbnR8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60" alt="Award" class="award__item-img-el">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const awardItems = document.querySelectorAll('.award__item');
-            
-            awardItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    // Close all items
-                    awardItems.forEach(el => {
-                        el.classList.remove('award__item--active');
-                        // Reset the flex value to ensure smooth transition
-                        el.style.flex = '1';
-                    });
-                    
-                    // Open the clicked item
-                    item.classList.add('award__item--active');
-                    // Set a larger flex value for the active item
-                    item.style.flex = '4';
-                });
-            });
-            
-            // Initialize the first item as active
-            if (awardItems.length > 0) {
-                awardItems[0].style.flex = '4';
-            }
-        });
-    </script>
+<body>
+
+    <main class="main">
+
+        <a href="tel:+12195354665" class="services__btn  btn-icon-left-primary">
+            <svg width="40" height="4" viewBox="0 0 10 7" fill="none">
+                <path
+                    d="M9.07926 2.38846C9.15803 2.13084 9.01303 1.85814 8.75541 1.77938L4.55719 0.495857C4.29957 0.417094 4.02687 0.562088 3.94811 0.819712C3.86934 1.07734 4.01434 1.35003 4.27196 1.42879L8.00371 2.5697L6.8628 6.30145C6.78404 6.55908 6.92903 6.83177 7.18666 6.91054C7.44428 6.9893 7.71697 6.8443 7.79574 6.58668L9.07926 2.38846ZM8.61279 2.24585L8.38379 1.81516L0.362471 6.08018L0.591471 6.51086L0.820471 6.94155L8.84179 2.67654L8.61279 2.24585Z"
+                    fill="black" />
+            </svg>
+            +1 (219) - 5354665
+        </a>
+        <a href="tel:+12195354665" class="services__btn btn-icon-right-primary">
+            +1 (219) - 5354665
+            <svg width="40" height="4" viewBox="0 0 10 7" fill="none">
+                <path
+                    d="M9.07926 2.38846C9.15803 2.13084 9.01303 1.85814 8.75541 1.77938L4.55719 0.495857C4.29957 0.417094 4.02687 0.562088 3.94811 0.819712C3.86934 1.07734 4.01434 1.35003 4.27196 1.42879L8.00371 2.5697L6.8628 6.30145C6.78404 6.55908 6.92903 6.83177 7.18666 6.91054C7.44428 6.9893 7.71697 6.8443 7.79574 6.58668L9.07926 2.38846ZM8.61279 2.24585L8.38379 1.81516L0.362471 6.08018L0.591471 6.51086L0.820471 6.94155L8.84179 2.67654L8.61279 2.24585Z"
+                    fill="black" />
+            </svg>
+        </a>
+
+        <a href="tel:+12195354665" class="services__btn btn-icon-left-secondary">
+            +1 (219) - 5354665
+            <svg width="40" height="4" viewBox="0 0 10 7" fill="none">
+                <path
+                    d="M9.07926 2.38846C9.15803 2.13084 9.01303 1.85814 8.75541 1.77938L4.55719 0.495857C4.29957 0.417094 4.02687 0.562088 3.94811 0.819712C3.86934 1.07734 4.01434 1.35003 4.27196 1.42879L8.00371 2.5697L6.8628 6.30145C6.78404 6.55908 6.92903 6.83177 7.18666 6.91054C7.44428 6.9893 7.71697 6.8443 7.79574 6.58668L9.07926 2.38846ZM8.61279 2.24585L8.38379 1.81516L0.362471 6.08018L0.591471 6.51086L0.820471 6.94155L8.84179 2.67654L8.61279 2.24585Z"
+                    fill="black" />
+            </svg>
+        </a>
+
+        <a href="tel:+12195354665" class="services__btn btn-icon-right-secondary">
+            <svg width="40" height="4" viewBox="0 0 10 7" fill="none">
+                <path
+                    d="M9.07926 2.38846C9.15803 2.13084 9.01303 1.85814 8.75541 1.77938L4.55719 0.495857C4.29957 0.417094 4.02687 0.562088 3.94811 0.819712C3.86934 1.07734 4.01434 1.35003 4.27196 1.42879L8.00371 2.5697L6.8628 6.30145C6.78404 6.55908 6.92903 6.83177 7.18666 6.91054C7.44428 6.9893 7.71697 6.8443 7.79574 6.58668L9.07926 2.38846ZM8.61279 2.24585L8.38379 1.81516L0.362471 6.08018L0.591471 6.51086L0.820471 6.94155L8.84179 2.67654L8.61279 2.24585Z"
+                    fill="black" />
+            </svg>
+            +1 (219) - 5354665
+        </a>
+
+        <a href="tel:+1234567890" class="btn-phn-primary">
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none">
+                <path
+                    d="M19.7529 15.604L16.956 12.8071C15.9571 11.8082 14.2589 12.2078 13.8594 13.5063C13.5597 14.4054 12.5608 14.9048 11.6618 14.705C9.66395 14.2055 6.96691 11.6084 6.46746 9.51069C6.16779 8.61164 6.76713 7.61273 7.66615 7.3131C8.96472 6.91354 9.36428 5.2154 8.36538 4.2165L5.56845 1.41957C4.76932 0.720333 3.57064 0.720333 2.87141 1.41957L0.973487 3.31748C-0.924431 5.31529 1.17327 10.6095 5.86812 15.3043C10.563 19.9992 15.8572 22.1968 17.855 20.199L19.7529 18.301C20.4522 17.5019 20.4522 16.3032 19.7529 15.604Z"
+                    fill="#EE212B" />
+            </svg>
+        </a>
+
+    </main>
+
+    <script src="./assets/js/tiny-slider.js"> </script>
+    <script src="./assets/js/glightbox.min.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
+
 </html>

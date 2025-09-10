@@ -52,6 +52,61 @@
      @include body-text;
    }
 
+   //  ===================================
+   .btn-icon-left-primary {
+     @include button($color-primary, $color-white, transparent, $color-primary);
+     padding-left: 0px;
+
+     svg {
+       margin-right: 12px;
+     }
+   }
+
+   .btn-icon-right-primary {
+     @include button($color-primary, $color-white, transparent, $color-primary);
+     padding-right: 10px;
+
+     svg {
+       margin-left: 12px !important;
+     }
+   }
+
+   .btn-icon-right-secondary {
+     @include button($color-white, $color-primary, $color-primary, $color-white);
+     padding-right: 0;
+
+     svg {
+       margin-right: 12px;
+     }
+
+     &:hover svg path {
+       fill: $color-primary;
+     }
+   }
+
+   .btn-icon-left-secondary {
+     @include button($color-white, $color-primary, $color-primary, $color-white);
+     padding-left: 0;
+
+     svg {
+       margin-right: 12px !important;
+     }
+
+     &:hover svg path {
+       fill: $color-primary;
+     }
+   }
+
+   .btn-phn-primary {
+     @include btn-phn;
+
+     &:hover {
+       background: transparent;
+     }
+   }
+
+   //  ===================================
+
    .btn-phn {
      @include btn-phn;
    }
@@ -68,6 +123,20 @@
      @include button('#fff', $color-white);
    }
 
+   .btn-icon {
+     @include button($color-primary, $color-white, transparent, $color-primary);
+     padding-right: 14px;
+   }
+
+   .btn-icon-left {
+     @include button($color-primary, $color-white, transparent, $color-primary);
+     padding-left: 0px;
+
+     svg {
+       margin-right: 12px;
+     }
+   }
+
    .btn-light {
      @include button($color-white, $color-primary);
    }
@@ -79,13 +148,13 @@
 
    //  For equal height
    .row>[class*="col"] {
-    //  display: flex;
-    //  flex-direction: column;
+     //  display: flex;
+     //  flex-direction: column;
 
      >* {
-      //  height: 100%;
+       //  height: 100%;
      }
-   } 
+   }
 
    section {
      overflow-x: hidden;

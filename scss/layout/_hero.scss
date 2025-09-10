@@ -17,6 +17,10 @@
         z-index: 15;
     }
 
+    &__title {
+        max-width: 610px;
+    }
+
     &__desc {
         color: $color-white;
         text-align: left;

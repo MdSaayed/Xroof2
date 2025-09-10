@@ -25,10 +25,16 @@
                 color: $color-white;
                 transition: $btn-transition;
             }
-            .pricing__icon svg path{
+
+            .pricing__icon svg path {
                 fill: $color-white;
                 transition: $btn-transition;
             }
+        }
+
+        &:hover .pricing__btn {
+            background: $color-white;
+            color: $color-primary;
         }
     }
 
@@ -52,7 +58,7 @@
 
         }
 
-        &>*{
+        &>* {
             position: relative;
             z-index: 15;
         }
@@ -107,6 +113,6 @@
         position: relative;
         list-style: none;
         margin-bottom: 1.5rem;
-        padding-left: 2rem;        
+        padding-left: 2rem;
     }
 }

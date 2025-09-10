@@ -34,6 +34,16 @@
         max-width: 555px;
     }
 
+    &__cta-btn--primary {
+        @extend .btn-icon-right-primary;
+        border: 1px solid $color-white;
+
+        &:hover {
+            background: $color-white !important;
+            border-color: transparent;
+        }
+    }
+
     &__cta-bg {
         position: absolute;
         bottom: -20px;
