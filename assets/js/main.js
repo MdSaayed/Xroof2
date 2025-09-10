@@ -36,59 +36,66 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* =============================
+* 3. Hero Bg Slider Home One
+============================= */
+document.addEventListener("DOMContentLoaded", function () {
+  const bgSliderContainer = document.querySelector("#hero-banner-2");
+  const heroSection = document.querySelector("#hero-2");
+
+  if (!bgSliderContainer || !heroSection) {
+    return;
+  }
+
+  const bgSlider = tns({
+    container: "#hero-banner-2",
+    items: 1,
+    slideBy: "page",
+    autoplay: true,
+    autoplayTimeout: 4000,
+    autoplayButtonOutput: false,
+    controls: false,
+    nav: true,
+    loop: true,
+    mouseDrag: false,
+    touch: false,
+    speed: 1000,
+  });
+
+  function updateHeroBackground(index) {
+    const currentSlide = document.querySelectorAll("#hero-banner-2 .hero__bg-slide")[index];
+    if (!currentSlide) return;
+    const bg = currentSlide.getAttribute("data-bg");
+    if (bg) {
+      heroSection.style.backgroundImage = `url(${bg})`;
+    }
+  }
+
+  updateHeroBackground(bgSlider.getInfo().index);
+
+  bgSlider.events.on("indexChanged", function (info) {
+    updateHeroBackground(info.index);
+  });
+
+  const prevBtn = document.querySelector("#hero-2 .hero__btn--prev");
+  const nextBtn = document.querySelector("#hero-2 .hero__btn--next");
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      bgSlider.goTo("prev");
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      bgSlider.goTo("next");
+    });
+  }
+});
+
+
+/* =============================
 * 20. Pure Counter
 ============================= */
-// document.addEventListener('DOMContentLoaded', () => {
-//   const counters = document.querySelectorAll('[data-start][data-end]');
-
-//   const animateCounter = (el) => {
-//     const start = parseFloat(el.dataset.start) || 0;
-//     const end = parseFloat(el.dataset.end) || 0;
-//     const duration = parseFloat(el.dataset.duration) || 2000; // ms
-//     const format = el.dataset.format || 'k'; // default to k
-//     let startTime = null;
-
-//     function animate(timestamp) {
-//       if (!startTime) startTime = timestamp;
-//       const progress = Math.min((timestamp - startTime) / duration, 1); // 0 → 1
-//       const value = start + (end - start) * progress;
-
-//       // Determine display based on format
-//       if (format === 'k') {
-//         el.innerText = (value / 1000).toFixed(1) + 'k';
-//       } else if (format === 'full') {
-//         el.innerText = Math.round(value);
-//       }
-
-//       if (progress < 1) {
-//         requestAnimationFrame(animate);
-//       } else {
-//         // Ensure exact final value
-//         if (format === 'k') {
-//           el.innerText = (end / 1000).toFixed(1) + 'k';
-//         } else if (format === 'full') {
-//           el.innerText = Math.round(end);
-//         }
-//       }
-//     }
-
-//     requestAnimationFrame(animate);
-//   };
-
-//   const observer = new IntersectionObserver((entries, observer) => {
-//     entries.forEach(entry => {
-//       if (entry.isIntersecting) {
-//         animateCounter(entry.target);
-//         observer.unobserve(entry.target); // animate only once
-//       }
-//     });
-//   }, {
-//     threshold: 0.5
-//   });
-
-//   counters.forEach(el => observer.observe(el));
-// });
-
 document.addEventListener('DOMContentLoaded', () => {
   const counters = document.querySelectorAll('[data-start][data-end]');
 
@@ -195,110 +202,100 @@ if (hero_two_slider) {
 /* =============================
 * 20. Projects Two Slider
 ============================= */
-const project_slider_element = document.querySelector('.projects__slider');
 document.addEventListener("DOMContentLoaded", function () {
-  if (project_slider_element) {
-    project_slider_element.forEach(slider => {
-      const slides = slider.querySelectorAll('.projects__slide');
-      const prevBtn = slider.parentElement.querySelector('#prevButton');
-      const nextBtn = slider.parentElement.querySelector('#nextButton');
+  const slider = document.querySelector('#project-slider-1');
+  if (!slider) return;
 
-      if (!slider || slides.length === 0 || !prevBtn || !nextBtn) return;
-      let currentIndex = 0;
-      let visibleCount = 3;
-      let gap = 32;
-      function updateVisibleCountAndGap() {
-        const width = window.innerWidth;
-        if (width < 540) {
-          visibleCount = 1;
-          gap = 8;
-        } else if (width < 768) {
-          visibleCount = 2;
-        } else if (width < 1200) {
-          gap = 16;
-        } else {
-          visibleCount = 3;
-          gap = 32;
-        }
-      }
+  const slides = slider.querySelectorAll('.projects__slide');
+  const prevBtn = slider.parentElement.querySelector('#prevButton');
+  const nextBtn = slider.parentElement.querySelector('#nextButton');
 
-      function updateSlider() {
-        updateVisibleCountAndGap();
+  if (slides.length === 0 || !prevBtn || !nextBtn) return;
 
-        const slideOuterWidth = slides[0].offsetWidth + gap;
-        const maxIndex = slides.length - visibleCount;
+  let currentIndex = 0;
+  let visibleCount = 3;
+  let gap = 32;
 
-        if (currentIndex < 0) currentIndex = 0;
-        if (currentIndex > maxIndex) currentIndex = maxIndex;
+  function updateVisibleCountAndGap() {
+    const width = window.innerWidth;
+    if (width < 540) {
+      visibleCount = 1;
+      gap = 8;
+    } else if (width < 768) {
+      visibleCount = 2;
+      gap = 12;
+    } else if (width < 1200) {
+      visibleCount = 3;
+      gap = 20;
+    } else {
+      visibleCount = 3;
+      gap = 32;
+    }
+  }
 
-        slider.style.transform = `translateX(-${currentIndex * slideOuterWidth}px)`;
+  function updateSlider() {
+    updateVisibleCountAndGap();
 
-        slides.forEach(s => {
-          s.style.flexBasis = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
-          s.style.marginRight = `${gap}px`;
-        });
-        const lastVisibleSlideInGroup = Array.from(slides)[currentIndex + visibleCount - 1];
-        if (lastVisibleSlideInGroup) {
-          lastVisibleSlideInGroup.style.marginRight = '0px';
-        }
-      }
+    slider.style.display = "flex";
+    slider.style.transition = "transform 0.5s ease";
 
-      nextBtn.addEventListener('click', () => {
-        currentIndex += 1;
-        updateSlider();
+    slides.forEach((s, i) => {
+      s.style.flex = `0 0 calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
+      s.style.marginRight = (i === slides.length - 1) ? "0px" : `${gap}px`;
+    });
+
+    const slideOuterWidth = slides[0].offsetWidth + gap;
+
+    if (currentIndex < 0) {
+      currentIndex = slides.length - visibleCount;
+    }
+    if (currentIndex > slides.length - visibleCount) {
+      currentIndex = 0;
+    }
+
+    slider.style.transform = `translateX(-${currentIndex * slideOuterWidth}px)`;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex++;
+    updateSlider();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex--;
+    updateSlider();
+  });
+
+  slides.forEach((slide) => {
+    slide.addEventListener("mouseenter", () => {
+      if (visibleCount === 1) return;
+
+      const groupStart = currentIndex;
+      const groupSlides = Array.from(slides).slice(groupStart, groupStart + visibleCount);
+
+      const growPercent = 20;
+      const baseFlex = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
+      const hoveredFlex = `calc(${baseFlex} + ${growPercent}%)`;
+      const nonHoveredFlex = `calc(${baseFlex} - ${growPercent / (visibleCount - 1)}%)`;
+
+      groupSlides.forEach(s => {
+        s.style.flexBasis = (s === slide) ? hoveredFlex : nonHoveredFlex;
       });
+    });
 
-      prevBtn.addEventListener('click', () => {
-        currentIndex -= 1;
-        updateSlider();
-      });
-
-      slides.forEach((slide) => {
-        slide.addEventListener("mouseenter", () => {
-          if (visibleCount === 1) return;
-
-          const groupStart = currentIndex;
-          const groupSlides = Array.from(slides).slice(groupStart, groupStart + visibleCount);
-
-          let hoveredSlideGrowthPercentage = 0;
-          if (visibleCount === 2) {
-            hoveredSlideGrowthPercentage = 25;
-          } else if (visibleCount === 3) {
-            hoveredSlideGrowthPercentage = 25;
-          }
-
-          const baseFlexBasisCalc = `calc((100% - ${gap * (visibleCount - 1)}px) / ${visibleCount})`;
-
-          const hoveredFlexBasisCalc = `calc(${baseFlexBasisCalc} + ${hoveredSlideGrowthPercentage}%)`;
-
-          const nonHoveredFlexBasisCalc = `calc(${baseFlexBasisCalc} - ${hoveredSlideGrowthPercentage / (visibleCount - 1)}%)`;
-
-
-          groupSlides.forEach(s => {
-            if (s === slide) {
-              s.style.flexBasis = hoveredFlexBasisCalc;
-            } else {
-              s.style.flexBasis = nonHoveredFlexBasisCalc;
-            }
-          });
-        });
-
-        slide.addEventListener("mouseleave", () => {
-          updateSlider();
-        });
-      });
-
-      window.addEventListener('resize', updateSlider);
+    slide.addEventListener("mouseleave", () => {
       updateSlider();
     });
-  }
-});
+  });
 
+  window.addEventListener('resize', updateSlider);
+  updateSlider();
+});
 
 /* =============================
 * 20. Team Two
 ============================= */
-const team_slider_element = document.querySelector('.team__cards');
+const team_slider_element = document.querySelector('#team-2');
 document.addEventListener("DOMContentLoaded", function () {
   if (team_slider_element) {
     const wrapper = document.querySelector('.team__cards');
@@ -313,9 +310,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateVisibleCountAndGap() {
       const width = window.innerWidth;
-      if (width >= 1025) {
+
+      if (width >= 1441) {
         visibleCount = 3;
         gap = 32;
+      }
+      else if (width >= 1220 && width <= 1440) {
+        visibleCount = 2;
+        gap = 24;
+      }
+      else if (width >= 1025 && width < 1220) {
+        visibleCount = 3;
+        gap = 28;
       }
       else if (width >= 541 && width <= 1024) {
         visibleCount = 2;
@@ -427,7 +433,6 @@ document.addEventListener("DOMContentLoaded", function () {
 /* =============================
 * 20. Team Three
 ============================= */
-
 const team_slider_three = document.querySelector('#team-slider-3');
 
 if (team_slider_three) {
@@ -454,7 +459,6 @@ if (team_slider_three) {
   });
 }
 
-
 /* =============================
 * 20. Award Area
 ============================= */
@@ -469,8 +473,78 @@ if (awardItems) {
   });
 }
 
+/* =============================
+* 20. Contact form input date
+============================= */
+document.addEventListener('DOMContentLoaded', function () {
+  const today = new Date().toISOString().split("T")[0];
+  // document.getElementById("dateInput").value = today;
+});
 
 
-// Contact form input date
-const today = new Date().toISOString().split("T")[0];
-document.getElementById("dateInput").value = today;
+
+/* =============================
+* 20. Nav Menu
+============================= */
+
+document.addEventListener('DOMContentLoaded', function () {
+    const offcanvas = document.querySelector('.offcanvas');
+    const offcanvasToggle = document.querySelector('#offcanvas-toggle');
+    const offcanvasClose = document.querySelector('#offcanvas-close');
+    const offcanvasNavMenu = document.querySelector('#offcanvas-nav-menu');
+    const body = document.body;
+
+    // Toggle offcanvas menu on button click
+    offcanvasToggle.addEventListener('click', function () {
+        offcanvas.classList.add('active');
+        body.classList.add('offcanvas-active');
+    });
+
+    // Close offcanvas menu on close button click
+    if (offcanvasClose) {
+        offcanvasClose.addEventListener('click', function () {
+            offcanvas.classList.remove('active');
+            body.classList.remove('offcanvas-active');
+        });
+    }
+
+    // Handle dropdown toggles inside the offcanvas
+    const parentLinks = offcanvasNavMenu.querySelectorAll('.nav__item-has-children > .nav__link');
+    parentLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            this.classList.toggle('active');
+
+            const submenu = this.nextElementSibling;
+            if (submenu) {
+                submenu.classList.toggle('active');
+            }
+        });
+    });
+
+    // Close offcanvas menu when clicking outside
+    document.addEventListener('click', function (e) {
+        if (offcanvas.classList.contains('active') && !offcanvas.contains(e.target) && !offcanvasToggle.contains(e.target)) {
+            offcanvas.classList.remove('active');
+            body.classList.remove('offcanvas-active');
+        }
+    });
+
+    // Automatically close offcanvas on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 1200 && offcanvas.classList.contains('active')) {
+            offcanvas.classList.remove('active');
+            body.classList.remove('offcanvas-active');
+        }
+        
+        // Reset dropdowns for desktop
+        if (window.innerWidth > 1200) {
+            document.querySelectorAll('.nav__item-has-children > .nav__link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelectorAll('.nav__submenu').forEach(submenu => {
+                submenu.classList.remove('active');
+            });
+        }
+    });
+});

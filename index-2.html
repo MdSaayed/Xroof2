@@ -19,7 +19,7 @@
     <main class="main">
 
         <!-- Starting of the Hero Two Area Here -->
-        <section class="hero hero--style-2" data-bg-img="./assets/img/hero/hero-two-bg.png">
+        <section id="hero-2" class="hero hero--style-2">
             <div class="hero__container container">
                 <div class="hero__content d-flex flex-column justify-content-between">
                     <div class="hero__top flex-items-center gap-5 flex-wrap justify-content-between">
@@ -52,18 +52,8 @@
                         </div>
                     </div>
 
-                    <div class="hero__slider-wrapper">
-                        <div id="hero-two-slider" class="hero__slider">
-                            <div class="hero__slide">
-                                <img src="./assets/img/hero/hero-slide-1.png" alt="Worker" class="hero__slide-image" />
-                            </div>
-                            <div class="hero__slide">
-                                <img src="./assets/img/hero/hero-slide-2.png" alt="Worker" class="hero__slide-image" />
-                            </div>
-                            <div class="hero__slide">
-                                <img src="./assets/img/hero/hero-slide-3.png" alt="Worker" class="hero__slide-image" />
-                            </div>
-                        </div>
+                    <div class="hero__img-wrapper">
+                        <img src="./assets/img/hero/hero-slide-1.png" alt="Worker" class="hero__img" />
                     </div>
 
                     <div class="hero__nav flex-items-center gap-3 flex-wrap justify-content-between py-8 px-12">
@@ -91,6 +81,12 @@
                     </div>
 
                     <h2 class="hero__bg-text">XROOF</h2>
+                </div>
+
+                <!-- Slider Image -->
+                <div id="hero-banner-2" class="hero__bg-slider">
+                    <div class="hero__bg-slide" data-bg="./assets/img/hero/hero-bg-2.png"></div>
+                    <div class="hero__bg-slide" data-bg="./assets/img/hero/hero-bg-3.png"></div>
                 </div>
             </div>
         </section>
@@ -134,7 +130,7 @@
         <section class="about about--style-2">
             <div class="about__container container">
                 <div class="row align-items-center g-5">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12 col-xl-6">
                         <div class="about__content">
                             <h2 class="about__title title-xl mb-6">Building Trust — Your <span
                                     class="highlight">Roofing</span>
@@ -206,8 +202,8 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
-                        <div class="about__image position-relative">
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="about__image position-relative  mt-lg-10 mt-xl-0">
                             <img src="./assets/img/about/about-img-2.png" alt="About Us" class="img-fluid rounded">
 
                             <div class="about__stat p-4 py-xl-5 px-xl-7">
@@ -241,9 +237,9 @@
                     </div>
                 </div>
 
-                <div class="services__items d-flex gap-4 mt-10 mt-xl-15 mt-xxl-20">
+                <div class="services__items row g-4 mt-10 mt-xl-15 mt-xxl-20">
                     <div class="col-12 col-sm-6">
-                        <div class="row g-4">
+                        <div class="row row-gap-4">
                             <div class="col-12 col-xl-6">
                                 <div class="services__item">
                                     <div
@@ -293,7 +289,7 @@
                     </div>
 
                     <div class="col-12 col-sm-6">
-                        <div class="row g-4 services__items-down">
+                        <div class="row row-gap-4 services__items-down">
                             <div class="col col-12 col-xl-6">
                                 <div class="services__item">
                                     <div
@@ -396,7 +392,7 @@
                 </div>
 
                 <div class="projects__slider-wrap mt-10 mt-xl-15 mt-xxl-20">
-                    <div class="projects__slider">
+                    <div id="project-slider-1" class="projects__slider">
                         <div class="projects__slide" data-bg-img="./assets/img/project/project-img-1.jpg">
                             <div class="slider__content">
                                 <span class="slider__subtitle mb-2 mb-lg-3">Residential Roofing</span>
@@ -794,7 +790,7 @@
 
                     <div class="col-12 col-xl-6">
                         <div class="team__right">
-                            <div class="team__cards">
+                            <div id="team-2" class="team__cards">
                                 <div class="team__card">
                                     <div class="team__img-wrap">
                                         <img src="./assets/img/team/team-member-4.png" alt="Team Member"
@@ -802,7 +798,7 @@
                                     </div>
 
                                     <div
-                                        class="team__card-content d-flex flex-wrap gap-2 gap-xxl-4 justify-centent-between mt-4">
+                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
@@ -867,7 +863,7 @@
                                     </div>
 
                                     <div
-                                        class="team__card-content d-flex flex-wrap gap-2 gap-xxl-4 justify-centent-between mt-4">
+                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
@@ -932,7 +928,7 @@
                                     </div>
 
                                     <div
-                                        class="team__card-content d-flex flex-wrap gap-2 gap-xxl-4 justify-centent-between mt-4">
+                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
@@ -997,7 +993,7 @@
                                     </div>
 
                                     <div
-                                        class="team__card-content d-flex flex-wrap gap-2 gap-xxl-4 justify-centent-between mt-4">
+                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
@@ -1062,7 +1058,7 @@
                                     </div>
 
                                     <div
-                                        class="team__card-content d-flex flex-wrap gap-2 gap-xxl-4 justify-centent-between mt-4">
+                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
@@ -1127,7 +1123,7 @@
                                     </div>
 
                                     <div
-                                        class="team__card-content d-flex flex-wrap gap-2 gap-xxl-4 justify-centent-between mt-4">
+                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
