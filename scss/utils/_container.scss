@@ -1,33 +1,33 @@
 @use './breakpoints' as *;
 
 $container-padding: (
-  xs: 15px,   
-  sm: 24px,  
-  md: 32px,  
-  lg: 60px,  
-  xl: 80px,   
-  x2l: 100px,  
-  x3l: 120px, 
-  x4l: 180px,  
-  xxl: 240px   
+    xs: 15px,
+    sm: 24px,
+    md: 32px,
+    lg: 60px,
+    xl: 80px,
+    x2l: 100px,
+    x3l: 120px,
+    x4l: 180px,
+    xxl: 240px
 );
 
 $container-padding-y: (
-  xs: 40px,    
-  sm: 50px,
-  md: 60px,
-  lg: 65px,
-  xl: 70px,
-  x2l: 80px,
-  x3l: 90px,
-  x4l: 100px,
-  xxl: 112px   
+    xs: 40px,
+    sm: 50px,
+    md: 60px,
+    lg: 65px,
+    xl: 70px,
+    x2l: 80px,
+    x3l: 90px,
+    x4l: 100px,
+    xxl: 112px
 );
 
 
 .container {
     width: 100%;
-    max-width: $xxl !important; //come from breakpoints
+    max-width: $xxl !important;  
     margin-left: auto;
     margin-right: auto;
 

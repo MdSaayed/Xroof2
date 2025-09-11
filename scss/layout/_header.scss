@@ -1,7 +1,10 @@
 @use '../utils/variables' as *;
+@use '../utils/mixin' as*;
 @use '../utils/breakpoints' as bp;
 
 .header {
+
+    // global Style
     .nav {
         display: flex;
         align-items: center;
@@ -19,7 +22,7 @@
 
         &__item {
             position: relative;
-            margin: 0 0.5rem;
+            margin: 0;
         }
 
         &__link {
@@ -91,6 +94,91 @@
         z-index: 9999;
     }
 
+    // Info panel
+    &__info {
+        &-panel {
+            position: relative;
+
+            @include bp.respond-to(xl) {
+                display: none;
+            }
+        }
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        max-width: 600px;
+        width: 100%;
+        background: $color-white;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        transform: translateX(-100%);
+        transition: transform 0.5s ease-in-out;
+        z-index: 10000;
+        padding: 0 1rem;
+        overflow-y: auto;
+        visibility: visible;
+
+        &.active {
+            transform: translateX(0);
+        }
+
+        &-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 1rem 0;
+        }
+
+        &-logo {
+            max-width: 140px;
+        }
+
+        &-toggle {
+            font-size: 2rem;
+            color: $color-black;
+        }
+
+        &-title {
+            @include title-sm;
+        }
+
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        &-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: $color-primary;
+            display: grid;
+            place-items: center;
+            padding: 8px;
+
+            svg {
+                width: 15px;
+
+                path {
+                    fill: $color-white;
+                }
+            }
+        }
+
+        &-text {
+            @include body-text;
+            font-size: 1rem;
+            font-weight: 500;
+
+            &:hover {
+                color: $color-primary;
+            }
+        }
+    }
+
     &--style-1 {
         position: relative;
         z-index: 9999;
@@ -142,8 +230,62 @@
                 font-size: 2rem;
                 background: transparent;
                 border: none;
+                display: none;
+
+                @include bp.respond-to(xl) {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &--style-2 {
+        background: $color-dark;
+
+        .header {
+            &__content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
             }
 
+            &__info-toggle {
+                display: block;
+                border: none;
+                background: transparent;
+            }
+        }
+
+        .nav {
+            &__menu {
+                background: $color-white;
+                border-radius: 200px;
+                padding: 10px 10px 10px 1.5rem;
+            }
+
+            &__link {
+                color: $color-black;
+
+                &:hover {
+                    color: $color-primary;
+                }
+            }
+
+            &__item-has-children>.nav__link::after {
+                content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 9 5' fill='none'><path d='M8.13231 0.972078C8.13235 1.01586 8.12375 1.05921 8.10699 1.09965C8.09023 1.1401 8.06564 1.17683 8.03464 1.20774L4.70136 4.54102C4.67043 4.57199 4.63369 4.59656 4.59326 4.61333C4.55282 4.63009 4.50947 4.63872 4.4657 4.63872C4.42193 4.63872 4.37858 4.63009 4.33814 4.61333C4.29771 4.59656 4.26097 4.57199 4.23004 4.54102L0.896758 1.20774C0.76651 1.07749 0.76651 0.86658 0.896758 0.736415C1.02701 0.60625 1.23792 0.606167 1.36808 0.736415L4.4657 3.83403L7.56332 0.736415C7.59425 0.705444 7.63099 0.680874 7.67142 0.66411C7.71186 0.647346 7.75521 0.638718 7.79898 0.638718C7.84275 0.638718 7.8861 0.647346 7.92654 0.66411C7.96697 0.680874 8.00371 0.705444 8.03464 0.736415C8.06564 0.767327 8.09023 0.80406 8.10699 0.844503C8.12375 0.884945 8.13235 0.9283 8.13231 0.972078Z' fill='%23000000'/></svg>");
+            }
+
+            &__toggle {
+                color: $color-white;
+                font-size: 2rem;
+                background: transparent;
+                border: none;
+                display: none;
+
+                @include bp.respond-to(xl) {
+                    display: block;
+                }
+            }
         }
     }
 }

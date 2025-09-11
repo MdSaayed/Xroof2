@@ -371,13 +371,14 @@
             }
 
             &__title {
-                font-size: clamp(3rem, 10vw, 240px);
+                font-size: clamp(3rem, 10vw, 225px);
                 color: $color-white;
                 font-weight: 500;
                 letter-spacing: -2.4px;
                 line-height: 100%;
                 font-family: $font-heading;
                 user-select: none;
+                max-width: 915px;
             }
 
             &__desc {

@@ -16,6 +16,207 @@
 
 <body>
 
+    <!-- Starting of the Header Two Area Here -->
+    <header class="header header--style-2">
+        <div class="header__container container py-8">
+            <div class="header__content">
+                <div class="header__logo">
+                    <img src="./assets/img/global/logo.png" alt="Company Logo" class="header__logo-img">
+                </div>
+
+                <div class="nav__menu-wrap">
+                    <ul class="nav__menu">
+                        <li class="nav__item nav__item-has-children">
+                            <a href="#" class="nav__link">Home</a>
+                            <ul class="nav__submenu">
+                                <li class="nav__item current-menu-item"><a href="./index.html" class="nav__link">Home
+                                        01</a>
+                                </li>
+                                <li class="nav__item"><a href="./index-2.html" class="nav__link">Home 02</a></li>
+                                <li class="nav__item"><a href="./index-3.html" class="nav__link">Home 03</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav__item nav__item-has-children">
+                            <a href="#" class="nav__link">Services</a>
+                            <ul class="nav__submenu">
+                                <li class="nav__item current-menu-item"><a href="./services.html"
+                                        class="nav__link">Services
+                                        01</a></li>
+                                <li class="nav__item"><a href="./services-details.html" class="nav__link">Services
+                                        Details</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav__item nav__item-has-children">
+                            <a href="#" class="nav__link">Project</a>
+                            <ul class="nav__submenu">
+                                <li class="nav__item current-menu-item"><a href="./project.html"
+                                        class="nav__link">Services
+                                        01</a></li>
+                                <li class="nav__item"><a href="./project-details.html" class="nav__link">Project
+                                        Details</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav__item"><a href="./about.html" class="nav__link">About</a></li>
+
+                        <li class="nav__item nav__item-has-children">
+                            <a href="#" class="nav__link">Pages</a>
+                            <ul class="nav__submenu">
+                                <li class="nav__item current-menu-item"><a href="./project.html"
+                                        class="nav__link">Services
+                                        01</a></li>
+                                <li class="nav__item"><a href="./project-details.html" class="nav__link">Project
+                                        Details</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav__item"><a href="./contact.html" class="nav__link">Contact</a></li>
+                    </ul>
+                </div>
+                <button id="offcanvas-toggle" class="nav__toggle" aria-label="Toggle navigation">☰</button>
+
+                <div class="header__info-panel">
+                    <button id="info-toggle" class="header__info-toggle" aria-label="Menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 100 100"
+                            fill="none">
+                            <rect x="10" y="20" width="80" height="8" rx="0" fill="white" />
+                            <rect x="10" y="47" width="80" height="5" rx="0" fill="white" />
+                            <rect x="10" y="74" width="80" height="5" rx="0" fill="white" />
+                        </svg>
+                    </button>
+
+                    <div id="info-panel" class="header__info">
+                        <div class="header__info-top">
+                            <div class="header__info-logo">
+                                <img src="./assets/img/global/logo-black.png" alt="Company Logo">
+                            </div>
+
+                            <button id="info-toggle" class="header__info-toggle" aria-label="Close info">
+                                &times;
+                            </button>
+                        </div>
+
+                        <div class="header__info-content pt-8">
+                            <h3 class="header__info-title mb-4">Contact Us</h3>
+
+                            <div class="header__info-item mt-4">
+                                <div class="header__info-icon">
+                                    <svg aria-hidden="true" class="e-font-icon-svg e-fas-location-arrow"
+                                        viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M444.52 3.52L28.74 195.42c-47.97 22.39-31.98 92.75 19.19 92.75h175.91v175.91c0 51.17 70.36 67.17 92.75 19.19l191.9-415.78c15.99-38.39-25.59-79.97-63.97-63.97z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="header__info-text">Valentin resides at 24 Street Road in New York</span>
+                            </div>
+
+                            <div class="header__info-item mt-4">
+                                <div class="header__info-icon">
+                                    <svg aria-hidden="true" class="e-font-icon-svg e-far-envelope" viewBox="0 0 512 512"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <a href="mailto:hello@bentol.com" class="header__info-link">hello@bentol.com</a>
+                            </div>
+
+                            <div class="header__info-item mt-4">
+                                <div class="header__info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21"
+                                        fill="none">
+                                        <path
+                                            d="M19.7529 15.604L16.956 12.8071C15.9571 11.8082 14.2589 12.2078 13.8594 13.5063C13.5597 14.4054 12.5608 14.9048 11.6618 14.705C9.66395 14.2055 6.96691 11.6084 6.46746 9.51069C6.16779 8.61164 6.76713 7.61273 7.66615 7.3131C8.96472 6.91354 9.36428 5.2154 8.36538 4.2165L5.56845 1.41957C4.76932 0.720333 3.57064 0.720333 2.87141 1.41957L0.973487 3.31748C-0.924431 5.31529 1.17327 10.6095 5.86812 15.3043C10.563 19.9992 15.8572 22.1968 17.855 20.199L19.7529 18.301C20.4522 17.5019 20.4522 16.3032 19.7529 15.604Z"
+                                            fill="#EE212B" />
+                                    </svg>
+                                </div>
+                                <a href="tel:+181234567" class="header__info-link">+18 123 4567</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- End of the Header Two Area Here -->
+
+    <!-- Starting of the offcanvas Area Here-->
+    <div class="offcanvas offcanvas--style-2">
+        <div class="offcanvas__header">
+            <div class="offcanvas__logo">
+                <a href="#" class="offcanvas__logo-link">
+                    <img src="./assets/img/global/logo-black.png" alt="Logo" class="offcanvas__logo-img">
+                </a>
+            </div>
+            <button id="offcanvas-close" class="offcanvas__close" aria-label="Close navigation">
+                &times;
+            </button>
+        </div>
+
+        <ul id="offcanvas-nav-menu" class="nav__menu">
+            <li class="nav__item nav__item-has-children">
+                <a href="#" class="nav__link">Home</a>
+                <ul class="nav__submenu">
+                    <li class="nav__item current-menu-item"><a href="./index.html" class="nav__link">Home 01</a></li>
+                    <li class="nav__item"><a href="./index-2.html" class="nav__link">Home 02</a></li>
+                    <li class="nav__item"><a href="./index-3.html" class="nav__link">Home 03</a></li>
+                </ul>
+            </li>
+
+            <li class="nav__item nav__item-has-children">
+                <a href="#" class="nav__link">Services</a>
+                <ul class="nav__submenu">
+                    <li class="nav__item current-menu-item"><a href="./services.html" class="nav__link">Services 01</a>
+                    </li>
+                    <li class="nav__item"><a href="./services-details.html" class="nav__link">Services
+                            Details</a> </li>
+                </ul>
+            </li>
+
+            <li class="nav__item nav__item-has-children">
+                <a href="#" class="nav__link">Project</a>
+                <ul class="nav__submenu">
+                    <li class="nav__item current-menu-item"><a href="./project.html" class="nav__link">Project 01</a>
+                    </li>
+                    <li class="nav__item"><a href="./project-details.html" class="nav__link">Project Details</a></li>
+                </ul>
+            </li>
+
+            <li class="nav__item"><a href="./about.html" class="nav__link">About</a></li>
+
+            <li class="nav__item nav__item-has-children">
+                <a href="#" class="nav__link">Pages</a>
+                <ul class="nav__submenu">
+                    <li class="nav__item current-menu-item"><a href="./project.html" class="nav__link">Services 01</a>
+                    </li>
+                    <li class="nav__item"><a href="./project-details.html" class="nav__link">Project Details</a></li>
+                </ul>
+            </li>
+
+            <li class="nav__item"><a href="./contact.html" class="nav__link">Contact</a></li>
+        </ul>
+
+        <div class="offcanvas__actions mt-6">
+            <a href="./contact" class="offcanvas__btn btn-icon-right-primary">
+                Get Started
+                <svg width="40" height="4" viewBox="0 0 10 7" fill="none">
+                    <path
+                        d="M9.07926 2.38846C9.15803 2.13084 9.01303 1.85814 8.75541 1.77938L4.55719 0.495857C4.29957 0.417094 4.02687 0.562088 3.94811 0.819712C3.86934 1.07734 4.01434 1.35003 4.27196 1.42879L8.00371 2.5697L6.8628 6.30145C6.78404 6.55908 6.92903 6.83177 7.18666 6.91054C7.44428 6.9893 7.71697 6.8443 7.79574 6.58668L9.07926 2.38846ZM8.61279 2.24585L8.38379 1.81516L0.362471 6.08018L0.591471 6.51086L0.820471 6.94155L8.84179 2.67654L8.61279 2.24585Z"
+                        fill="black" />
+                </svg>
+            </a>
+
+        </div>
+    </div>
+    <!-- End of the offcanvas Area Here-->
+
     <main class="main">
 
         <!-- Starting of the Hero Two Area Here -->
@@ -797,8 +998,7 @@
                                             class="team__img">
                                     </div>
 
-                                    <div
-                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
+                                    <div class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
@@ -862,8 +1062,7 @@
                                             class="team__img">
                                     </div>
 
-                                    <div
-                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
+                                    <div class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
@@ -927,8 +1126,7 @@
                                             class="team__img">
                                     </div>
 
-                                    <div
-                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
+                                    <div class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
@@ -992,8 +1190,7 @@
                                             class="team__img">
                                     </div>
 
-                                    <div
-                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
+                                    <div class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
@@ -1057,8 +1254,7 @@
                                             class="team__img">
                                     </div>
 
-                                    <div
-                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
+                                    <div class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>
@@ -1122,8 +1318,7 @@
                                             class="team__img">
                                     </div>
 
-                                    <div
-                                        class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
+                                    <div class="team__card-content d-flex flex-column gap-2 gap-xxl-4 mt-4">
                                         <div class="team__info">
                                             <h3 class="team__name m-0">Michael Lopez</h3>
                                             <p class="team__role body-text mt-2 mt-xxl-4">Maintenance Technician</p>

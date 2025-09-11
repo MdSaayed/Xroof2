@@ -478,73 +478,111 @@ if (awardItems) {
 ============================= */
 document.addEventListener('DOMContentLoaded', function () {
   const today = new Date().toISOString().split("T")[0];
-  // document.getElementById("dateInput").value = today;
+  const dateInput = document.getElementById("dateInput");
+
+  if (dateInput) {
+    dateInput.value = today;
+  }
+});
+
+
+/* =============================
+* 20. Offcanvas
+============================= */
+
+document.addEventListener('DOMContentLoaded', function () {
+  const offcanvas = document.querySelector('.offcanvas');
+  const offcanvasToggle = document.querySelector('#offcanvas-toggle');
+  const offcanvasClose = document.querySelector('#offcanvas-close');
+  const offcanvasNavMenu = document.querySelector('#offcanvas-nav-menu');
+  const body = document.body;
+
+  // Toggle offcanvas menu on button click
+  offcanvasToggle.addEventListener('click', function () {
+    offcanvas.classList.add('active');
+    body.classList.add('offcanvas-active');
+  });
+
+  // Close offcanvas menu on close button click
+  if (offcanvasClose) {
+    offcanvasClose.addEventListener('click', function () {
+      offcanvas.classList.remove('active');
+      body.classList.remove('offcanvas-active');
+    });
+  }
+
+  // Handle dropdown toggles inside the offcanvas
+  const parentLinks = offcanvasNavMenu.querySelectorAll('.nav__item-has-children > .nav__link');
+  parentLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      this.classList.toggle('active');
+
+      const submenu = this.nextElementSibling;
+      if (submenu) {
+        submenu.classList.toggle('active');
+      }
+    });
+  });
+
+  // Close offcanvas menu when clicking outside
+  document.addEventListener('click', function (e) {
+    if (offcanvas.classList.contains('active') && !offcanvas.contains(e.target) && !offcanvasToggle.contains(e.target)) {
+      offcanvas.classList.remove('active');
+      body.classList.remove('offcanvas-active');
+    }
+  });
+
+  // Automatically close offcanvas on window resize
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 1200 && offcanvas.classList.contains('active')) {
+      offcanvas.classList.remove('active');
+      body.classList.remove('offcanvas-active');
+    }
+
+    // Reset dropdowns for desktop
+    if (window.innerWidth > 1200) {
+      document.querySelectorAll('.nav__item-has-children > .nav__link').forEach(link => {
+        link.classList.remove('active');
+      });
+      document.querySelectorAll('.nav__submenu').forEach(submenu => {
+        submenu.classList.remove('active');
+      });
+    }
+  });
 });
 
 
 
-/* =============================
-* 20. Nav Menu
-============================= */
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleBtn = document.getElementById("info-toggle");  
+  const infoPanel = document.getElementById("info-panel");
+  const closeBtn = infoPanel ? infoPanel.querySelector(".header__info-toggle") : null;  
 
-document.addEventListener('DOMContentLoaded', function () {
-    const offcanvas = document.querySelector('.offcanvas');
-    const offcanvasToggle = document.querySelector('#offcanvas-toggle');
-    const offcanvasClose = document.querySelector('#offcanvas-close');
-    const offcanvasNavMenu = document.querySelector('#offcanvas-nav-menu');
-    const body = document.body;
-
-    // Toggle offcanvas menu on button click
-    offcanvasToggle.addEventListener('click', function () {
-        offcanvas.classList.add('active');
-        body.classList.add('offcanvas-active');
+  if (toggleBtn && infoPanel) {
+    // Toggle panel with main button
+    toggleBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      infoPanel.classList.toggle("active");
     });
 
-    // Close offcanvas menu on close button click
-    if (offcanvasClose) {
-        offcanvasClose.addEventListener('click', function () {
-            offcanvas.classList.remove('active');
-            body.classList.remove('offcanvas-active');
-        });
+    // Close panel with close button
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function () {
+        infoPanel.classList.remove("active");
+      });
     }
 
-    // Handle dropdown toggles inside the offcanvas
-    const parentLinks = offcanvasNavMenu.querySelectorAll('.nav__item-has-children > .nav__link');
-    parentLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            this.classList.toggle('active');
-
-            const submenu = this.nextElementSibling;
-            if (submenu) {
-                submenu.classList.toggle('active');
-            }
-        });
+    // Prevent closing when clicking inside panel
+    infoPanel.addEventListener("click", function (e) {
+      e.stopPropagation();
     });
 
-    // Close offcanvas menu when clicking outside
-    document.addEventListener('click', function (e) {
-        if (offcanvas.classList.contains('active') && !offcanvas.contains(e.target) && !offcanvasToggle.contains(e.target)) {
-            offcanvas.classList.remove('active');
-            body.classList.remove('offcanvas-active');
-        }
+    // Close when clicking outside
+    document.addEventListener("click", function () {
+      if (infoPanel.classList.contains("active")) {
+        infoPanel.classList.remove("active");
+      }
     });
-
-    // Automatically close offcanvas on window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 1200 && offcanvas.classList.contains('active')) {
-            offcanvas.classList.remove('active');
-            body.classList.remove('offcanvas-active');
-        }
-        
-        // Reset dropdowns for desktop
-        if (window.innerWidth > 1200) {
-            document.querySelectorAll('.nav__item-has-children > .nav__link').forEach(link => {
-                link.classList.remove('active');
-            });
-            document.querySelectorAll('.nav__submenu').forEach(submenu => {
-                submenu.classList.remove('active');
-            });
-        }
-    });
+  }
 });
