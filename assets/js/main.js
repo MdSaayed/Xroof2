@@ -1,21 +1,36 @@
 /*------------------------------------------------------------------
-Template Name: Kitsolve – Business Solution HTML Template
-Template URL: https://kitsolve.netlify.app
-Description: Kitsolve is a clean, modern, and fully responsive HTML template designed for corporate businesses, startups, creative agencies, IT services, consulting firms, SaaS platforms, software showcases, app landing pages, marketing agencies, and digital service providers. Built on a 1920px grid, it offers a clear visual hierarchy, organized sections, and reusable components for easy editing and rapid customization.
-Author: KitDokan
-Author URL: https://themeforest.net/user/kitdokan
+Template Name: 
+Template URL:  
+Description:  
+Author:
+Author URL: 
 Version: 1.0
 -------------------------------------------------------------------
 
 JS INDEX
 ===================
 
-1. Preloader
-
 ------------------------------------------------------------------*/
 
 
 "use strict";
+
+
+
+/* =============================
+* 1. Preloader
+============================= */
+document.addEventListener('DOMContentLoaded', function () {
+  var preloader = document.querySelector(".preloader");
+
+  if (!preloader) return;
+
+  setTimeout(() => {
+    preloader.style.display = "none";
+  }, 500);
+});
+
+/* =======
 
 /* =============================
 * 2. Dynamically set BG
@@ -778,7 +793,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const iso = new Isotope(grid, {
     itemSelector: '[data-category]',
     layoutMode: 'fitRows',
-    percentPosition: true,        
+    percentPosition: true,
     transitionDuration: '0.6s'
 
   });
