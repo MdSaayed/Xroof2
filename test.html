@@ -3,101 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parallax Effects Demo</title>
+  <title>Projects Filter Example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;
-    }
-    section {
+    /* BEM styles */
+    .projects__filter {
       display: flex;
-      align-items: center;
+      gap: 1rem;
       justify-content: center;
-      font-size: 2rem;
-      color: white;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
     }
-    /* Background Parallax */
-    .bg-parallax {
-      background-image: url('https://picsum.photos/1600/900?random=1');
-      height: 100vh;
-      background-attachment: fixed;
-      background-position: center;
-      background-size: cover;
+
+    .projects__filter-item {
+      border: none;
+      padding: 0.6rem 1.2rem;
+      background: #f0f0f0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
     }
-    .content {
-      height: 100vh;
+
+    .projects__filter-item--active {
       background: #222;
+      color: #fff;
     }
-    /* Rellax Demo Styles */
-    .rellax {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: white;
-    }
-    .rellax.slow {
-      background: crimson;
-      height: 300px;
-    }
-    .rellax.fast {
-      background: royalblue;
-      height: 300px;
-    }
-    /* Parallax.js container */
-    #scene {
-      height: 100vh;
-      background: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+
+    .projects__card {
       overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      background: #fff;
     }
-    #scene img {
-      max-width: 200px;
+
+    .projects__card:hover {
+      transform: translateY(-5px);
+    }
+
+    .projects__card-thumb {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .projects__card:hover .projects__card-thumb {
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
 
-  <!-- Background Parallax -->
-  <section class="bg-parallax">
-    <h1>CSS Background Parallax</h1>
-  </section>
+<section class="projects projects--style-1 py-5">
+  <div class="projects__container container">
 
-  <section class="content">
-    <h2>Scroll Down ⬇</h2>
-  </section>
+    <!-- Filter Buttons -->
+    <div class="projects__filter">
+      <button class="projects__filter-item projects__filter-item--active" data-filter="*">All</button>
+      <button class="projects__filter-item" data-filter="installation">INSTALLATION</button>
+      <button class="projects__filter-item" data-filter="repairing">REPAIRING</button>
+      <button class="projects__filter-item" data-filter="maintenance">MAINTENANCE</button>
+    </div>
 
-  <!-- Rellax.js Scroll Parallax -->
-  <div class="rellax slow" data-rellax-speed="-2">Slow Scroll Element</div>
-  <div class="rellax fast" data-rellax-speed="3">Fast Scroll Element</div>
+    <!-- Grid -->
+    <div class="row g-4 mt-4 projects__grid">
+      <div class="col col-12 col-sm-6 col-xl-4">
+        <div class="projects__card" data-category="installation">
+          <div class="projects__card-thumb-wrap">
+            <img src="./assets/img/project/project-1.png" alt="Project Image 1" class="projects__card-thumb">
+          </div>
+          <div class="projects__card-title-wrap">
+            <a href="./project-details.html" class="projects__card-title-link">
+              <h2 class="projects__card-title">Roof Installation in Acme</h2>
+            </a>
+          </div>
+        </div>
+      </div>
 
-  <section class="content">
-    <h2>More Content</h2>
-  </section>
+      <div class="col col-12 col-sm-6 col-xl-4">
+        <div class="projects__card" data-category="repairing">
+          <div class="projects__card-thumb-wrap">
+            <img src="./assets/img/project/project-2.png" alt="Project Image 2" class="projects__card-thumb">
+          </div>
+          <div class="projects__card-title-wrap">
+            <a href="./project-details.html" class="projects__card-title-link">
+              <h2 class="projects__card-title">Roof Repairing Service</h2>
+            </a>
+          </div>
+        </div>
+      </div>
 
-  <!-- Parallax.js Mouse Movement -->
-  <div id="scene">
-    <div data-depth="0.2"><img src="https://picsum.photos/200/200?random=2"></div>
-    <div data-depth="0.6"><img src="https://picsum.photos/200/200?random=3"></div>
+      <div class="col col-12 col-sm-6 col-xl-4">
+        <div class="projects__card" data-category="maintenance">
+          <div class="projects__card-thumb-wrap">
+            <img src="./assets/img/project/project-3.png" alt="Project Image 3" class="projects__card-thumb">
+          </div>
+          <div class="projects__card-title-wrap">
+            <a href="./project-details.html" class="projects__card-title-link">
+              <h2 class="projects__card-title">Roof Maintenance Program</h2>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
+</section>
 
-  <section class="content">
-    <h2>End of Demo 🚀</h2>
-  </section>
+<!-- Isotope JS -->
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const grid = document.querySelector('.projects__grid');
 
-  <!-- JS Libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/parallax-js@3.1.0/dist/parallax.min.js"></script>
-  <script>
-    // Init Rellax.js
-    var rellax = new Rellax('.rellax');
+  // Initialize Isotope with itemSelector as the card
+  const iso = new Isotope(grid, {
+    itemSelector: '.projects__card',
+    layoutMode: 'fitRows',
+    transitionDuration: '0.6s',
+    getSortData: {
+      category: '[data-category]'
+    }
+  });
 
-    // Init Parallax.js
-    var scene = document.getElementById('scene');
-    var parallaxInstance = new Parallax(scene);
-  </script>
+  // Filter buttons
+  const filterButtons = document.querySelectorAll('.projects__filter-item');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      // Toggle BEM active class
+      filterButtons.forEach(b => b.classList.remove('projects__filter-item--active'));
+      this.classList.add('projects__filter-item--active');
+
+      const filterValue = this.getAttribute('data-filter');
+      if (filterValue === '*') {
+        iso.arrange({ filter: '*' });
+      } else {
+        iso.arrange({ filter: `[data-category="${filterValue}"]` });
+      }
+    });
+  });
+});
+</script>
+
 </body>
 </html>

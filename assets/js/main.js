@@ -498,59 +498,56 @@ document.addEventListener('DOMContentLoaded', function () {
   const offcanvasNavMenu = document.querySelector('#offcanvas-nav-menu');
   const body = document.body;
 
-  // Toggle offcanvas menu on button click
-  offcanvasToggle.addEventListener('click', function () {
-    offcanvas.classList.add('active');
-    body.classList.add('offcanvas-active');
-  });
-
-  // Close offcanvas menu on close button click
-  if (offcanvasClose) {
-    offcanvasClose.addEventListener('click', function () {
-      offcanvas.classList.remove('active');
-      body.classList.remove('offcanvas-active');
+  if (offcanvas) {
+    offcanvasToggle.addEventListener('click', function () {
+      offcanvas.classList.add('active');
+      body.classList.add('offcanvas-active');
     });
-  }
 
-  // Handle dropdown toggles inside the offcanvas
-  const parentLinks = offcanvasNavMenu.querySelectorAll('.nav__item-has-children > .nav__link');
-  parentLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      this.classList.toggle('active');
+    if (offcanvasClose) {
+      offcanvasClose.addEventListener('click', function () {
+        offcanvas.classList.remove('active');
+        body.classList.remove('offcanvas-active');
+      });
+    }
 
-      const submenu = this.nextElementSibling;
-      if (submenu) {
-        submenu.classList.toggle('active');
+    const parentLinks = offcanvasNavMenu.querySelectorAll('.nav__item-has-children > .nav__link');
+    parentLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        this.classList.toggle('active');
+
+        const submenu = this.nextElementSibling;
+        if (submenu) {
+          submenu.classList.toggle('active');
+        }
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (offcanvas.classList.contains('active') && !offcanvas.contains(e.target) && !offcanvasToggle.contains(e.target)) {
+        offcanvas.classList.remove('active');
+        body.classList.remove('offcanvas-active');
       }
     });
-  });
 
-  // Close offcanvas menu when clicking outside
-  document.addEventListener('click', function (e) {
-    if (offcanvas.classList.contains('active') && !offcanvas.contains(e.target) && !offcanvasToggle.contains(e.target)) {
-      offcanvas.classList.remove('active');
-      body.classList.remove('offcanvas-active');
-    }
-  });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 1200 && offcanvas.classList.contains('active')) {
+        offcanvas.classList.remove('active');
+        body.classList.remove('offcanvas-active');
+      }
 
-  // Automatically close offcanvas on window resize
-  window.addEventListener('resize', function () {
-    if (window.innerWidth > 1200 && offcanvas.classList.contains('active')) {
-      offcanvas.classList.remove('active');
-      body.classList.remove('offcanvas-active');
-    }
-
-    // Reset dropdowns for desktop
-    if (window.innerWidth > 1200) {
-      document.querySelectorAll('.nav__item-has-children > .nav__link').forEach(link => {
-        link.classList.remove('active');
-      });
-      document.querySelectorAll('.nav__submenu').forEach(submenu => {
-        submenu.classList.remove('active');
-      });
-    }
-  });
+      // Reset dropdowns for desktop
+      if (window.innerWidth > 1200) {
+        document.querySelectorAll('.nav__item-has-children > .nav__link').forEach(link => {
+          link.classList.remove('active');
+        });
+        document.querySelectorAll('.nav__submenu').forEach(submenu => {
+          submenu.classList.remove('active');
+        });
+      }
+    });
+  }
 });
 
 /* =============================
@@ -765,5 +762,39 @@ document.addEventListener("DOMContentLoaded", () => {
       video.pause();
       playBtn.innerHTML = playIcon;
     }
+  });
+});
+
+
+
+/* =============================
+* 20. Project filter
+============================= */
+document.addEventListener("DOMContentLoaded", function () {
+  const grid = document.querySelector('#projects-grid');
+
+  if (!grid) return;
+
+  const iso = new Isotope(grid, {
+    itemSelector: '[data-category]',
+    layoutMode: 'fitRows',
+    percentPosition: true,        
+    transitionDuration: '0.6s'
+
+  });
+
+  const filterButtons = document.querySelectorAll('.projects__filter-item');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      filterButtons.forEach(b => b.classList.remove('projects__filter-item--active'));
+      this.classList.add('projects__filter-item--active');
+
+      const filterValue = this.getAttribute('data-filter');
+      if (filterValue === '*') {
+        iso.arrange({ filter: '*' });
+      } else {
+        iso.arrange({ filter: `[data-category="${filterValue}"]` });
+      }
+    });
   });
 });

@@ -18,34 +18,15 @@
         <!-- Starting of the Project One Area Here -->
         <section class="projects projects--style-1">
             <div class="projects__container container">
-                <div class="projects__header flex-wrap gap-4 gap-md-5 flex-items-center justify-content-between">
-                    <div class="projects__title-wrap">
-                        <div class="projects__subtitle-wrap d-flex align-items-center mb-4 gap-4">
-                            <svg width="32" height="29" viewBox="0 0 32 29" fill="none">
-                                <path
-                                    d="M31.7395 11.0518L30.4823 9.7946C30.1351 9.44737 29.5723 9.44737 29.2251 9.7946L28.5967 10.4229L26.9912 8.81737C27.3039 7.63349 27.0112 6.32293 26.0828 5.3946L23.5689 2.88071C20.0978 -0.590403 14.4695 -0.590403 10.9978 2.88071L16.0262 5.3946V6.43626C16.0262 7.37904 16.4006 8.28349 17.0678 8.95015L19.7978 11.6802C20.7262 12.6085 22.0367 12.9013 23.2206 12.5885L24.8262 14.194L24.1978 14.8224C23.8506 15.1696 23.8506 15.7324 24.1978 16.0796L25.4551 17.3368C25.8023 17.684 26.3651 17.684 26.7123 17.3368L31.7406 12.3085C32.0867 11.9618 32.0867 11.399 31.7395 11.0518ZM15.8106 10.2074C15.6051 10.0018 15.4306 9.7746 15.2634 9.54348L1.09117 22.7752C-0.329384 24.1018 -0.367718 26.3413 1.00617 27.7157C2.38006 29.0902 4.62006 29.0518 5.94673 27.6307L19.1762 13.4602C18.9562 13.2985 18.7373 13.134 18.5406 12.9374L15.8106 10.2074Z"
-                                    fill="#EE212B" />
-                            </svg>
-                            <p class="projects__subtitle subtitle mb-0">Services</p>
-                        </div>
-                        <h2 class="projects__title title-xl">Our Latest Project</h2>
-                    </div>
-
-                    <p class="projects__desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                        luctus nec
-                        ullamcorper mattis, pulvinar dapibus leo.</p>
-
-                    <a href="./contact" class="projects__btn btn-icon-right-primary">View All
-                        <svg width="40" height="4" viewBox="0 0 10 7" fill="none">
-                            <path
-                                d="M9.07926 2.38846C9.15803 2.13084 9.01303 1.85814 8.75541 1.77938L4.55719 0.495857C4.29957 0.417094 4.02687 0.562088 3.94811 0.819712C3.86934 1.07734 4.01434 1.35003 4.27196 1.42879L8.00371 2.5697L6.8628 6.30145C6.78404 6.55908 6.92903 6.83177 7.18666 6.91054C7.44428 6.9893 7.71697 6.8443 7.79574 6.58668L9.07926 2.38846ZM8.61279 2.24585L8.38379 1.81516L0.362471 6.08018L0.591471 6.51086L0.820471 6.94155L8.84179 2.67654L8.61279 2.24585Z"
-                                fill="black" />
-                        </svg>
-                    </a>
+                <div class="projects__filter d-flex">
+                    <button class="projects__filter-item projects__filter-item--active" data-filter="*">All</button>
+                    <button class="projects__filter-item" data-filter="installation">INSTALLATION</button>
+                    <button class="projects__filter-item" data-filter="repairing">REPAIRING</button>
+                    <button class="projects__filter-item" data-filter="maintenance">MAINTENANCE</button>
                 </div>
 
-                <div class="row g-4 mt-10 mt-xl-15 mt-xxl-20">
-                    <div class="col col-12 col-sm-6 col-xl-4">
+                <div id="projects-grid" class="row g-4 mt-8">
+                    <div class="col-12 col-sm-6 col-xl-4" data-category="installation">
                         <div class="projects__card">
                             <div class="projects__card-thumb-wrap">
                                 <img src="./assets/img/project/project-1.png" alt="Project Image 1"
@@ -59,7 +40,7 @@
                         </div>
                     </div>
 
-                    <div class="col col-12 col-sm-6 col-xl-4">
+                    <div class="col-12 col-sm-6 col-xl-4" data-category="maintenance">
                         <div class="projects__card">
                             <div class="projects__card-thumb-wrap">
                                 <img src="./assets/img/project/project-2.png" alt="Project Image 2"
@@ -73,7 +54,7 @@
                         </div>
                     </div>
 
-                    <div class="col col-12 col-sm-6 col-xl-4">
+                    <div class="col-12 col-sm-6 col-xl-4" data-category="repairing">
                         <div class="projects__card">
                             <div class="projects__card-thumb-wrap">
                                 <img src="./assets/img/project/project-3.png" alt="Project Image 3"
@@ -87,7 +68,7 @@
                         </div>
                     </div>
 
-                    <div class="col col-12 col-sm-6 col-xl-4">
+                    <div class="col-12 col-sm-6 col-xl-4" data-category="installation">
                         <div class="projects__card">
                             <div class="projects__card-thumb-wrap">
                                 <img src="./assets/img/project/project-4.png" alt="Project Image 4"
@@ -101,7 +82,7 @@
                         </div>
                     </div>
 
-                    <div class="col col-12 col-sm-6 col-xl-4">
+                    <div class="col-12 col-sm-6 col-xl-4" data-category="maintenance">
                         <div class="projects__card">
                             <div class="projects__card-thumb-wrap">
                                 <img src="./assets/img/project/project-5.png" alt="Project Image 5"
@@ -115,7 +96,7 @@
                         </div>
                     </div>
 
-                    <div class="col col-12 col-sm-6 col-xl-4">
+                    <div class="col-12 col-sm-6 col-xl-4" data-category="repairing">
                         <div class="projects__card">
                             <div class="projects__card-thumb-wrap">
                                 <img src="./assets/img/project/project-6.png" alt="Project Image 6"

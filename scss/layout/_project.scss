@@ -4,6 +4,7 @@
 
 .projects {
     background: $color-light-gray;
+    overflow: hidden;
 
     &__card {
         background: $color-white;
@@ -28,6 +29,32 @@
 
     &__desc {
         max-width: 510px;
+    }
+
+    &__filter {
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        column-gap: 2rem;
+        row-gap: 1rem;
+
+        &-item {
+            border: 1px solid $color-primary;
+            padding: 0.5rem 1rem;
+            border-radius: 80px;
+            display: inline-block;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 150%;
+            letter-spacing: 0.09px;
+            color: $color-primary;
+            transition: $btn-transition;
+
+            &--active{
+                background:$color-primary;
+                color:$color-white;
+            }
+        }
     }
 
     &--style-2 {
