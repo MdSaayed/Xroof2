@@ -97,6 +97,7 @@
             box-shadow: none;
             flex-wrap: wrap;
             position: relative;
+            height: 100%;
 
             &::after {
                 content: "";
