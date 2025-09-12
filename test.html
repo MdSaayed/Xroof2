@@ -1,227 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Offcanvas Menu</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Background with Toggle Button</title>
   <style>
-    /* === Base Reset === */
-    * {
+    body, html {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* === Navbar Toggle Button (Desktop + Mobile) === */
-    .nav__toggle {
-      background: none;
-      border: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    /* === Offcanvas === */
-    .offcanvas {
-      position: fixed;
-      top: 0;
-      right: -320px; /* hidden by default */
-      width: 300px;
       height: 100%;
-      background: #fff;
-      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: right 0.3s ease-in-out;
-      z-index: 1000;
     }
 
-    .offcanvas.active {
-      right: 0;
+    .video-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    /* === Header Section === */
-    .offcanvas .nav__logo img {
-      max-width: 160px;
-    }
-
-    .offcanvas .div {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-
-    /* === Menu Items === */
-    .nav__menu {
-      list-style: none;
-    }
-
-    .nav__item {
-      margin-bottom: 0.5rem;
-    }
-
-    .nav__link {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      transition: background 0.2s ease;
-    }
-
-    .nav__link:hover {
-      background: #f1f1f1;
-    }
-
-    /* === Submenu === */
-    .nav__submenu {
-      list-style: none;
-      padding-left: 1rem;
-      margin-top: 0.3rem;
-      display: none;
-    }
-
-    .nav__item.open > .nav__submenu {
-      display: block;
-    }
-
-    .nav__item-has-children > .nav__link::after {
-      content: "▸";
-      font-size: 0.8rem;
-      transition: transform 0.3s ease;
-    }
-
-    .nav__item.open > .nav__link::after {
-      transform: rotate(90deg);
-    }
-
-    /* === Bottom Button === */
-    .nav__btn-wrap {
-      margin-top: 1rem;
-    }
-
-    .nav__btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 0.8rem 1.2rem;
-      border-radius: 8px;
-      background: #007bff;
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: background 0.3s ease;
-    }
-
-    .nav__btn:hover {
-      background: #0056b3;
-    }
-
-    /* === Overlay === */
-    .offcanvas-overlay {
-      position: fixed;
+    /* Background video */
+    .video-bg {
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 900;
+      object-fit: cover;
+      z-index: 1;
     }
 
-    .offcanvas-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
+    /* Button container (top) */
+    .video-controls {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 2;
+    }
+
+    .play-btn {
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .play-btn:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
 
-  <!-- Toggle Button -->
-  <button class="nav__toggle" id="menuToggle">☰</button>
+  <section class="video-section">
+    <!-- Background Video -->
+    <video id="bgVideo" class="video-bg" muted loop>
+      <source src="./assets/img/services/services-video.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
 
-  <!-- Overlay -->
-  <div class="offcanvas-overlay" id="offcanvasOverlay"></div>
-
-  <!-- Offcanvas -->
-  <div class="offcanvas" id="offcanvasMenu">
-    <div class="div">
-      <div class="nav__logo">
-        <a href="#"><img src="./assets/img/global/logo.png" alt="Logo" /></a>
-      </div>
-      <button class="nav__toggle" id="closeMenu">✕</button>
+    <!-- Play/Pause button -->
+    <div class="video-controls">
+      <button id="playBtn" class="play-btn">▶</button>
     </div>
+  </section>
 
-    <ul class="nav__menu">
-      <li class="nav__item nav__item-has-children">
-        <a href="#" class="nav__link">Home</a>
-        <ul class="nav__submenu">
-          <li class="nav__item"><a href="./index.html" class="nav__link">Home 01</a></li>
-          <li class="nav__item"><a href="./index-2.html" class="nav__link">Home 02</a></li>
-          <li class="nav__item"><a href="./index-3.html" class="nav__link">Home 03</a></li>
-        </ul>
-      </li>
-      <li class="nav__item nav__item-has-children">
-        <a href="#" class="nav__link">Services</a>
-        <ul class="nav__submenu">
-          <li class="nav__item"><a href="./services.html" class="nav__link">Services 01</a></li>
-          <li class="nav__item"><a href="./services-details.html" class="nav__link">Services Details</a></li>
-        </ul>
-      </li>
-      <li class="nav__item"><a href="./about.html" class="nav__link">About</a></li>
-      <li class="nav__item"><a href="./contact.html" class="nav__link">Contact</a></li>
-    </ul>
+  .askfldajfdaadkd
 
-    <div class="nav__btn-wrap">
-      <a href="./contact.html" class="nav__btn">Get Started →</a>
-    </div>
-  </div>
+<svg xmlns='http://www.w3.org/2000/svg' width='7' height='12' viewBox='0 0 5 9' fill='none'><path d='M0.972078 8.13231C1.01586 8.13235 1.05921 8.12375 1.09965 8.10699C1.1401 8.09023 1.17683 8.06564 1.20774 8.03464L4.54102 4.70136C4.57199 4.67043 4.59656 4.63369 4.61333 4.59326C4.63009 4.55282 4.63872 4.50947 4.63872 4.4657C4.63872 4.42193 4.63009 4.37858 4.61333 4.33814C4.59656 4.29771 4.57199 4.26097 4.54102 4.23004L1.20774 0.896758C1.07749 0.76651 0.86658 0.76651 0.736415 0.896758C0.60625 1.02701 0.606167 1.23792 0.736415 1.36808L3.83403 4.4657L0.736415 7.56332C0.705444 7.59425 0.680874 7.63099 0.66411 7.67142C0.647346 7.71186 0.638718 7.75521 0.638718 7.79898C0.638718 7.84275 0.647346 7.8861 0.66411 7.92654C0.680874 7.96697 0.705444 8.00371 0.736415 8.03464C0.767327 8.06564 0.80406 8.09023 0.844503 8.10699C0.884945 8.12375 0.9283 8.13235 0.972078 8.13231Z' fill='%23000000'/></svg>
+
 
   <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const closeMenu = document.getElementById("closeMenu");
-    const offcanvas = document.getElementById("offcanvasMenu");
-    const overlay = document.getElementById("offcanvasOverlay");
-    const dropdownItems = document.querySelectorAll(".nav__item-has-children");
+    const video = document.getElementById("bgVideo");
+    const playBtn = document.getElementById("playBtn");
 
-    // Open Menu
-    menuToggle.addEventListener("click", () => {
-      offcanvas.classList.add("active");
-      overlay.classList.add("active");
-    });
-
-    // Close Menu
-    closeMenu.addEventListener("click", () => {
-      offcanvas.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-
-    overlay.addEventListener("click", () => {
-      offcanvas.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-
-    // Dropdown Toggle
-    dropdownItems.forEach(item => {
-      item.querySelector(".nav__link").addEventListener("click", e => {
-        e.preventDefault();
-        item.classList.toggle("open");
-      });
+    playBtn.addEventListener("click", () => {
+      if (video.paused) {
+        video.play();
+        playBtn.textContent = "⏸";  
+      } else {
+        video.pause();
+        playBtn.textContent = "▶";  
+      }
     });
   </script>
+
 </body>
 </html>

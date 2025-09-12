@@ -11,9 +11,12 @@
 body {
     font-family: $font-primary;
     line-height: 1.5;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-all;
+
+    @media (max-width:540px) {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-all;
+    }
 }
 
 ul,

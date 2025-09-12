@@ -55,6 +55,7 @@
         &__description {
             @include card-title;
             font-weight: 400;
+            margin-bottom: 0;
         }
 
         &__item-wrap:last-child .statistics__item {

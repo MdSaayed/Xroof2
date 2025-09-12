@@ -84,6 +84,7 @@
                 border-radius: 20px;
                 padding: 3.5rem 2rem;
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+                height: 100%;
 
                 @include bp.respond-to(xl) {
                     padding: 3rem 2rem;
@@ -101,53 +102,53 @@
                 line-height: 120%;
                 letter-spacing: -0.4px;
             }
+        }
 
-            .info-card {
-                display: flex;
-                align-items: center;
-                gap: 20px;
-                flex-wrap: wrap;
+        .info-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+
+            @include bp.respond-to(md) {
+                gap: 1rem;
+            }
+
+            &__list {
+                gap: 2.2rem;
+
+                @include bp.respond-to(xl) {
+                    gap: 1.5rem;
+                }
 
                 @include bp.respond-to(md) {
                     gap: 1rem;
                 }
+            }
 
-                &__list {
-                    gap: 2.2rem;
+            &__icon {
+                background: $color-black;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                flex-shrink: 0;
 
-                    @include bp.respond-to(xl) {
-                        gap: 1.5rem;
-                    }
-
-                    @include bp.respond-to(md) {
-                        gap: 1rem;
-                    }
+                @include bp.respond-to(xl) {
+                    width: 40px;
+                    height: 40px;
                 }
+            }
 
-                &__icon {
-                    background: $color-black;
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                    display: grid;
-                    place-items: center;
-                    flex-shrink: 0;
+            &__link {
+                @include card-title;
+            }
 
-                    @include bp.respond-to(xl) {
-                        width: 40px;
-                        height: 40px;
-                    }
-                }
-
-                &__link {
-                    @include card-title;
-                }
-
-                &__text {
-                    color: $color-dark-gray;
-                    margin-bottom: 0;
-                    margin-top: 5px;
-                }
+            &__text {
+                color: $color-dark-gray;
+                margin-bottom: 0;
+                margin-top: 5px;
             }
         }
     }

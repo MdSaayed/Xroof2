@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* =============================
-* 3. Hero Bg Slider Home One
+* 3. Hero Bg Slider Home Two
 ============================= */
 document.addEventListener("DOMContentLoaded", function () {
   const bgSliderContainer = document.querySelector("#hero-banner-2");
@@ -91,6 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+
 
 
 /* =============================
@@ -485,11 +488,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-
 /* =============================
 * 20. Offcanvas
 ============================= */
-
 document.addEventListener('DOMContentLoaded', function () {
   const offcanvas = document.querySelector('.offcanvas');
   const offcanvasToggle = document.querySelector('#offcanvas-toggle');
@@ -552,12 +553,13 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-
-
+/* =============================
+* 20. Info Panel
+============================= */
 document.addEventListener("DOMContentLoaded", function () {
-  const toggleBtn = document.getElementById("info-toggle");  
+  const toggleBtn = document.getElementById("info-toggle");
   const infoPanel = document.getElementById("info-panel");
-  const closeBtn = infoPanel ? infoPanel.querySelector(".header__info-toggle") : null;  
+  const closeBtn = infoPanel ? infoPanel.querySelector(".header__info-toggle") : null;
 
   if (toggleBtn && infoPanel) {
     // Toggle panel with main button
@@ -585,4 +587,183 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+});
+
+/* =============================
+* 20. Nav Arrow Toggle
+============================= */
+// document.addEventListener("DOMContentLoaded", function () {
+//   const arrow = document.querySelector('.nav__arrow');
+//   const menuWrap = document.querySelector('.nav__menu');
+
+//   if (!arrow || !menuWrap) return;
+
+//   let lastKnownWidth = 0;  
+
+//   const setMenuWidth = () => {
+//     menuWrap.style.width = 'auto';
+//     lastKnownWidth = menuWrap.scrollWidth;
+//     menuWrap.style.width = lastKnownWidth + 'px';
+//   };
+
+//   menuWrap.style.transition = 'width 0.5s ease, padding 0.5s ease';
+//   menuWrap.style.visibility = 'visible';
+//   menuWrap.style.overflow = 'visible';
+//   menuWrap.classList.remove('hide');
+//   menuWrap.style.padding = '0 2rem';
+//   setMenuWidth(); // Calculate initial width
+
+//   arrow.addEventListener('click', () => {
+//     if (!menuWrap.classList.contains('hide')) {
+//       // Hide menu
+//       lastKnownWidth = menuWrap.scrollWidth; // Capture width before hiding
+//       menuWrap.style.overflow = 'hidden';
+//       menuWrap.style.width = '0';
+//       menuWrap.style.padding = '0';
+//       setTimeout(() => {
+//         menuWrap.style.visibility = 'hidden';
+//         menuWrap.classList.add('hide');
+//       }, 500);
+//     } else {
+//       // Show menu
+//       menuWrap.style.visibility = 'visible';
+//       menuWrap.classList.remove('hide');
+//       menuWrap.style.overflow = 'hidden';
+//       menuWrap.style.width = '0';
+//       menuWrap.style.padding = '0';
+
+//       requestAnimationFrame(() => {
+//         menuWrap.style.width = lastKnownWidth + 'px';
+//         menuWrap.style.padding = '0 2rem';
+//       });
+
+//       setTimeout(() => {
+//         menuWrap.style.overflow = 'visible';
+//       }, 500);
+//     }
+//   });
+
+//   // Recalculate width on resize
+//   window.addEventListener('resize', () => {
+//     if (!menuWrap.classList.contains('hide')) {
+//       // If visible, recalculate and apply the width
+//       setMenuWidth();
+//     } else {
+//       menuWrap.style.visibility = 'visible';
+//       menuWrap.style.overflow = 'visible';
+//       setMenuWidth();
+//       menuWrap.style.visibility = 'hidden';
+//       menuWrap.style.overflow = 'hidden';
+//     }
+//   });
+// });
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const arrow = document.querySelector('.nav__arrow');
+  const menuWrap = document.querySelector('.nav__menu');
+  const breakpoint = 768; // Adjust this breakpoint as needed
+
+  if (!arrow || !menuWrap) return;
+
+  let lastKnownWidth = 0;
+
+  // Function to calculate and set the menu's width
+  const setMenuWidth = () => {
+    // Temporarily set width to 'auto' to get the true scrollWidth
+    menuWrap.style.width = 'auto';
+    lastKnownWidth = menuWrap.scrollWidth;
+    // Set the fixed width back
+    menuWrap.style.width = lastKnownWidth + 'px';
+  };
+
+  const handleResize = () => {
+    // Hide the menu if the screen is smaller than the breakpoint
+    if (window.innerWidth < breakpoint) {
+      menuWrap.classList.add('hide');
+      menuWrap.style.width = '0';
+      menuWrap.style.padding = '0';
+      menuWrap.style.visibility = 'hidden';
+      // The arrow will always be visible
+    } else {
+      // If the screen is larger than the breakpoint, show the menu
+      menuWrap.classList.remove('hide');
+      menuWrap.style.visibility = 'visible';
+      menuWrap.style.overflow = 'visible';
+      menuWrap.style.padding = '0 2rem';
+      setMenuWidth(); // Recalculate and set the full width
+    }
+  };
+
+  // Initial setup on page load
+  menuWrap.style.transition = 'width 0.5s ease, padding 0.5s ease';
+  handleResize(); // Initial check
+
+  arrow.addEventListener('click', () => {
+    if (menuWrap.classList.contains('hide')) {
+      // Show menu
+      menuWrap.style.visibility = 'visible';
+      menuWrap.classList.remove('hide');
+      menuWrap.style.overflow = 'hidden';
+      menuWrap.style.width = '0';
+      menuWrap.style.padding = '0';
+
+      requestAnimationFrame(() => {
+        menuWrap.style.width = lastKnownWidth + 'px';
+        menuWrap.style.padding = '0 2rem';
+      });
+
+      setTimeout(() => {
+        menuWrap.style.overflow = 'visible';
+      }, 500);
+    } else {
+      // Hide menu
+      lastKnownWidth = menuWrap.scrollWidth;
+      menuWrap.style.overflow = 'hidden';
+      menuWrap.style.width = '0';
+      menuWrap.style.padding = '0';
+      setTimeout(() => {
+        menuWrap.style.visibility = 'hidden';
+        menuWrap.classList.add('hide');
+      }, 500);
+    }
+  });
+
+  // Recalculate width on resize
+  window.addEventListener('resize', handleResize);
+});
+
+
+/* =============================
+* 20. Services Video Section
+============================= */
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.getElementById("bgVideo");
+  const playBtn = document.getElementById("playBtn");
+
+  if (!video || !playBtn) return;
+
+  const playIcon = `
+    <svg width="31" height="35" viewBox="0 0 31 35" fill="none">
+      <path d="M30.6092 17.4998L0.445408 34.9149V0.0847454L30.6092 17.4998Z" fill="white" />
+    </svg>`;
+  const pauseIcon = `
+    <svg width="31" height="35" viewBox="0 0 31 35" fill="none">
+      <rect x="2" y="2" width="10" height="31" fill="white"/>
+      <rect x="19" y="2" width="10" height="31" fill="white"/>
+    </svg>`;
+
+  playBtn.innerHTML = playIcon;
+
+  playBtn.addEventListener("click", () => {
+    if (video.paused) {
+      video.muted = false;
+      video.play();
+      playBtn.innerHTML = pauseIcon;
+    } else {
+      video.pause();
+      playBtn.innerHTML = playIcon;
+    }
+  });
 });

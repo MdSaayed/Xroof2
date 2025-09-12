@@ -1,6 +1,7 @@
 @use '../utils/variables' as *;
 @use '../utils/mixin' as*;
 @use '../utils/breakpoints' as bp;
+@use '../utils/extends' as *;
 
 .header {
 
@@ -96,23 +97,15 @@
 
     // Info panel
     &__info {
-        &-panel {
-            position: relative;
-
-            @include bp.respond-to(xl) {
-                display: none;
-            }
-        }
-
         position: fixed;
         top: 0;
-        left: 0;
+        right: 0;
         height: 100vh;
-        max-width: 600px;
+        max-width: 500px;
         width: 100%;
         background: $color-white;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        transform: translateX(-100%);
+        transform: translateX(100%);
         transition: transform 0.5s ease-in-out;
         z-index: 10000;
         padding: 0 1rem;
@@ -121,6 +114,14 @@
 
         &.active {
             transform: translateX(0);
+        }
+
+        &-panel {
+            position: relative;
+
+            @include bp.respond-to(xl) {
+                display: none;
+            }
         }
 
         &-top {
@@ -136,8 +137,21 @@
         }
 
         &-toggle {
-            font-size: 2rem;
+            background: transparent;
+            border: 0.3px solid $color-white !important;
+            padding: 0 5px !important;
+            border-radius: 4px !important;
+
+            svg {
+                width: 30px;
+            }
+        }
+
+        &-toggle--close {
             color: $color-black;
+            border: none;
+            background: transparent;
+            font-size: 2rem;
         }
 
         &-title {
@@ -171,10 +185,31 @@
         &-text {
             @include body-text;
             font-size: 1rem;
-            font-weight: 500;
 
             &:hover {
                 color: $color-primary;
+            }
+        }
+
+        &-social-icon {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+            .social-icon__link {
+                @include card-icon-wrap;
+                border: 1px solid $color-primary;
+                transition: $btn-transition;
+
+                &:hover {
+                    background: transparent;
+
+                    svg path {
+                        fill: $color-primary;
+                        transition: $btn-transition;
+                    }
+                }
             }
         }
     }
@@ -186,21 +221,68 @@
         .header {
             &__top {
                 background: $color-primary;
+
+                &-content {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+
+                    @include bp.respond-to(sm) {
+                        justify-content: end;
+                    }
+                }
+            }
+
+            &__info-wrap {
+                @include bp.respond-to(sm) {
+                    display: none;
+                }
+            }
+
+            &__social {
+                gap: 1.5rem;
+
+                @include bp.respond-to(xl) {
+                    gap: 1rem;
+                }
+
+                &-link {
+                    transition: $btn-transition;
+                    width: 30px;
+                    height: 30px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 50%;
+
+                    &:hover {
+                        background-color: $color-white;
+
+                        svg {
+                            transition: $btn-transition;
+
+                            path {
+                                fill: $color-primary;
+                            }
+                        }
+                    }
+                }
             }
 
             &__info-text {
                 color: $color-white;
                 margin-bottom: 0;
 
-                @include bp.respond-to(sm) {
-                    display: none;
+                @include bp.respond-to(md) {
+                    &--address {
+                        display: none;
+                    }
                 }
             }
 
             &__bottom {
-                max-height: 75px;
+                max-height: 100px;
                 background: transparent;
-                margin-top: 20px;
                 margin-bottom: -100px;
             }
         }
@@ -208,6 +290,12 @@
         .nav {
             &__logo .nav__link {
                 padding: 0;
+            }
+
+            &__logo-img {
+                @include bp.respond-to(md) {
+                    max-width: 120px;
+                }
             }
 
             &__link {
@@ -249,18 +337,51 @@
                 align-items: center;
             }
 
-            &__info-toggle {
-                display: block;
-                border: none;
-                background: transparent;
+            &__logo-img {
+                @include bp.respond-to(md) {
+                    max-width: 120px;
+                }
             }
         }
 
         .nav {
-            &__menu {
+            &__menu-wrap {
+                display: flex;
+                align-items: center;
                 background: $color-white;
                 border-radius: 200px;
-                padding: 10px 10px 10px 1.5rem;
+                padding: 10px;
+                transition: width 0.5s ease;
+
+                @include bp.respond-to(xl) {
+                    display: none;
+                }
+            }
+
+            &__arrow {
+                background: $color-dark;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: grid;
+                place-items: center;
+                cursor: pointer;
+                transition: $btn-transition;
+
+                &:hover {
+                    background: $color-primary;
+                }
+            }
+
+            &__menu {
+                padding: 0 2rem;
+                transition: width 0.5s ease;
+
+                &.hide {
+                    padding: 0;
+                    width: 0 !important;
+                    visibility: hidden;
+                }
             }
 
             &__link {
@@ -273,6 +394,124 @@
 
             &__item-has-children>.nav__link::after {
                 content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 9 5' fill='none'><path d='M8.13231 0.972078C8.13235 1.01586 8.12375 1.05921 8.10699 1.09965C8.09023 1.1401 8.06564 1.17683 8.03464 1.20774L4.70136 4.54102C4.67043 4.57199 4.63369 4.59656 4.59326 4.61333C4.55282 4.63009 4.50947 4.63872 4.4657 4.63872C4.42193 4.63872 4.37858 4.63009 4.33814 4.61333C4.29771 4.59656 4.26097 4.57199 4.23004 4.54102L0.896758 1.20774C0.76651 1.07749 0.76651 0.86658 0.896758 0.736415C1.02701 0.60625 1.23792 0.606167 1.36808 0.736415L4.4657 3.83403L7.56332 0.736415C7.59425 0.705444 7.63099 0.680874 7.67142 0.66411C7.71186 0.647346 7.75521 0.638718 7.79898 0.638718C7.84275 0.638718 7.8861 0.647346 7.92654 0.66411C7.96697 0.680874 8.00371 0.705444 8.03464 0.736415C8.06564 0.767327 8.09023 0.80406 8.10699 0.844503C8.12375 0.884945 8.13235 0.9283 8.13231 0.972078Z' fill='%23000000'/></svg>");
+            }
+
+            &__item.current-menu-item>.nav__link {
+                color: $color-primary !important;
+                font-weight: 500;
+            }
+
+            &__toggle {
+                color: $color-white;
+                font-size: 2rem;
+                background: transparent;
+                border: none;
+                display: none;
+
+                @include bp.respond-to(xl) {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &--style-3 {
+        background: $color-dark;
+
+        .header {
+            &__top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            &__logo-img {
+                @include bp.respond-to(md) {
+                    max-width: 120px;
+                }
+            }
+
+            &__bottom {
+                align-items: center;
+                background: $color-white;
+                justify-content: space-between;
+                border-radius: 8px;
+                margin-top: 18px;
+
+                @include bp.respond-to(xl) {
+                    display: none !important;
+                }
+            }
+
+            &__contact-list {
+                gap: 40px;
+
+                li {
+                    @include body-text;
+                    color: $color-dark;
+                    position: relative;
+                    padding-left: 1rem;
+
+                    &:not(:first-child)::before {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        background: $color-dark;
+                        width: 5px;
+                        height: 5px;
+                        border-radius: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+
+            &__cta-btn {
+                @extend %btn--square;
+                background: $color-black;
+                border: 1px solid $color-black;
+                transition: $btn-transition;
+                border-radius: 8px;
+
+                &:hover {
+                    background: $color-primary;
+                    border-color: $color-primary;
+                    color: $color-white;
+
+                    span {
+                        background: $color-white;
+                    }
+                }
+            }
+        }
+
+        .nav {
+            &__menu {
+                padding: 0 2rem;
+                transition: width 0.5s ease;
+
+                &.hide {
+                    padding: 0;
+                    width: 0 !important;
+                    visibility: hidden;
+                }
+            }
+
+            &__link {
+                color: $color-white;
+
+                &:hover {
+                    color: $color-primary;
+                }
+            }
+
+            &__item-has-children>.nav__link::after {
+                content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 9 5' fill='none'><path d='M8.13231 0.972078C8.13235 1.01586 8.12375 1.05921 8.10699 1.09965C8.09023 1.1401 8.06564 1.17683 8.03464 1.20774L4.70136 4.54102C4.67043 4.57199 4.63369 4.59656 4.59326 4.61333C4.55282 4.63009 4.50947 4.63872 4.4657 4.63872C4.42193 4.63872 4.37858 4.63009 4.33814 4.61333C4.29771 4.59656 4.26097 4.57199 4.23004 4.54102L0.896758 1.20774C0.76651 1.07749 0.76651 0.86658 0.896758 0.736415C1.02701 0.60625 1.23792 0.606167 1.36808 0.736415L4.4657 3.83403L7.56332 0.736415C7.59425 0.705444 7.63099 0.680874 7.67142 0.66411C7.71186 0.647346 7.75521 0.638718 7.79898 0.638718C7.84275 0.638718 7.8861 0.647346 7.92654 0.66411C7.96697 0.680874 8.00371 0.705444 8.03464 0.736415C8.06564 0.767327 8.09023 0.80406 8.10699 0.844503C8.12375 0.884945 8.13235 0.9283 8.13231 0.972078Z' fill='%23EE212B'/></svg>");
+            }
+
+            &__item.current-menu-item>.nav__link {
+                color: $color-primary !important;
+                font-weight: 500;
             }
 
             &__toggle {

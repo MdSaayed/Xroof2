@@ -196,6 +196,9 @@
                 color: rgba(255, 255, 255, 0.54);
                 letter-spacing: 0.08px;
                 font-size: 1rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                word-break: break-all;
             }
 
             &__container {
@@ -477,3 +480,4 @@
         }
     }
 }
+
