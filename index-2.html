@@ -17,7 +17,7 @@
 <body>
 
     <!-- Starting of the Header Two Area Here -->
-    <header class="header header--style-2">
+    <header id="header-2" class="header header--style-2">
         <div class="header__container container py-8">
             <div class="header__content">
                 <div class="header__logo">
@@ -172,7 +172,7 @@
 
                             <div class="header__info-social-icon mt-8">
                                 <a href="https://x.com" class="social-icon__link">
-                                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                                    <svg width="18" height="18" viewBox="0 0 26 26" fill="none">
                                         <path
                                             d="M15.3078 11.1708L24.338 0.392578H22.1981L14.3572 9.75115L8.09459 0.392578H0.87146L10.3417 14.5444L0.87146 25.847H3.01147L11.2917 15.964L17.9055 25.847H25.1286L15.3072 11.1708H15.3078ZM12.3767 14.6691L11.4172 13.2599L3.78254 2.0467H7.06947L13.2307 11.0961L14.1903 12.5053L22.1992 24.2681H18.9122L12.3767 14.6696V14.6691Z"
                                             fill="white" />
@@ -180,7 +180,7 @@
                                 </a>
 
                                 <a href="https://www.facebook.com" class="social-icon__link">
-                                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                                    <svg width="18" height="18" viewBox="0 0 26 26" fill="none">
                                         <g clip-path="url(#clip0_328_1833)">
                                             <path
                                                 d="M14.92 25.4753V14.1681H18.7138L19.283 9.76021H14.92V6.94641C14.92 5.67061 15.2728 4.80118 17.1043 4.80118L19.4365 4.80022V0.857636C19.0332 0.805223 17.6488 0.685059 16.0374 0.685059C12.6726 0.685059 10.369 2.73888 10.369 6.50985V9.76021H6.56372V14.1681H10.369V25.4753H14.92Z"
@@ -196,7 +196,7 @@
                                 </a>
 
                                 <a href="https://dribbble.com" class="social-icon__link">
-                                    <svg width="26" height="26" fill="#fff" viewBox="0 0 256 256" id="Flat">
+                                    <svg width="20" height="20" fill="#fff" viewBox="0 0 256 256" id="Flat">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
                                         </g>
@@ -209,7 +209,7 @@
                                 </a>
 
                                 <a href="https://www.instagram.com" class="social-icon__link">
-                                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                                    <svg width="20" height="20" viewBox="0 0 26 26" fill="none">
                                         <g clip-path="url(#clip0_328_333)">
                                             <path
                                                 d="M18.6847 0.272461H7.31545C3.61524 0.272461 0.60498 3.36337 0.60498 7.16273V18.8368C0.60498 22.6359 3.61524 25.7268 7.31545 25.7268H18.6849C22.3849 25.7268 25.3951 22.6359 25.3951 18.8368V7.16273C25.3951 3.36337 22.3849 0.272461 18.6847 0.272461ZM23.9418 18.8368C23.9418 21.8131 21.5835 24.2346 18.6847 24.2346H7.31545C4.4166 24.2346 2.05829 21.8131 2.05829 18.8368V7.16273C2.05829 4.1862 4.4166 1.76471 7.31545 1.76471H18.6849C21.5835 1.76471 23.9418 4.1862 23.9418 7.16273V18.8368Z"
@@ -1693,8 +1693,8 @@
     <!-- Starting of the footer Area Here -->
     <footer class="footer footer--style-2">
         <div class="footer__container footer__container--top container pb-20">
-            <div class="row g-4 justify-content-between align-items-start">
-                <div class="footer__brand col-lg-4 col-md-6">
+            <div class="footer__inner">
+                <div class="footer__brand">
                     <div class="footer__logo-wrap mb-4">
                         <img src="./assets/img/global/logo.png" alt="Logo" class="footer__logo">
                     </div>
@@ -1704,22 +1704,23 @@
                         repairs to full installations.
                     </p>
 
-                    <div class="footer__action mt-10">
+                    <div class="footer__action my-10">
                         <a href="./contact.html" class="footer__action-btn">Book a 15 -min call</a>
                     </div>
                 </div>
 
-                <div class="footer__links col-lg-2 col-md-6">
+                <div class="footer__links">
                     <h5 class="footer__title mb-8">Quick Link</h5>
                     <ul class="footer__nav list-unstyled mb-0">
-                        <li class="mb-4"><a href="#" class="footer__nav-link body-text">About Us</a></li>
-                        <li class="mb-4"><a href="#" class="footer__nav-link body-text">Service</a></li>
-                        <li class="mb-4"><a href="#" class="footer__nav-link body-text">Blog</a></li>
-                        <li class="mb-4"><a href="#" class="footer__nav-link body-text">Contact Us</a></li>
+                        <li class="mb-4"><a href="./about.html" class="footer__nav-link body-text">About Us</a></li>
+                        <li class="mb-4"><a href=".team.html" class="footer__nav-link body-text">Our Team</a></li>
+                        <li class="mb-4"><a href=".pricing.html" class="footer__nav-link body-text">Pricing</a></li>
+                        <li class="mb-4"><a href="./blog.html" class="footer__nav-link body-text">Blog</a></li>
+                        <li class="mb-4"><a href="./contact.html" class="footer__nav-link body-text">Contact Us</a></li>
                     </ul>
                 </div>
 
-                <div class="footer__links col-lg-2 col-md-6">
+                <div class="footer__links">
                     <h5 class="footer__title mb-8">Services</h5>
                     <ul class="footer__nav list-unstyled mb-0">
                         <li class="mb-4"><a href="#" class="footer__nav-link body-text">Residential Roofing</a></li>
@@ -1730,7 +1731,7 @@
                     </ul>
                 </div>
 
-                <div class="footer__hours col-lg-2 col-md-6 mb-4">
+                <div class="footer__hours">
                     <h5 class="footer__title mb-8">Working Hours</h5>
                     <ul class="list-unstyled mb-0 small">
                         <li class="footer__hour body-text mb-4">Monday : 10.00 AM- 4.00PM</li>
@@ -1741,7 +1742,7 @@
                     </ul>
                 </div>
 
-                <div class="footer__hours col-lg-2 col-md-6 mb-4 pl-10">
+                <div class="footer__hours">
                     <h5 class="footer__title mb-8">Contact Us</h5>
                     <ul class="list-unstyled mb-0 small">
                         <li class="footer__address body-text mb-4">857,king street road,New York-89009</li>
@@ -1759,7 +1760,7 @@
                     class="d-flex flex-column gap-3 flex-md-row justify-content-between align-items-center text-center text-md-start">
                     <p class="footer__bottom-text body-text mb-0">XRooF Themes 2025. All Rights Reserved.</p>
 
-                    <a href="" class="footer__back-to-top body-text">BACK TO TOP</a>
+                    <a href="#header-2" class="footer__back-to-top body-text">BACK TO TOP</a>
 
                     <ul class="footer__bootom-nav d-flex flex-wrap justify-content-center list-inline mb-0">
                         <li class="list-inline-item"><a href="#" class="footer__bottom-nav-link">Terms &

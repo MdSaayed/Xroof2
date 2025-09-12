@@ -3,94 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Background with Toggle Button</title>
+  <title>Parallax Effects Demo</title>
   <style>
-    body, html {
+    body {
       margin: 0;
-      padding: 0;
-      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
     }
-
-    .video-section {
-      position: relative;
-      width: 100%;
+    section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+    }
+    /* Background Parallax */
+    .bg-parallax {
+      background-image: url('https://picsum.photos/1600/900?random=1');
       height: 100vh;
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+    }
+    .content {
+      height: 100vh;
+      background: #222;
+    }
+    /* Rellax Demo Styles */
+    .rellax {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+    }
+    .rellax.slow {
+      background: crimson;
+      height: 300px;
+    }
+    .rellax.fast {
+      background: royalblue;
+      height: 300px;
+    }
+    /* Parallax.js container */
+    #scene {
+      height: 100vh;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
     }
-
-    /* Background video */
-    .video-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 1;
-    }
-
-    /* Button container (top) */
-    .video-controls {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 2;
-    }
-
-    .play-btn {
-      background: rgba(255, 255, 255, 0.8);
-      border: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-
-    .play-btn:hover {
-      background: rgba(255, 255, 255, 1);
-      transform: scale(1.1);
+    #scene img {
+      max-width: 200px;
     }
   </style>
 </head>
 <body>
 
-  <section class="video-section">
-    <!-- Background Video -->
-    <video id="bgVideo" class="video-bg" muted loop>
-      <source src="./assets/img/services/services-video.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
-
-    <!-- Play/Pause button -->
-    <div class="video-controls">
-      <button id="playBtn" class="play-btn">▶</button>
-    </div>
+  <!-- Background Parallax -->
+  <section class="bg-parallax">
+    <h1>CSS Background Parallax</h1>
   </section>
 
-  .askfldajfdaadkd
+  <section class="content">
+    <h2>Scroll Down ⬇</h2>
+  </section>
 
-<svg xmlns='http://www.w3.org/2000/svg' width='7' height='12' viewBox='0 0 5 9' fill='none'><path d='M0.972078 8.13231C1.01586 8.13235 1.05921 8.12375 1.09965 8.10699C1.1401 8.09023 1.17683 8.06564 1.20774 8.03464L4.54102 4.70136C4.57199 4.67043 4.59656 4.63369 4.61333 4.59326C4.63009 4.55282 4.63872 4.50947 4.63872 4.4657C4.63872 4.42193 4.63009 4.37858 4.61333 4.33814C4.59656 4.29771 4.57199 4.26097 4.54102 4.23004L1.20774 0.896758C1.07749 0.76651 0.86658 0.76651 0.736415 0.896758C0.60625 1.02701 0.606167 1.23792 0.736415 1.36808L3.83403 4.4657L0.736415 7.56332C0.705444 7.59425 0.680874 7.63099 0.66411 7.67142C0.647346 7.71186 0.638718 7.75521 0.638718 7.79898C0.638718 7.84275 0.647346 7.8861 0.66411 7.92654C0.680874 7.96697 0.705444 8.00371 0.736415 8.03464C0.767327 8.06564 0.80406 8.09023 0.844503 8.10699C0.884945 8.12375 0.9283 8.13235 0.972078 8.13231Z' fill='%23000000'/></svg>
+  <!-- Rellax.js Scroll Parallax -->
+  <div class="rellax slow" data-rellax-speed="-2">Slow Scroll Element</div>
+  <div class="rellax fast" data-rellax-speed="3">Fast Scroll Element</div>
 
+  <section class="content">
+    <h2>More Content</h2>
+  </section>
 
+  <!-- Parallax.js Mouse Movement -->
+  <div id="scene">
+    <div data-depth="0.2"><img src="https://picsum.photos/200/200?random=2"></div>
+    <div data-depth="0.6"><img src="https://picsum.photos/200/200?random=3"></div>
+  </div>
+
+  <section class="content">
+    <h2>End of Demo 🚀</h2>
+  </section>
+
+  <!-- JS Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/parallax-js@3.1.0/dist/parallax.min.js"></script>
   <script>
-    const video = document.getElementById("bgVideo");
-    const playBtn = document.getElementById("playBtn");
+    // Init Rellax.js
+    var rellax = new Rellax('.rellax');
 
-    playBtn.addEventListener("click", () => {
-      if (video.paused) {
-        video.play();
-        playBtn.textContent = "⏸";  
-      } else {
-        video.pause();
-        playBtn.textContent = "▶";  
-      }
-    });
+    // Init Parallax.js
+    var scene = document.getElementById('scene');
+    var parallaxInstance = new Parallax(scene);
   </script>
-
 </body>
 </html>

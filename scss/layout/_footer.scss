@@ -233,6 +233,15 @@
                 word-wrap: break-word;
                 overflow-wrap: break-word;
                 word-break: break-all;
+                max-width: 250px;
+            }
+
+            &__inner{
+                column-gap: 2.5rem;
+                
+                @include bp.respond-to(sm){
+                    flex-direction: column;
+                }
             }
 
             &__container {
