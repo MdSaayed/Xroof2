@@ -66,6 +66,25 @@
         padding-top: 7rem;
     }
 
+    &__inner {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 80px;
+        row-gap: 40px;
+
+        >* {
+            flex-grow: 1;
+        }
+    }
+
+    &__brand {
+        max-width: 420px !important;
+    }
+
+    &__newsletter {
+        max-width: 340px;
+    }
+
     &__desc-small {
         color: $color-white;
         max-width: 92%;
@@ -95,6 +114,11 @@
     &__hour,
     &__newsletter-text {
         color: $color-white;
+    }
+
+    &__nav-link:hover {
+        color: $color-primary;
+        transition: $btn-transition;
     }
 
     &__newsletter-form-group {
@@ -135,10 +159,20 @@
             border-radius: 50%;
             flex-shrink: 0;
             margin: 0;
+            border:none;
+            transition: $primary-transition;
 
-            &:hover svg {
-                transform: translateX(2px);
-                transition: $primary-transition;
+            &:hover {
+                background: $color-primary;
+
+                svg {
+                    transform: translateX(2px);
+                    transition: $primary-transition;
+
+                    path {
+                        fill: $color-white;
+                    }
+                }
             }
         }
     }
@@ -480,4 +514,3 @@
         }
     }
 }
-
