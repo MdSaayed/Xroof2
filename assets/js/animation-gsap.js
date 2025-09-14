@@ -17,6 +17,87 @@ JS INDEX
 ------------------------------------------------------------------*/
 
 /* =============================
+* 20. Card Stagger
+============================= */
+gsap.registerPlugin(ScrollTrigger);
+
+function animateCards(className) {
+    const cards = document.querySelectorAll('.' + className);
+
+    cards.forEach((card) => {
+        gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            rotation: 0,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 90%',
+                end: 'bottom 60%',
+                toggleActions: 'play none none none',
+            }
+        });
+    });
+
+    ScrollTrigger.refresh();
+}
+
+function animateCards(className) {
+    const cards = document.querySelectorAll('.' + className);
+
+    // Mobile-friendly initial state
+    gsap.set(cards, {
+        opacity: 0,
+        y: 80,
+        rotation: 1
+    });
+
+    cards.forEach((card) => {
+        gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            rotation: 0,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 90%',
+                end: 'bottom 60%',
+                toggleActions: 'play none none none',
+                invalidateOnRefresh: true // ✅ mobile orientation/resize fix
+            }
+        });
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    animateCards('services__card');
+    animateCards('why-choose-us__card');
+    animateCards('projects__card');
+    animateCards('team__member');
+    animateCards('testimonials__card');
+    animateCards('faq__item');
+    animateCards('blog-card');
+    animateCards('pricing__card');
+    animateCards('services__item');
+    animateCards('blog__card');
+
+    setTimeout(() => ScrollTrigger.refresh(), 300);
+
+    window.addEventListener('resize', () => ScrollTrigger.refresh());
+    window.addEventListener('orientationchange', () => ScrollTrigger.refresh());
+});
+
+
+// opacity: 0;
+// transform: translateY(80px) rotate(1deg);
+// transition: transform 0.3s, box - shadow 0.3s, background 0.3s;
+
+
+
+/* =============================
 * 1. Reuseable Animation
 ============================= */
 
@@ -80,9 +161,9 @@ function elementMove(selectors) {
     selectors.forEach(selector => {
         const elements = document.querySelectorAll("." + selector);
         elements.forEach(el => {
-            gsap.fromTo(el, 
+            gsap.fromTo(el,
                 { y: -5 },
-                { 
+                {
                     y: 5,
                     duration: 1,
                     ease: "power1.inOut",
@@ -93,7 +174,7 @@ function elementMove(selectors) {
         });
     });
 }
- 
+
 
 
 
@@ -185,71 +266,206 @@ function shake(selector, duration = 0.1, amount = 10) { gsap.to(selector, { x: `
 function spin(selector, duration = 2) { gsap.to(selector, { rotation: 360, duration: duration, repeat: -1, ease: "linear" }); }
 
 
-/* =============================
-* 1. Hero One Area
-============================= */
-fadeAnimation('fade-up', ['hero__title','hero__desc', 'hero__btn', 'hero__subtitle-wrap', 'hero__img-wrap', 'hero__form-wrap', 'hero__stats-item']);
-elementMove(['hero__shape-arrow']);
 
-/* =============================
-* 1. About One Area
-============================= */
-fadeAnimation('fade-left', ['about__img-wrap', 'about__stat']);
-fadeAnimation('fade-up', ['about__subtitle-wrap', 'about__title', 'about__desc', 'services__item', 'about__btn-wrap']);
+document.addEventListener('DOMContentLoaded', function () {
 
-/* =============================
-* 1. Services One Area
-============================= */
-fadeAnimation('fade-up', ['services__top-subtitle-wrap', 'services__top-title', 'services__top-desc', 'services__card']);
+    /* =============================
+    * Helper Function
+    ============================= */
+    function elementExists(classNames) {
+        if (!Array.isArray(classNames)) classNames = [classNames];
+        return classNames.some(cls => document.querySelector(`.${cls}`));
+    }
 
-/* =============================
-* 1. Why Choose Us One Area
-============================= */
-fadeAnimation('fade-up', ['why-choose-us__subtitle-wrap', 'why-choose-us__title', 'why-choose-us__desc', 'why-choose-us__btn-wrap']);
-fadeAnimation('zoom-in', ['why-choose-us__award']);
+    /* =============================
+    * 1. Hero One Area
+    ============================= */
+    if (elementExists(['hero--style-1'])) {
+        fadeAnimation('fade-up', ['hero__title', 'hero__desc', 'hero__btn', 'hero__subtitle-wrap', 'hero__img-wrap', 'hero__form-wrap', 'hero__stats-item']);
+        elementMove(['hero__shape-arrow']);
+    }
 
-/* =============================
-* 1. Project One Area Here
-============================= */
-fadeAnimation('fade-up', ['projects__subtitle-wrap', 'projects__title', 'projects__desc', 'projects__btn']);
+    /* =============================
+    * 2. About One Area
+    ============================= */
+    if (elementExists(['about--style-1'])) {
+        fadeAnimation('fade-left', ['about__img-wrap', 'about__stat']);
+        fadeAnimation('fade-up', ['about__subtitle-wrap', 'about__title', 'about__desc', 'services__item', 'about__btn-wrap']);
+    }
 
-/* =============================
-* 1. Achievement One Area Here
-============================= */
-fadeAnimation('fade-up', ['achievement__left','achievement__subtitle-wrap','achievement__title','achievement__desc','achievement__stats','achievement__btn']);
-elementMove(['achievement__phn-number','achievement__home-icon','achievement__video-icon']);
+    /* =============================
+    * 3. Services One Area
+    ============================= */
+    if (elementExists(['services--style-1'])) {
+        fadeAnimation('fade-up', ['services__top-subtitle-wrap', 'services__top-title', 'services__top-desc', 'services__card']);
+    }
 
-/* =============================
-* 1. Team One Area Here
-============================= */
-fadeAnimation('fade-up', ['achievement__subtitle-wrap','achievement__title','achievement__desc','achievement__stats','achievement__btn']);
+    /* =============================
+    * 4. Why Choose Us One Area
+    ============================= */
+    if (elementExists(['why-choose-us--style-1'])) {
+        fadeAnimation('fade-up', ['why-choose-us__subtitle-wrap', 'why-choose-us__title', 'why-choose-us__desc', 'why-choose-us__btn-wrap']);
+        fadeAnimation('zoom-in', ['why-choose-us__award']);
+    }
 
-/* =============================
-* 1. Testimonials One Area Here
-============================= */
-fadeAnimation('fade-up', ['testimonials__subtitle-wrap','testimonials__title','testimonials__desc']);
+    /* =============================
+    * 5. Project One Area
+    ============================= */
+    if (elementExists(['projects--style-1'])) {
+        fadeAnimation('fade-up', ['projects__subtitle-wrap', 'projects__title', 'projects__desc', 'projects__btn']);
+    }
 
-/* =============================
-* 1. Pricing One Area Here
-============================= */
-fadeAnimation('fade-up', ['pricing__subtitle-wrap','pricing__title','pricing__desc']);
+    /* =============================
+    * 6. Achievement One Area
+    ============================= */
+    if (elementExists(['achievement--style-1'])) {
+        fadeAnimation('fade-up', ['achievement__left', 'achievement__subtitle-wrap', 'achievement__title', 'achievement__desc', 'achievement__stats', 'achievement__btn']);
+        elementMove(['achievement__phn-number', 'achievement__home-icon', 'achievement__video-icon']);
+    }
 
-/* =============================
-* 1. Faq One Area Here
-============================= */
-fadeAnimation('fade-up', ['faq__subtitle-wrap','faq__title','faq__desc']);
+    /* =============================
+    * 7. Team One Area
+    ============================= */
+    if (elementExists(['team--style-1'])) {
+        fadeAnimation('fade-up', ['team__subtitle-wrap', 'team__title', 'team__desc', 'team__btn']);
+    }
 
-/* =============================
-* 1. Blog One Area Here
-============================= */
-fadeAnimation('fade-up', ['blog__subtitle-wrap','blog__title','blog__desc','blog__btn']);
+    /* =============================
+    * 8. Testimonials One Area
+    ============================= */
+    if (elementExists(['testimonials--style-1'])) {
+        fadeAnimation('fade-up', ['testimonials__subtitle-wrap', 'testimonials__title', 'testimonials__desc']);
+    }
 
-/* =============================
-* 1. Footer One Area Here
-============================= */
-fadeAnimation('fade-up',['footer__cta-title','footer__cta-desc','footer__cta-btn','footer__cta-bg'])
+    /* =============================
+    * 9. Pricing One Area
+    ============================= */
+    if (elementExists(['pricing--style-1'])) {
+        fadeAnimation('fade-up', ['pricing__subtitle-wrap', 'pricing__title', 'pricing__desc']);
+    }
+
+    /* =============================
+    * 10. Faq One Area
+    ============================= */
+    if (elementExists(['faq'])) {
+        fadeAnimation('fade-up', ['faq__subtitle-wrap', 'faq__title', 'faq__desc']);
+    }
+
+    /* =============================
+    * 11. Blog One Area
+    ============================= */
+    if (elementExists(['blog--style-1'])) {
+        fadeAnimation('fade-up', ['blog__subtitle-wrap', 'blog__title', 'blog__desc', 'blog__btn']);
+    }
+
+    /* =============================
+    * 12. Footer One Area
+    ============================= */
+    if (elementExists(['footer--style-1'])) {
+        fadeAnimation('fade-up', ['footer__cta-title', 'footer__cta-desc', 'footer__cta-btn', 'footer__cta-bg']);
+    }
+
+    /* =============================
+    * 12. Heo Two Area
+    ============================= */
+    if (elementExists(['hero--style-2'])) {
+        fadeAnimation('fade-up', ['hero__stat', 'hero__nav', 'hero__img-wrapper']);
+        fadeAnimation('zoom-out', ['hero__bg-text'], {
+            to: {
+                duration: 2,
+                ease: "power1.inOut"
+            },
+            scrollTrigger: {
+                start: "top 80%"
+            }
+        });
+    }
+
+    /* =============================
+    * 12. About Two Area
+    ============================= */
+    if (elementExists(['about--style-2'])) {
+        fadeAnimation('fade-up', ['about__title', 'about__desc', 'about__solution-text', 'about__feature']);
+    }
+
+    /* =============================
+    * 12. Services Two Area
+    ============================= */
+    if (elementExists(['services--style-2'])) {
+        fadeAnimation('fade-up', ['services__subtitle', 'services__title', 'services__desc', 'stat__number', 'stat__text']);
+        fadeAnimation('fade-right', ['about__stat']);
+        fadeAnimation('zoom-in', ['about__image'], {
+            to: {
+                ease: "power1.inOut"
+            },
+            scrollTrigger: {
+                start: "top 80%"
+            }
+        });
+    }
+
+    /* =============================
+    * 12. Services Two Area
+    ============================= */
+    if (elementExists(['projects--style-2'])) {
+        fadeAnimation('fade-up', ['projects__subtitle', 'projects__title', 'projects__desc', 'projects__slider', 'slider__nav']);
+    }
+
+    /* =============================
+    * 12. Started One Area
+    ============================= */
+    if (elementExists(['started--style-1'])) {
+        fadeAnimation('fade-up', ['started__title', 'statistics__item']);
+    }
+
+    /* =============================
+    * 12. Work Process One Area
+    ============================= */
+    if (elementExists(['work-process--style-1'])) {
+        fadeAnimation('fade-up', ['work-process__title', 'work-process__desc', 'step-card']);
+    }
+
+    /* =============================
+    * 12. Team Two Area
+    ============================= */
+    if (elementExists(['team--style-2'])) {
+        fadeAnimation('fade-up', ['team__title', 'team__desc', 'team__right']);
+    }
+
+    /* =============================
+    * 12. testimonials Two Area
+    ============================= */
+    if (elementExists(['testimonials--style-2'])) {
+        fadeAnimation('fade-up', ['testimonials__subtitle', 'testimonials__title', 'testimonials__desc', 'testimonials__right']);
+    }
+
+    /* =============================
+    * 12. Services three Area
+    ============================= */
+    if (elementExists(['services--style-3'])) {
+        fadeAnimation('fade-left', ['services__top ']);
+
+        if (elementExists(['services__video-bottom'])) {
+            fadeAnimation('fade-up', ['services__video-text', 'services__video-btn']);
+        }
+    }
+
+    /* =============================
+    * 12. Blog Two Area
+    ============================= */
+    if (elementExists(['blog--style-2'])) {
+        fadeAnimation('fade-up', ['blog__title', 'blog__desc', 'blog__btn',]);
+    }
+    
+    /* =============================
+    * 12. Hero Three Area
+    ============================= */
+    if (elementExists(['blog--style-2'])) {
+        fadeAnimation('fade-up', ['blog__title', 'blog__desc', 'blog__btn',]);
+    }
 
 
 
+});
 
 

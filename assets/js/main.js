@@ -980,45 +980,37 @@ initCircularProgress();
 
 
 
-/* =============================
-* 20. Card Stagger
-============================= */
-gsap.registerPlugin(ScrollTrigger);
 
-function animateCards(className) {
-  const cards = document.querySelectorAll(className);
 
-  cards.forEach((card) => {
-    gsap.to(card, {
-      opacity: 1,
-      y: 0,
-      rotation: 0,
-      duration: 0.8,
-      ease: "back.out(1.7)",
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 90%',
-        end: 'bottom 60%',
-        toggleActions: 'play none none none',
-      }
-    });
-  });
 
-  ScrollTrigger.refresh();
-}
 
-document.addEventListener('DOMContentLoaded', function () {
-  animateCards('.services__card');
-  animateCards('.why-choose-us__card');
-  animateCards('.projects__card');
-  animateCards('.team__member');
-  animateCards('.testimonials__card');
-  animateCards('.testimonials__card'); //testimonial section
-  animateCards('.faq__item');
-  animateCards('.blog-card');
-  animateCards('.pricing__card');
+
+
+
+
+
+
+
+particlesJS("hero-particles", {
+  particles: {
+    number: { value: 60, density: { enable: true, value_area: 800 } },
+    color: { value: "#ffffff" },
+    shape: { type: "circle" },
+    opacity: { value: 0.5, random: true },
+    size: { value: 3, random: true },
+    line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+    move: { enable: true, speed: 2, direction: "none", out_mode: "out" }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: { enable: true, mode: "repulse" },
+      onclick: { enable: true, mode: "push" }
+    },
+    modes: {
+      repulse: { distance: 100, duration: 0.4 },
+      push: { particles_nb: 4 }
+    }
+  },
+  retina_detect: true
 });
-
-// opacity: 0;
-// transform: translateY(80px) rotate(1deg);
-// transition: transform 0.3s, box - shadow 0.3s, background 0.3s;
