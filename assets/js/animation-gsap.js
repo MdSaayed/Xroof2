@@ -43,6 +43,7 @@ function animateCards(className) {
     ScrollTrigger.refresh();
 }
 
+
 function animateCards(className) {
     const cards = document.querySelectorAll('.' + className);
 
@@ -456,12 +457,35 @@ document.addEventListener('DOMContentLoaded', function () {
     if (elementExists(['blog--style-2'])) {
         fadeAnimation('fade-up', ['blog__title', 'blog__desc', 'blog__btn',]);
     }
+
+
+
+
+
+
+
+
     
     /* =============================
     * 12. Hero Three Area
     ============================= */
     if (elementExists(['blog--style-2'])) {
         fadeAnimation('fade-up', ['blog__title', 'blog__desc', 'blog__btn',]);
+    }
+
+
+    /* =============================
+    * 12. About Three Area
+    ============================= */
+    if (elementExists(['about--style-3'])) {
+        fadeAnimation('fade-up', ['about__title', 'about__desc', 'about__btn-wrap','about__solution','about__img','year__img-wrap','about__stat']);
+    }
+
+    /* =============================
+    * 12. Hero Three Area
+    ============================= */
+    if (elementExists(['services--style-4'])) {
+        fadeAnimation('fade-up', ['services__title','services__desc','services__btn-all']);
     }
 
 

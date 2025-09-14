@@ -503,66 +503,6 @@ document.addEventListener('DOMContentLoaded', function () {
 /* =============================
 * 20. Offcanvas
 ============================= */
-// document.addEventListener('DOMContentLoaded', function () {
-//   const offcanvas = document.querySelector('.offcanvas');
-//   const offcanvasToggle = document.querySelector('#offcanvas-toggle');
-//   const offcanvasClose = document.querySelector('#offcanvas-close');
-//   const offcanvasNavMenu = document.querySelector('#offcanvas-nav-menu');
-//   const body = document.body;
-
-//   if (offcanvas) {
-//     offcanvasToggle.addEventListener('click', function () {
-//       offcanvas.classList.add('active');
-//       body.classList.add('offcanvas-active');
-//     });
-
-//     if (offcanvasClose) {
-//       offcanvasClose.addEventListener('click', function () {
-//         offcanvas.classList.remove('active');
-//         body.classList.remove('offcanvas-active');
-//       });
-//     }
-
-//     const parentLinks = offcanvasNavMenu.querySelectorAll('.nav__item-has-children > .nav__link');
-//     parentLinks.forEach(link => {
-//       link.addEventListener('click', function (e) {
-//         e.preventDefault();
-//         this.classList.toggle('active');
-
-//         const submenu = this.nextElementSibling;
-//         if (submenu) {
-//           submenu.classList.toggle('active');
-//         }
-//       });
-//     });
-
-//     document.addEventListener('click', function (e) {
-//       if (offcanvas.classList.contains('active') && !offcanvas.contains(e.target) && !offcanvasToggle.contains(e.target)) {
-//         offcanvas.classList.remove('active');
-//         body.classList.remove('offcanvas-active');
-//       }
-//     });
-
-//     window.addEventListener('resize', function () {
-//       if (window.innerWidth > 1200 && offcanvas.classList.contains('active')) {
-//         offcanvas.classList.remove('active');
-//         body.classList.remove('offcanvas-active');
-//       }
-
-//       // Reset dropdowns for desktop
-//       if (window.innerWidth > 1200) {
-//         document.querySelectorAll('.nav__item-has-children > .nav__link').forEach(link => {
-//           link.classList.remove('active');
-//         });
-//         document.querySelectorAll('.nav__submenu').forEach(submenu => {
-//           submenu.classList.remove('active');
-//         });
-//       }
-//     });
-//   }
-// });
-
-
 document.addEventListener('DOMContentLoaded', function () {
   const offcanvas = document.querySelector('.offcanvas');
   const offcanvasToggle = document.querySelector('#offcanvas-toggle');
@@ -640,8 +580,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
-
-
 
 /* =============================
 * 20. Info Panel
