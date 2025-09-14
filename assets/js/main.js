@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 500);
 });
 
-/* =======
-
 /* =============================
 * 2. Dynamically set BG
 ============================= */
@@ -109,10 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-
-
-
-
 
 /* =============================
 * 20. Pure Counter
@@ -578,12 +572,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (offcanvas) {
     const overlay = document.createElement('div');
-    overlay.classList.add('offcanvas-overlay'); 
+    overlay.classList.add('offcanvas-overlay');
     document.body.appendChild(overlay);
 
     const openOffcanvas = () => {
       offcanvas.classList.add('active');
-      overlay.classList.add('offcanvas-overlay---active');  
+      overlay.classList.add('offcanvas-overlay---active');
       body.classList.add('offcanvas-active');
     };
 
@@ -894,3 +888,137 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+/* =============================
+* 20. Progress Bar
+============================= */
+// function initCircularProgress() {
+//   const progressCircle = document.querySelector('.progress-circle-progress');
+//   const progressText = document.querySelector('.progress-circle-text');
+//   const radius = progressCircle.r.baseVal.value;
+//   const circumference = 2 * Math.PI * radius;
+
+//   // Set the stroke dasharray and initial offset
+//   progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+//   progressCircle.style.strokeDashoffset = circumference;
+
+//   // Update progress on scroll
+//   window.addEventListener('scroll', () => {
+//     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+//     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+//     const scrollPercent = (scrollTop / scrollHeight);
+
+//     // Calculate stroke offset
+//     const offset = circumference - (scrollPercent * circumference);
+//     progressCircle.style.strokeDashoffset = offset;
+
+//     // Update text
+//     progressText.textContent = `${Math.round(scrollPercent * 100)}%`;
+//   });
+// }
+
+function initCircularProgress() {
+  // Create container div
+  const container = document.createElement('div');
+  container.classList.add('progress-circle');
+
+  // Create SVG
+  const svgNS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('viewBox', '0 0 100 100');
+
+  // Background circle
+  const bgCircle = document.createElementNS(svgNS, 'circle');
+  bgCircle.setAttribute('class', 'progress-circle-bg');
+  bgCircle.setAttribute('cx', 50);
+  bgCircle.setAttribute('cy', 50);
+  bgCircle.setAttribute('r', 40);
+
+  // Progress circle
+  const progressCircle = document.createElementNS(svgNS, 'circle');
+  progressCircle.setAttribute('class', 'progress-circle-progress');
+  progressCircle.setAttribute('cx', 50);
+  progressCircle.setAttribute('cy', 50);
+  progressCircle.setAttribute('r', 40);
+
+  // Text
+  const progressText = document.createElementNS(svgNS, 'text');
+  progressText.setAttribute('class', 'progress-circle-text');
+  progressText.setAttribute('x', 50);
+  progressText.setAttribute('y', 50);
+  progressText.setAttribute('text-anchor', 'middle');
+  progressText.setAttribute('dy', '0.3em');
+  progressText.textContent = '0%';
+
+  // Append elements
+  svg.appendChild(bgCircle);
+  svg.appendChild(progressCircle);
+  svg.appendChild(progressText);
+  container.appendChild(svg);
+  document.body.appendChild(container);
+
+  // Setup circular stroke
+  const radius = progressCircle.r.baseVal.value;
+  const circumference = 2 * Math.PI * radius;
+  progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+  progressCircle.style.strokeDashoffset = circumference;
+
+  // Scroll event
+  window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / scrollHeight);
+
+    const offset = circumference - (scrollPercent * circumference);
+    progressCircle.style.strokeDashoffset = offset;
+
+    progressText.textContent = `${Math.round(scrollPercent * 100)}%`;
+  });
+}
+
+initCircularProgress();
+
+
+
+/* =============================
+* 20. Card Stagger
+============================= */
+gsap.registerPlugin(ScrollTrigger);
+
+function animateCards(className) {
+  const cards = document.querySelectorAll(className);
+
+  cards.forEach((card) => {
+    gsap.to(card, {
+      opacity: 1,
+      y: 0,
+      rotation: 0,
+      duration: 0.8,
+      ease: "back.out(1.7)",
+      scrollTrigger: {
+        trigger: card,
+        start: 'top 90%',
+        end: 'bottom 60%',
+        toggleActions: 'play none none none',
+      }
+    });
+  });
+
+  ScrollTrigger.refresh();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  animateCards('.services__card');
+  animateCards('.why-choose-us__card');
+  animateCards('.projects__card');
+  animateCards('.team__member');
+  animateCards('.testimonials__card');
+  animateCards('.testimonials__card'); //testimonial section
+  animateCards('.faq__item');
+  animateCards('.blog-card');
+  animateCards('.pricing__card');
+});
+
+// opacity: 0;
+// transform: translateY(80px) rotate(1deg);
+// transition: transform 0.3s, box - shadow 0.3s, background 0.3s;

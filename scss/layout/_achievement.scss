@@ -2,6 +2,10 @@
 @use '../utils/breakpoints' as bp;
 
 .achievement {
+    position: relative;
+    background-attachment: fixed !important;
+    overflow: hidden;
+    
     &__img-wrap {
         width: 100%;
         border-radius: 20px;

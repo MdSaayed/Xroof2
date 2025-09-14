@@ -5,6 +5,8 @@
 .why-choose-us {
     position: relative;
     z-index: 0;
+    background-attachment: fixed !important;
+    overflow: hidden;
 
     &::before {
         content: '';
@@ -40,6 +42,9 @@
     &__card {
         @extend %card1;
         position: relative;
+        opacity: 0;
+        transform: translateY(80px) rotate(1deg);
+        transition: transform 0.3s, box - shadow 0.3s, background 0.3s;
         z-index: 10;
 
         &-icon-wrap {

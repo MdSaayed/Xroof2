@@ -18,6 +18,9 @@
 
     &__item {
         height: auto !important;
+        opacity: 0;
+        transform: translateY(80px);
+        transition: transform 0.3s, box - shadow 0.3s, background 0.3s;
     }
 
     &__question-wrap {
@@ -84,7 +87,7 @@
             opacity: 1;
             padding: 1rem;
             height: auto;
-        } 
+        }
 
         .faq__icon {
             transform: rotate(180deg);

@@ -1,149 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects Filter Example</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-  <style>
-    /* BEM styles */
-    .projects__filter {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .projects__filter-item {
-      border: none;
-      padding: 0.6rem 1.2rem;
-      background: #f0f0f0;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 500;
-    }
-
-    .projects__filter-item--active {
-      background: #222;
-      color: #fff;
-    }
-
-    .projects__card {
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-      background: #fff;
-    }
-
-    .projects__card:hover {
-      transform: translateY(-5px);
-    }
-
-    .projects__card-thumb {
-      width: 100%;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .projects__card:hover .projects__card-thumb {
-      transform: scale(1.05);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSAP All Animations Demo</title>
+<style>
+body { margin:0; font-family:Arial,sans-serif; background:#111; color:#fff; overflow-x:hidden;}
+section{min-height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center; padding:50px;}
+h2{margin-bottom:20px;}
+.services__card{background:#e60000; padding:40px; border-radius:8px; min-width:200px; text-align:center; margin:10px; cursor:pointer;}
+.gallery img{width:100%; border-radius:8px; margin:10px; cursor:pointer;}
+.stats div{margin:20px;}
+.counter{font-size:40px; font-weight:bold; color:#e60000;}
+.mouse-parallax{width:500px; height:300px; background:url("https://picsum.photos/800/600?random=3") center/cover no-repeat; border-radius:12px;}
+.float-container{display:inline-block; perspective:1000px;}
+.float-item{display:inline-block; transform-origin:center center;}
+.char, .word{display:inline-block;}
+</style>
 </head>
 <body>
 
-<section class="projects projects--style-1 py-5">
-  <div class="projects__container container">
+<!-- Fade In -->
+<section class="fade-in-section">
+  <h2>fade-in</h2>
+  <div class="services__card fade-in">Fade In Card</div>
+</section>
 
-    <!-- Filter Buttons -->
-    <div class="projects__filter">
-      <button class="projects__filter-item projects__filter-item--active" data-filter="*">All</button>
-      <button class="projects__filter-item" data-filter="installation">INSTALLATION</button>
-      <button class="projects__filter-item" data-filter="repairing">REPAIRING</button>
-      <button class="projects__filter-item" data-filter="maintenance">MAINTENANCE</button>
-    </div>
+<!-- Fade Up -->
+<section class="fade-up-section">
+  <h2>fade-up</h2>
+  <div class="services__card fade-up">Fade Up Card</div>
+</section>
 
-    <!-- Grid -->
-    <div class="row g-4 mt-4 projects__grid">
-      <div class="col col-12 col-sm-6 col-xl-4">
-        <div class="projects__card" data-category="installation">
-          <div class="projects__card-thumb-wrap">
-            <img src="./assets/img/project/project-1.png" alt="Project Image 1" class="projects__card-thumb">
-          </div>
-          <div class="projects__card-title-wrap">
-            <a href="./project-details.html" class="projects__card-title-link">
-              <h2 class="projects__card-title">Roof Installation in Acme</h2>
-            </a>
-          </div>
-        </div>
-      </div>
+<!-- Fade Left -->
+<section class="fade-left-section">
+  <h2>fade-left</h2>
+  <div class="services__card fade-left">Fade Left Card</div>
+</section>
 
-      <div class="col col-12 col-sm-6 col-xl-4">
-        <div class="projects__card" data-category="repairing">
-          <div class="projects__card-thumb-wrap">
-            <img src="./assets/img/project/project-2.png" alt="Project Image 2" class="projects__card-thumb">
-          </div>
-          <div class="projects__card-title-wrap">
-            <a href="./project-details.html" class="projects__card-title-link">
-              <h2 class="projects__card-title">Roof Repairing Service</h2>
-            </a>
-          </div>
-        </div>
-      </div>
+<!-- Fade Right -->
+<section class="fade-right-section">
+  <h2>fade-right</h2>
+  <div class="services__card fade-right">Fade Right Card</div>
+</section>
 
-      <div class="col col-12 col-sm-6 col-xl-4">
-        <div class="projects__card" data-category="maintenance">
-          <div class="projects__card-thumb-wrap">
-            <img src="./assets/img/project/project-3.png" alt="Project Image 3" class="projects__card-thumb">
-          </div>
-          <div class="projects__card-title-wrap">
-            <a href="./project-details.html" class="projects__card-title-link">
-              <h2 class="projects__card-title">Roof Maintenance Program</h2>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- Slide Left -->
+<section class="slide-left-section">
+  <h2>slide-left</h2>
+  <div class="services__card slide-left">Slide Left Card</div>
+</section>
 
+<!-- Slide Right -->
+<section class="slide-right-section">
+  <h2>slide-right</h2>
+  <div class="services__card slide-right">Slide Right Card</div>
+</section>
+
+<!-- Slide Up -->
+<section class="slide-up-section">
+  <h2>slide-up</h2>
+  <div class="services__card slide-up">Slide Up Card</div>
+</section>
+
+<!-- Slide Down -->
+<section class="slide-down-section">
+  <h2>slide-down</h2>
+  <div class="services__card slide-down">Slide Down Card</div>
+</section>
+
+<!-- Zoom In -->
+<section class="zoom-in-section">
+  <h2>zoom-in</h2>
+  <div class="services__card zoom-in">Zoom In Card</div>
+</section>
+
+<!-- Zoom Out -->
+<section class="zoom-out-section">
+  <h2>zoom-out</h2>
+  <div class="services__card zoom-out">Zoom Out Card</div>
+</section>
+
+<!-- Parallax -->
+<section class="projects">
+  <h2>parallax</h2>
+  <div>Scroll to see Parallax Effect</div>
+</section>
+
+<!-- Hover Scale -->
+<section class="hover-scale-section">
+  <h2>hover-scale</h2>
+  <div class="services__card hover-scale">Hover Scale Card</div>
+</section>
+
+<!-- Hover Rotate -->
+<section class="hover-rotate-section">
+  <h2>hover-rotate</h2>
+  <div class="services__card hover-rotate">Hover Rotate Card</div>
+</section>
+
+<!-- BG Animate -->
+<section class="bg-animate-section">
+  <h2>bgAnimate</h2>
+  <div class="services__card bg-animate">Background Animate Card</div>
+</section>
+
+<!-- Text Reveal -->
+<section class="text-reveal-section">
+  <h2>textReveal</h2>
+  <h1 class="hero-title">Hello Text Reveal</h1>
+  <p class="hero-subtitle">Scroll Triggered Word Reveal</p>
+</section>
+
+<!-- Float Effect -->
+<section class="float-effect-section">
+  <h2>floatEffect</h2>
+  <div class="mouse-parallax float-container">
+    <div class="float-item">Floating Item</div>
   </div>
 </section>
 
-<!-- Isotope JS -->
-<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<!-- Counter -->
+<section class="counter-section">
+  <h2>counterAnim</h2>
+  <div class="stats">
+    <div>
+      <div class="counter">0</div>
+      <p>Projects</p>
+    </div>
+    <div>
+      <div class="counter">0</div>
+      <p>Customers</p>
+    </div>
+  </div>
+</section>
+
+<!-- Mouse Parallax -->
+<section class="mouse-parallax-section">
+  <h2>mouseParallax</h2>
+  <div class="mouse-parallax"></div>
+</section>
+
+<!-- Pulse -->
+<section class="pulse-section">
+  <h2>pulse</h2>
+  <div class="services__card pulse">Pulse Card</div>
+</section>
+
+<!-- Shake -->
+<section class="shake-section">
+  <h2>shake</h2>
+  <div class="services__card shake">Shake Card</div>
+</section>
+
+<!-- Spin -->
+<section class="spin-section">
+  <h2>spin</h2>
+  <div class="services__card spin">Spin Card</div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const grid = document.querySelector('.projects__grid');
-
-  // Initialize Isotope with itemSelector as the card
-  const iso = new Isotope(grid, {
-    itemSelector: '.projects__card',
-    layoutMode: 'fitRows',
-    transitionDuration: '0.6s',
-    getSortData: {
-      category: '[data-category]'
-    }
-  });
-
-  // Filter buttons
-  const filterButtons = document.querySelectorAll('.projects__filter-item');
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', function () {
-      // Toggle BEM active class
-      filterButtons.forEach(b => b.classList.remove('projects__filter-item--active'));
-      this.classList.add('projects__filter-item--active');
-
-      const filterValue = this.getAttribute('data-filter');
-      if (filterValue === '*') {
-        iso.arrange({ filter: '*' });
-      } else {
-        iso.arrange({ filter: `[data-category="${filterValue}"]` });
-      }
+// -----------------------
+// Reusable Animation Functions
+// -----------------------
+function animation(type, targets,duration=1){
+  if(typeof targets==="string") targets=[targets];
+  const presets={
+    "fade-in": {opacity:0,y:30},
+    "fade-up": {opacity:0,y:80},
+    "fade-left": {opacity:0,x:-80},
+    "fade-right": {opacity:0,x:80},
+    "slide-left": {x:-300,opacity:0},
+    "slide-right": {x:300,opacity:0},
+    "slide-up": {y:300,opacity:0},
+    "slide-down": {y:-300,opacity:0},
+    "zoom-in": {opacity:0,scale:0.8},
+    "zoom-out": {opacity:0,scale:1.2}
+  };
+  const config=presets[type]||presets["fade-in"];
+  targets.forEach(selector=>{
+    const elements=document.querySelectorAll("."+selector);
+    elements.forEach((el,index)=>{
+      gsap.from(el,{...config,duration:duration,delay:index*0.15,ease:"power3.out",
+        scrollTrigger:{trigger:el,start:"top 85%",toggleActions:"play none none none"}
+      });
     });
   });
-});
-</script>
+}
 
+function parallax(selector,axis="y",strength=100,duration=1.2){
+  const elements=document.querySelectorAll("."+selector);
+  elements.forEach(el=>{
+    gsap.fromTo(el,{[axis]:strength,opacity:0},{[axis]:0,opacity:1,ease:"power2.out",duration:duration,
+      scrollTrigger:{trigger:el,start:"top 85%",scrub:true}
+    });
+  });
+}
+
+function hoverEffect(selector,effect="scale",amount=1.1,duration=0.3){
+  const elements=document.querySelectorAll(selector);
+  elements.forEach(el=>{
+    el.addEventListener("mouseenter",()=>{gsap.to(el,{scale:effect==="scale"?amount:1,rotate:effect==="rotate"?5:0,duration:duration,ease:"power2.out"});});
+    el.addEventListener("mouseleave",()=>{gsap.to(el,{scale:1,rotate:0,duration:duration,ease:"power2.out"});});
+  });
+}
+
+function bgAnimate(selector,colors=["#e60000","#ff9900"],duration=2){
+  const elements=document.querySelectorAll(selector);
+  elements.forEach(el=>{gsap.to(el,{backgroundColor:colors[1],duration:duration,repeat:-1,yoyo:true,ease:"power1.inOut"});});
+}
+
+function textReveal(selector,type="char",duration=0.8){
+  const elements=document.querySelectorAll(selector);
+  elements.forEach(el=>{
+    const text=el.textContent;
+    el.innerHTML=type==="char"?text.split("").map(c=>`<span class="char">${c}</span>`).join(""):text.split(" ").map(w=>`<span class="word">${w}</span>`).join("");
+    gsap.from(el.querySelectorAll(type==="char"?".char":".word"),{y:50,opacity:0,stagger:0.05,duration:duration,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 80%"}});
+  });
+}
+
+function floatEffect(selector,distance=20,duration=2,rotate=false){
+  const elements=document.querySelectorAll(selector);
+  elements.forEach(el=>{gsap.to(el,{y:`+=${distance}`,rotation:rotate?10:0,duration:duration,repeat:-1,yoyo:true,ease:"sine.inOut"});});
+}
+
+function counterAnim(selector,values){
+  document.querySelectorAll(selector).forEach((counter,i)=>{
+    gsap.to(counter,{textContent:values[i]||1000,duration:2,snap:{textContent:1},ease:"power1.inOut",scrollTrigger:{trigger:counter,start:"top 80%"}});
+  });
+}
+
+function mouseParallax(selector,strength=30){
+  const parallaxBox=document.querySelector(selector);
+  document.addEventListener("mousemove",e=>{
+    const x=(window.innerWidth/2-e.pageX)/strength;
+    const y=(window.innerHeight/2-e.pageY)/strength;
+    gsap.to(parallaxBox,{x:x,y:y,duration:0.5,ease:"power2.out"});
+  });
+}
+
+// Extra animations
+function pulse(selector,duration=0.8,scale=1.1){gsap.to(selector,{scale:scale,duration:duration,repeat:-1,yoyo:true,ease:"power1.inOut"});}
+function shake(selector,duration=0.1,amount=10){gsap.to(selector,{x:`+=${amount}`,duration:duration,repeat:-1,yoyo:true,ease:"power1.inOut"});}
+function spin(selector,duration=2){gsap.to(selector,{rotation:360,duration:duration,repeat:-1,ease:"linear"});}
+
+// -----------------------
+// Apply Animations
+// -----------------------
+animation("fade-in","fade-in");
+animation("fade-up","fade-up");
+animation("fade-left","fade-left");
+animation("fade-right","fade-right");
+animation("slide-left","slide-left");
+animation("slide-right","slide-right");
+animation("slide-up","slide-up");
+animation("slide-down","slide-down");
+animation("zoom-in","zoom-in");
+animation("zoom-out","zoom-out");
+
+parallax("projects","y",150);
+
+hoverEffect(".hover-scale","scale",1.1);
+hoverEffect(".hover-rotate","rotate",5);
+
+bgAnimate(".bg-animate",["#e60000","#ff9900"]);
+
+textReveal(".hero-title","char");
+textReveal(".hero-subtitle","word");
+
+floatEffect(".float-item",20,3,false);
+
+counterAnim(".counter",[1500,1800]);
+
+mouseParallax(".mouse-parallax",30);
+
+pulse(".pulse");
+shake(".shake");
+spin(".spin");
+
+</script>
 </body>
 </html>

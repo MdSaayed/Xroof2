@@ -13,7 +13,9 @@
         padding: 1.5rem;
         border-radius: 10px;
         box-shadow: $card-shadow3;
-        transition: $btn-transition;
+        opacity: 0;
+        transform: translateY(80px) rotate(1deg);
+        transition: transform 0.3s, box - shadow 0.3s, background 0.3s;
 
         @include bp.respond-to(xs) {
             padding: 1.5rem 10px;
