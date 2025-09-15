@@ -587,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener("DOMContentLoaded", function () {
   const toggleBtn = document.getElementById("info-toggle");
   const infoPanel = document.getElementById("info-panel");
-  const closeBtn = infoPanel ? infoPanel.querySelector(".header__info-toggle") : null;
+  const closeBtn = document.getElementById("offcanvas-toggle-close");  
 
   if (toggleBtn && infoPanel) {
     // Toggle panel with main button

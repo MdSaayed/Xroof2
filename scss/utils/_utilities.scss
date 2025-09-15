@@ -154,6 +154,10 @@
     background: #FFF4F5 !important;
    }
 
+   .title-hidden{
+    display: none;
+   }
+
    //  For equal height
    .row>[class*="col"] {
      //  display: flex;

@@ -451,6 +451,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
+      * 12. Blog Details Content
+       ============================= */
+    if (elementExists(['blog-details__content'])) {
+        fadeAnimation('fade-up', ['blog-details__text','blog-details__highlight-title','blog-details__highlight-text','blog-details__list-item','blog-details__share']);
+        fadeAnimation('zoom-in',['blog-details__highlight-thumb'])
+    }
+
+    /* =============================
+      * 12. Contact Two
+       ============================= */
+    if (elementExists(['contact--style-2'])) {
+        fadeAnimation('fade-up', ['contact__title','contact__desc','contact__card','contact-form']);
+        fadeAnimation('zoom-in',['contact__map'])
+    }
+
+    /* =============================
       * 12. Sidebar Services
       ============================= */
     if (elementExists(['sidebar__services'])) {
@@ -458,7 +474,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-      * 12. Sidebar Services
+      * 12. Appointment Card
       ============================= */
     if (elementExists(['sidebar__appointment-card'])) {
         fadeAnimation('fade-up', ['sidebar__appointment-card', 'appointment-card__heading', 'appointment-card__description', 'appointment-card__actions']);
@@ -469,6 +485,20 @@ document.addEventListener('DOMContentLoaded', function () {
       ============================= */
     if (elementExists(['sidebar__project-details'])) {
         fadeAnimation('fade-up', ['sidebar__project-details','sidebar__title', 'project-details__item']);
+    }
+
+    /* =============================
+      * 12. Sidebar Post
+      ============================= */
+    if (elementExists(['sidebar__posts'])) {
+        fadeAnimation('fade-up', ['sidebar__posts','sidebar-post','sidebar__subtitle']);
+    }
+
+    /* =============================
+      * 12. Sidebar Post
+      ============================= */
+    if (elementExists(['gallery'])) {
+        fadeAnimation('zoom-in', ['sidebar__subtitle','gallery__item']);
     }
 });
 
