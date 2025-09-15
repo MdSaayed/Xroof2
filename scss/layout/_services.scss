@@ -3,6 +3,116 @@
 
 // Services Section Home One
 .services {
+    &--secondary {
+        & .services__container {
+            transform: translateY(280px);
+            margin-top: -300px;
+
+            &--global{
+                transform: none;
+                margin-top: 0;
+            }
+        }
+
+        & .services__card {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            border-radius: 10px;
+            background: transparent;
+            box-shadow: none;
+            flex-wrap: wrap;
+            position: relative;
+            height: 100%;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('../../assets/img/shape/services-card-square-shape.png') center center / cover no-repeat;
+                z-index: 10;
+            }
+
+            @include bp.respond-to(x2l) {
+                flex-direction: column;
+            }
+
+            &-icon-wrap {
+                margin-bottom: 2rem;
+                margin-left: 0;
+                border: none;
+
+                svg path {
+                    fill: $color-primary;
+
+                }
+            }
+
+            :hover &-icon-wrap {
+                background: none;
+            }
+
+            &-content {
+                flex: 1;
+                color: $color-white;
+                background: $color-black;
+                height: 100%;
+                padding: 2rem;
+                flex-grow: 1;
+
+                &>* {
+                    position: relative;
+                    z-index: 15;
+                }
+
+                @include bp.respond-to(x2l) {
+                    width: 100% !important;
+                }
+
+            }
+
+            &--explore {
+                .services__card-content {
+                    background: $color-primary;
+                }
+
+                .services__card-icon-wrap svg path {
+                    fill: $color-white;
+                }
+            }
+
+            &-title {
+                @include title-sm;
+                color: $color-white;
+                text-align: left;
+                margin-bottom: 1.5rem;
+            }
+
+            &-image {
+                flex-shrink: 0;
+                flex-grow: 1;
+                max-width: 300px;
+                max-height: 380px;
+                width: 100%;
+                position: relative;
+                z-index: 15;
+
+                @include bp.respond-to(x2l) {
+                    max-width: 100% !important;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+
     &--style-1 {
         .services {
             &__item {
@@ -312,21 +422,22 @@
                     @include bp.respond-to(xxl) {
                         padding-top: 2rem;
                         padding-bottom: 2rem;
-                         width: calc(100% - 6rem);
+                        width: calc(100% - 6rem);
                     }
 
                     @include bp.respond-to(lg) {
                         padding-top: 1.5rem;
                         padding-bottom: 1.5rem;
-                         width: calc(100% - 4rem);
+                        width: calc(100% - 4rem);
                     }
 
                     @include bp.respond-to(md) {
                         justify-content: center;
-                         width: calc(100% - 2rem);
+                        width: calc(100% - 2rem);
                     }
+
                     @include bp.respond-to(sm) {
-                         width: calc(100% - 1rem);
+                        width: calc(100% - 1rem);
                     }
                 }
 

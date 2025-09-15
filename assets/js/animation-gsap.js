@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
     * 3. Services One Area
     ============================= */
     if (elementExists(['services--style-1'])) {
-        fadeAnimation('fade-up', ['services__top-subtitle-wrap', 'services__top-title', 'services__top-desc', 'services__card','service__desc']);
+        fadeAnimation('fade-up', ['services__top-subtitle-wrap', 'services__top-title', 'services__top-desc', 'services__card', 'service__desc']);
     }
 
     /* =============================
@@ -433,7 +433,28 @@ document.addEventListener('DOMContentLoaded', function () {
     * 12. Blog Three Area
     ============================= */
     if (elementExists(['breadcrumbs'])) {
-        fadeAnimation('fade-up', ['breadcrumbs__title','breadcrumbs__list']);
+        fadeAnimation('fade-up', ['breadcrumbs__title', 'breadcrumbs__list']);
+    }
+
+    /* =============================
+      * 12. Sidebar Services
+      ============================= */
+    if (elementExists(['services-details__highlight-thumb'])) {
+        fadeAnimation('fade-up', ['services-details__highlight-thumb','services-details__highlight-title','services-details__text']);
+    }
+
+    /* =============================
+      * 12. Sidebar Services
+      ============================= */
+    if (elementExists(['sidebar__services'])) {
+        fadeAnimation('fade-up', ['sidebar__services', 'sidebar__title', 'sidebar__item']);
+    }
+
+    /* =============================
+      * 12. Sidebar Services
+      ============================= */
+    if (elementExists(['sidebar__appointment-card'])) {
+        fadeAnimation('fade-up', ['sidebar__appointment-card', 'appointment-card__heading', 'appointment-card__description', 'appointment-card__actions']);
     }
 });
 

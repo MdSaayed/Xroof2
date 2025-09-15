@@ -97,4 +97,29 @@
             transform: translateX(-50%) scaleY(0);
         }
     }
+
+    &--style-2{
+        background: transparent;
+
+        .faq{
+            &__title{
+                text-align: left;
+                margin-left: 0;
+            }
+
+             &__question-wrap {
+                background: $color-light-pink;
+             }
+
+             &__question {
+                color:$color-primary;
+             }
+
+             &__list{
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;;
+             }
+        }
+    }
 }

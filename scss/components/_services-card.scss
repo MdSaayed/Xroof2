@@ -9,11 +9,12 @@
         }
 
         &-title {
-            @include card-title; 
+            @include card-title;
         }
 
         &-desc {
             @include card-text;
         }
     }
-} 
+}
+
