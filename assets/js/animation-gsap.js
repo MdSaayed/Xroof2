@@ -437,10 +437,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-      * 12. Sidebar Services
-      ============================= */
+      * 12. Services Details
+       ============================= */
     if (elementExists(['services-details__highlight-thumb'])) {
         fadeAnimation('fade-up', ['services-details__highlight-thumb','services-details__highlight-title','services-details__text']);
+    }
+
+    /* =============================
+      * 12. Project Details
+       ============================= */
+    if (elementExists(['project-details'])) {
+        fadeAnimation('fade-up', ['project-details__highlight-title','project-details__text','project-details__highlight-thumb','project-details__quote']);
     }
 
     /* =============================
@@ -455,6 +462,13 @@ document.addEventListener('DOMContentLoaded', function () {
       ============================= */
     if (elementExists(['sidebar__appointment-card'])) {
         fadeAnimation('fade-up', ['sidebar__appointment-card', 'appointment-card__heading', 'appointment-card__description', 'appointment-card__actions']);
+    }
+
+    /* =============================
+      * 12. Sidebar Project Details
+      ============================= */
+    if (elementExists(['sidebar__project-details'])) {
+        fadeAnimation('fade-up', ['sidebar__project-details','sidebar__title', 'project-details__item']);
     }
 });
 
