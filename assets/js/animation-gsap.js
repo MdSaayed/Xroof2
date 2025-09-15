@@ -11,98 +11,17 @@ JS INDEX
 ===================
 
 1. Reuseable Animation
-2. 
+2. Card Stagger
+3. Hero One Area
+4. 
 
 
 ------------------------------------------------------------------*/
-
-/* =============================
-* 20. Card Stagger
-============================= */
 gsap.registerPlugin(ScrollTrigger);
-
-function animateCards(className) {
-    const cards = document.querySelectorAll('.' + className);
-
-    cards.forEach((card) => {
-        gsap.to(card, {
-            opacity: 1,
-            y: 0,
-            rotation: 0,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 90%',
-                end: 'bottom 60%',
-                toggleActions: 'play none none none',
-            }
-        });
-    });
-
-    ScrollTrigger.refresh();
-}
-
-
-function animateCards(className) {
-    const cards = document.querySelectorAll('.' + className);
-
-    // Mobile-friendly initial state
-    gsap.set(cards, {
-        opacity: 0,
-        y: 80,
-        rotation: 1
-    });
-
-    cards.forEach((card) => {
-        gsap.to(card, {
-            opacity: 1,
-            y: 0,
-            rotation: 0,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 90%',
-                end: 'bottom 60%',
-                toggleActions: 'play none none none',
-                invalidateOnRefresh: true // ✅ mobile orientation/resize fix
-            }
-        });
-    });
-}
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    animateCards('services__card');
-    animateCards('why-choose-us__card');
-    animateCards('projects__card');
-    animateCards('team__member');
-    animateCards('testimonials__card');
-    animateCards('faq__item');
-    animateCards('blog-card');
-    animateCards('pricing__card');
-    animateCards('services__item');
-    animateCards('blog__card');
-
-    setTimeout(() => ScrollTrigger.refresh(), 300);
-
-    window.addEventListener('resize', () => ScrollTrigger.refresh());
-    window.addEventListener('orientationchange', () => ScrollTrigger.refresh());
-});
-
-
-// opacity: 0;
-// transform: translateY(80px) rotate(1deg);
-// transition: transform 0.3s, box - shadow 0.3s, background 0.3s;
-
-
 
 /* =============================
 * 1. Reuseable Animation
 ============================= */
-
-
 function fadeAnimation(type, selectors, options = {}) {
     const selectorArray = Array.isArray(selectors) ? selectors : [selectors];
 
@@ -176,98 +95,63 @@ function elementMove(selectors) {
     });
 }
 
+function animateCards(className) {
+    const cards = document.querySelectorAll('.' + className);
+    if (!cards || cards.length === 0) return;
 
-
-
-
-
-
-
-function parallax(selector, axis = "y", strength = 100, duration = 1.2) {
-    const elements = document.querySelectorAll("." + selector);
-    elements.forEach(el => {
-        gsap.fromTo(el, { [axis]: strength, opacity: 0 }, {
-            [axis]: 0, opacity: 1, ease: "power2.out", duration: duration,
-            scrollTrigger: { trigger: el, start: "top 85%", scrub: true }
-        });
+    gsap.set(cards, {
+        opacity: 0,
+        y: 80,
     });
-}
 
-function hoverEffect(selector, effect = "scale", amount = 1.1, duration = 0.3) {
-    const elements = document.querySelectorAll(selector);
-    elements.forEach(el => {
-        el.addEventListener("mouseenter", () => { gsap.to(el, { scale: effect === "scale" ? amount : 1, rotate: effect === "rotate" ? 5 : 0, duration: duration, ease: "power2.out" }); });
-        el.addEventListener("mouseleave", () => { gsap.to(el, { scale: 1, rotate: 0, duration: duration, ease: "power2.out" }); });
-    });
-}
-
-function textRevealNested(selector, type = "char", duration = 0.8) {
-    const elements = document.querySelectorAll(selector);
-
-    elements.forEach(el => {
-        function wrapText(node) {
-            node.childNodes.forEach(child => {
-                if (child.nodeType === Node.TEXT_NODE && child.textContent.trim() !== "") {
-                    const text = child.textContent;
-                    let wrapped = "";
-                    if (type === "char") {
-                        wrapped = text.split("").map(c => c === " " ? "&nbsp;" : `<span class="char">${c}</span>`).join("");
-                    } else {
-                        wrapped = text.split(" ").map(w => `<span class="word">${w}&nbsp;</span>`).join("");
-                    }
-                    const temp = document.createElement("span");
-                    temp.innerHTML = wrapped;
-                    child.parentNode.replaceChild(temp, child);
-                } else if (child.nodeType === Node.ELEMENT_NODE) {
-                    wrapText(child); // recurse into nested span
-                }
-            });
-        }
-        wrapText(el);
-
-        const targets = el.querySelectorAll(".char, .word");
-        gsap.from(targets, {
-            y: 50,
-            opacity: 0,
-            stagger: 0.05,
-            duration: duration,
-            ease: "power3.out",
+    cards.forEach((card) => {
+        gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            rotation: 0,
+            duration: 0.5,
+            ease: "none",
             scrollTrigger: {
-                trigger: el,
-                start: "top 80%"
-            }
+                trigger: card,
+                start: 'top 95%',
+                toggleActions: 'play none none none',
+                markers: false
+            },
+            onComplete: () => card.classList.add('animated')
         });
     });
+
+    ScrollTrigger.refresh();
 }
 
+/* =============================
+* 2. Card Stagger
+============================= */
+document.addEventListener('DOMContentLoaded', function () {
+    [
+        'services__card',
+        'why-choose-us__card',
+        'projects__card',
+        'team__member',
+        'testimonials__card',
+        'faq__item',
+        'blog-card',
+        'pricing__card',
+        'services__item',
+        'blog__card',
+        'process-item',
+        'blog__list-item'
+    ].forEach(className => animateCards(className));
 
-function floatEffect(selector, distance = 20, duration = 2, rotate = false) {
-    const elements = document.querySelectorAll(selector);
-    elements.forEach(el => { gsap.to(el, { y: `+=${distance}`, rotation: rotate ? 10 : 0, duration: duration, repeat: -1, yoyo: true, ease: "sine.inOut" }); });
-}
+    setTimeout(() => ScrollTrigger.refresh(), 300);
 
-function counterAnim(selector, values) {
-    document.querySelectorAll(selector).forEach((counter, i) => {
-        gsap.to(counter, { textContent: values[i] || 1000, duration: 2, snap: { textContent: 1 }, ease: "power1.inOut", scrollTrigger: { trigger: counter, start: "top 80%" } });
-    });
-}
+    window.addEventListener('resize', () => ScrollTrigger.refresh());
+    window.addEventListener('orientationchange', () => ScrollTrigger.refresh());
+});
 
-function mouseParallax(selector, strength = 30) {
-    const parallaxBox = document.querySelector(selector);
-    document.addEventListener("mousemove", e => {
-        const x = (window.innerWidth / 2 - e.pageX) / strength;
-        const y = (window.innerHeight / 2 - e.pageY) / strength;
-        gsap.to(parallaxBox, { x: x, y: y, duration: 0.5, ease: "power2.out" });
-    });
-}
-
-// Extra animations
-function pulse(selector, duration = 0.8, scale = 1.1) { gsap.to(selector, { scale: scale, duration: duration, repeat: -1, yoyo: true, ease: "power1.inOut" }); }
-function shake(selector, duration = 0.1, amount = 10) { gsap.to(selector, { x: `+=${amount}`, duration: duration, repeat: -1, yoyo: true, ease: "power1.inOut" }); }
-function spin(selector, duration = 2) { gsap.to(selector, { rotation: 360, duration: duration, repeat: -1, ease: "linear" }); }
-
-
-
+/* =============================
+* 20. Fade Animation
+============================= */
 document.addEventListener('DOMContentLoaded', function () {
 
     /* =============================
@@ -458,38 +342,99 @@ document.addEventListener('DOMContentLoaded', function () {
         fadeAnimation('fade-up', ['blog__title', 'blog__desc', 'blog__btn',]);
     }
 
-
-
-
-
-
-
-
-    
     /* =============================
     * 12. Hero Three Area
     ============================= */
-    if (elementExists(['blog--style-2'])) {
-        fadeAnimation('fade-up', ['blog__title', 'blog__desc', 'blog__btn',]);
-    }
+    if (elementExists(['hero--style-3'])) {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
 
+        // Top area
+        tl.from(".hero__subtitle", { y: -30, opacity: 0 })
+            .from(".hero__review-area", { y: -30, opacity: 0 }, "-=0.5");
+
+        // Headings
+        tl.from(".hero__title", { scale: 0.8, opacity: 0, stagger: 0.3 }, "-=0.3");
+
+        // Description + Button
+        tl.from(".hero__desc", { y: 40, opacity: 0 }, "-=0.5")
+            .from(".hero__btn", { y: 40, opacity: 0 }, "-=0.7");
+
+        // Video thumbnail
+        tl.from(".hero__video-wrap", { scale: 0.7, opacity: 0, duration: 1.2 }, "-=0.5");
+
+        // Social icons stagger
+        tl.fromTo(
+            ".hero__socials-link",
+            { x: 40, opacity: 0 },   // starting state
+            { x: 0, opacity: 1, stagger: 0.2, duration: 0.6 }, // ending state
+            "-=0.5"
+        );
+    }
 
     /* =============================
     * 12. About Three Area
     ============================= */
     if (elementExists(['about--style-3'])) {
-        fadeAnimation('fade-up', ['about__title', 'about__desc', 'about__btn-wrap','about__solution','about__img','year__img-wrap','about__stat']);
+        fadeAnimation('fade-up', ['about__title', 'about__desc', 'about__btn-wrap', 'about__solution', 'about__img', 'year__img-wrap', 'about__stat']);
     }
 
     /* =============================
-    * 12. Hero Three Area
+    * 12. Services Four Area
     ============================= */
     if (elementExists(['services--style-4'])) {
-        fadeAnimation('fade-up', ['services__title','services__desc','services__btn-all']);
+        fadeAnimation('fade-up', ['services__title', 'services__desc', 'services__btn-all']);
     }
 
+    /* =============================
+    * 12. Project Three Area
+    ============================= */
+    if (elementExists(['projects--style-3'])) {
+        fadeAnimation('fade-up', ['projects__title', 'projects__desc', 'projects__header-btn']);
+        fadeAnimation('zoom-in', ['projects__item']);
+    }
 
+    /* =============================
+    * 12. Work Process Two Area
+    ============================= */
+    if (elementExists(['work-process--style-2'])) {
+        fadeAnimation('fade-up', ['work-process__title']);
+        fadeAnimation('zoom-in', ['work-process__img-wrap']);
+    }
 
+    /* =============================
+    * 12. Team Three Area
+    ============================= */
+    if (elementExists(['team--style-3'])) {
+        fadeAnimation('fade-up', ['team__title', 'team__desc', 'team__header-right', 'team-slider']);
+    }
+
+    /* =============================
+    * 12. Team Three Area
+    ============================= */
+    if (elementExists(['award--style-1'])) {
+        fadeAnimation('fade-up', ['award__subtitle', 'award__title', 'award__desc', 'award__btn', 'award__list']);
+    }
+
+    /* =============================
+    * 12. Contact One Area
+    ============================= */
+    if (elementExists(['contact--style-1'])) {
+        fadeAnimation('fade-up', ['contact__title', 'contact__form-wrap', 'contact__info-title', 'contact__info-text', 'info-card']);
+    }
+
+    /* =============================
+    * 12. Blog Three Area
+    ============================= */
+    if (elementExists(['blog--style-3'])) {
+        fadeAnimation('fade-up', ['blog__title', 'blog__desc']);
+    }
+
+    /* =============================
+    * 12. Blog Three Area
+    ============================= */
+    if (elementExists(['breadcrumbs'])) {
+        fadeAnimation('fade-up', ['breadcrumbs__title','breadcrumbs__list']);
+    }
 });
 
 

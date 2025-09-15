@@ -146,6 +146,14 @@
      align-items: center;
    }
 
+   .mw-510 {
+     max-width: 510px !important;
+   }
+
+   .bg-light-pink{
+    background: #FFF4F5 !important;
+   }
+
    //  For equal height
    .row>[class*="col"] {
      //  display: flex;
@@ -207,8 +215,8 @@
 
 
 
- 
-   #hero-particles{
+
+   #hero-particles {
      position: absolute;
      top: 0;
      left: 0;

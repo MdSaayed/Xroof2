@@ -1,284 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GSAP All Animations Demo</title>
-<style>
-body { margin:0; font-family:Arial,sans-serif; background:#111; color:#fff; overflow-x:hidden;}
-section{min-height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center; padding:50px;}
-h2{margin-bottom:20px;}
-.services__card{background:#e60000; padding:40px; border-radius:8px; min-width:200px; text-align:center; margin:10px; cursor:pointer;}
-.gallery img{width:100%; border-radius:8px; margin:10px; cursor:pointer;}
-.stats div{margin:20px;}
-.counter{font-size:40px; font-weight:bold; color:#e60000;}
-.mouse-parallax{width:500px; height:300px; background:url("https://picsum.photos/800/600?random=3") center/cover no-repeat; border-radius:12px;}
-.float-container{display:inline-block; perspective:1000px;}
-.float-item{display:inline-block; transform-origin:center center;}
-.char, .word{display:inline-block;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed GSAP Stagger Animation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .services__bottom {
+            position: relative;
+            z-index: 2;
+        }
+
+        .service__bottom-container {
+            overflow: visible !important;
+        }
+
+        .services__card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 100%;
+            opacity: 0;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            /* Remove transform from initial state to prevent layout issues */
+            transform: translateY(0) rotate(0);
+            will-change: transform, opacity; /* Optimize performance */
+        }
+
+        .services__card.animated {
+            opacity: 1;
+        }
+
+        .services__card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .services__card-icon-wrap {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .services__card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #6dd5fa;
+        }
+
+        .services__card-text {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .services__card-btn {
+            display: inline-flex;
+            align-items: center;
+            color: #EE212B;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .services__card-btn:hover {
+            transform: translateX(5px);
+        }
+
+        .services__card-btn svg {
+            margin-left: 8px;
+        }
+
+        /* Circular Progress Indicator */
+        .progress-circle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
+            z-index: 100;
+        }
+
+        .progress-circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.2);
+            stroke-width: 4;
+        }
+
+        .progress-circle-progress {
+            fill: none;
+            stroke: #ff7e5f;
+            stroke-width: 4;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            transition: stroke-dashoffset 0.2s;
+        }
+
+        .progress-circle-text {
+            font-size: 16px;
+            font-weight: bold;
+            fill: white;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ff7e5f;
+            text-align: center;
+        }
+        
+        /* Animation container to prevent layout shifts */
+        .animation-container {
+            position: relative;
+            overflow: visible;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Our Roofing Services</h1>
+        <p>We provide high-quality roofing services with years of experience and expertise. Scroll down to see our services animate into view.</p>
+        
+        <div class="services__bottom">
+            <div class="service__bottom-container container">
+                <div class="row g-4 animation-container">
+                    <!-- Card 1 -->
+                    <div class="col col-12 col-sm-6 col-xl-4 col-xxl-3">
+                        <div class="services__card">
+                            <div class="services__card-icon-wrap">
+                                <svg width="28" height="26" viewBox="0 0 28 26" fill="none">
+                                    <g clip-path="url(#clip0_99_689)">
+                                        <path d="M27.7721 9.98306L26.672 8.88299C26.3682 8.57917 25.8758 8.57917 25.572 8.88299L25.0222 9.43278L23.6173 8.02792C23.891 6.99202 23.6348 5.84528 22.8225 5.03299L20.6229 2.83334C17.5856 -0.203886 12.6608 -0.203886 9.62314 2.83334L14.0229 5.03299V5.94445C14.0229 6.76938 14.3506 7.56077 14.9344 8.1441L17.3231 10.5329C18.1354 11.3451 19.2822 11.6013 20.3181 11.3276L21.7229 12.7325L21.1731 13.2823C20.8693 13.5861 20.8693 14.0785 21.1731 14.3824L22.2732 15.4824C22.577 15.7863 23.0695 15.7863 23.3733 15.4824L27.7731 11.0826C28.0759 10.7793 28.0759 10.2869 27.7721 9.98306ZM13.8343 9.24417C13.6545 9.06431 13.5018 8.86549 13.3555 8.66327L0.954805 20.241C-0.288181 21.4018 -0.321723 23.3613 0.88043 24.564C2.08258 25.7666 4.04258 25.7331 5.20342 24.4896L16.7792 12.0903C16.5867 11.9489 16.3952 11.805 16.2231 11.6329L13.8343 9.24417Z" fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_99_689">
+                                            <rect width="28" height="24.8889" fill="white" transform="translate(0 0.55542)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
 
-<!-- Fade In -->
-<section class="fade-in-section">
-  <h2>fade-in</h2>
-  <div class="services__card fade-in">Fade In Card</div>
-</section>
+                            <h2 class="services__card-title">Quality Workmanship</h2>
+                            <p class="services__card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
+                                mattis, pulvinar dapibus leo.
+                            </p>
 
-<!-- Fade Up -->
-<section class="fade-up-section">
-  <h2>fade-up</h2>
-  <div class="services__card fade-up">Fade Up Card</div>
-</section>
+                            <a href="#" class="services__card-btn">
+                                Read More
+                                <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
+                                    <path d="M9.88727 3.65509C10.0778 3.84558 10.0778 4.15442 9.88727 4.34491L6.78304 7.44914C6.59255 7.63963 6.28371 7.63963 6.09322 7.44914C5.90273 7.25865 5.90273 6.9498 6.09322 6.75931L8.85253 极L6.09322 1.24069C5.90273 1.0502 5.902极3 0.741349 6.09322 0.550858C6.28371 0.360367 6.59255 0.360367 6.78304 0.550858L9.88727 3.65509ZM9.54236 4V4.48778L0.45765 4.48778V4V3.51222L9.54236 3.51222V4Z" fill="#EE212B" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
 
-<!-- Fade Left -->
-<section class="fade-left-section">
-  <h2>fade-left</h2>
-  <div class="services__card fade-left">Fade Left Card</div>
-</section>
+                    <!-- Card 2 -->
+                    <div class="col col-12 col-sm-6 col-xl-4 col-xxl-3">
+                        <div class="services__card">
+                            <div class="services__card-icon-wrap">
+                                <svg width="28" height="26" viewBox="0 0 28 26" fill="none">
+                                    <g clip-path="url(#clip0_99_689)">
+                                        <path d="M27.7721 9.98306L26.极72 8.88299C26.3682 8.57917 25.8758 8.57917 25.572 8.88299L25.0222 9.43278L23.6173 8.02792C23.891 6.99202 23.6348 5.84528 22.8225 5.03299L20.6229 2.83334C17.5856 -0.203886 12.6608 -0.203886 极.62314 2.83334L14.0229 5.03299V5.94445C14.0229 6.76938 14.3506 7.56077 14.9344 8.1441L17.3231 10.5329C18.1354 11.3451 19.2822 11.6013 20.3181 11.3276L21.7229 12.7325L21.1731 13.2823C20.8693 13.5861 20.8693 14.0785 21.1731 14.3824L22.2732 15.4824C22.577 15.7863 23.0695 15.7863 23.3733 15.4824L27.7731 11.0826C28.0759 10.7793 28.0759 10.2869 27.7721 9.98306ZM13.8343 9.24417C13.6545 9.06431 13.5018 8.86549 13.3555 8.66327L0.954805 20.241C-0.288181 21.4018 -0.321723 23.3613 0.88043 24.564C2.08258 25.766极 4.04258 25.7331 5.20342 24.4896L16.7792 12.0903C极6.5867 11.9489 16.3952 11.805 16.2231 11.6329L13.8343 9.24417Z" fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_99_689">
+                                            <rect width="28" height="24.8889" fill="white" transform="translate(0 0.55542)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
 
-<!-- Fade Right -->
-<section class="fade-right-section">
-  <h2>fade-right</h2>
-  <div class="services__card fade-right">Fade Right Card</div>
-</section>
+                            <h2 class="services__card-title">Roof Replacement</h2>
+                            <p class="services__card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
+                                mattis, pulvinar dapibus leo.
+                            </p>
 
-<!-- Slide Left -->
-<section class="slide-left-section">
-  <h2>slide-left</h2>
-  <div class="services__card slide-left">Slide Left Card</div>
-</section>
+                            <a href="#" class="services__card-btn">
+                                Read More
+                                <svg width="11" height="8" viewBox="0 极 11 8" fill="none">
+                                    <path d="M9.88727 3.65509C10.0778 3.84558 10.0778 4.15442 9.88727 4.34491L6.78304 7.44914C6.59255 7.63963 6.28371 7.63963 6.09322 7.449极4C5.90273 7.25865 5.90273 6.9498 6.09322 6.75931L8.85253 4L6.09322 1.24069C5.90273 1.0502 5.90273 0.741349 6.09322 0.550858C6.28371 0.360367 6.59255 0.360367 6.78304 0.550858L9.88727 3.65509ZM9.54236 4V4.48778L0.45765 4.48778V4V3.51222L9.54236 3.51222V4Z" fill="#EE212B" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
 
-<!-- Slide Right -->
-<section class="slide-right-section">
-  <h2>slide-right</h2>
-  <div class="services__card slide-right">Slide Right Card</div>
-</section>
+                    <!-- Card 3 -->
+                    <div class="col col-12 col-sm-6 col-xl-4 col-xxl-3">
+                        <div class="services__card">
+                            <div class="services__card-icon-wrap">
+                                <svg width="28" height="26" viewBox="0 0 28 26" fill="none">
+                                    <g clip-path="url(#clip0_99_689)">
+                                        <path d="M27.7721 9.98306L26.672 8.88299C26.3682 8.57917 25.8758 8.57917 25.572 8.88299L25.0222 9.43278L23.6173 8.02792C23.891 6.99202 23.6348 5.84528 22.8225 5.03299L20.6229 2.83334极C17.5856 -0.203886 12.6608 -0.203886 9.62314 2.83334L14.0229 5.极3299V5.94445C14.0229 6.76938 14.3506 7.56077 14.9344 8.1441L17.3231 10.5329C18.1354 11.3451 19.2822 11.6013 20.3181 11.3276L21.7229 12.7325L21.1731 13.2823C20.8693 13.5861 20.8693 14.0785 21.1731 14.3824L22.2732 15.4824C22.577 15.7863 23.0695 15.7863 23.3733 15.4824L27.7731 11.0826C28.0759 10.7793 28.0759 10.2869 27.7721 9.98306ZM13.8343 9.24417C13.6545 9.06431 13.5018 8.86549 13.3555 8.66327L0.954805 20.241C-0.288181 21.4018 -0.321723 23.3613 0.88043 24.564C2.08258 25.7666 4.04258 25.7331 5.20342 24.4896L16.7792 12.0903C16.5867 11.9489 16.3952 11.805 16.2231 11.6329L13.8343 9.24417Z" fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_99_689">
+                                            <rect width="28" height="24.8889" fill="white" transform="translate(0 0.55542)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
 
-<!-- Slide Up -->
-<section class="slide-up-section">
-  <h2>slide-up</h2>
-  <div class="services__card slide-up">Slide Up Card</div>
-</section>
+                            <h2 class="services__card-title">Emergency Roof Repair</h2>
+                            <p class="services__card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
+                                mattis, pulvinar dapibus leo.
+                            </p>
 
-<!-- Slide Down -->
-<section class="slide-down-section">
-  <h2>slide-down</h2>
-  <div class="services__card slide-down">Slide Down Card</div>
-</section>
+                            <a href="#" class="services__card-btn">
+                                Read More
+                                <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
+                                    <path d="M9.88727 3.65509C10.0778 3.84558 10.0778 4.15442 9.88727 4.34491L6.78304 7.44914C6.59255 7.63963 6.28371 7.63963 6.09322 7.44914C5.90273 7.25865 5.90273 6.9498 6.09322 6.75931L8.85253 4L6.09322 1.24069C5.90273 1.0502 5.90273 0.741349 6.09322 0.550858C6.28371 0.360367 6.59255 0.360367 极.78304 0.550858L9.88727 3.65509ZM9.54236 4V4.48778L0.45765 4.48778V4V3.51222L9.54236 3.51222V4极" fill="#EE212B" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
 
-<!-- Zoom In -->
-<section class="zoom-in-section">
-  <h2>zoom-in</h2>
-  <div class="services__card zoom-in">Zoom In Card</div>
-</section>
+                    <!-- Card 4 -->
+                    <div class="col col-12 col-sm-6 col-xl-4 col-xxl-3">
+                        <div class="services__card">
+                            <div class="services__card-icon-wrap">
+                                <svg width="28" height="26" viewBox="0 0 28 26" fill="none">
+                                    <g clip-path="url(#clip0_99_689)">
+                                        <path d="M27.7721 9.98306L26.672 8.88299C26.3682 8.57917 25.8758 8.57917 25.572 8.88299L25.0222 9.43278L23.6173 8.02792C23.891 6.99202 23.6348 5.84528 22.8225 5.03299L20.6229 2.83334C17.5856 -0.203886 12.6608 -0.203886 9.62314 2.83334L14.0229 5.03299V5.94445C14.0229 6.76938 14.3506 7.56077 14.9344 极.1441L17.3231 10.5329C18.1354 11.3451 19.2822 11.6013 20.3181 11.3276L21.7229 12.7325L21.1731 13.2823C20.8693 13.5861 20.8693 14.0785 21.1731 14.3824L22.2732 15.4824C22.577 15.7863 23.0695 15.7863 23.3733 15.4824L27.7731 11.0826C28.0759 10.7793 28.0759 10.2869 27.7721 9.98306ZM13.8343 9.24417极C13.6545 9.06431 13.5018 8.86549 13.3555 8.66327L0.954805 20.241C-0.288181 21.4018 -0.321723 23.3613 0.88043 24.564C2.08258 25.7666 4.04258 25.7331 5.20342 24.4896L16.7792 12.0903C16.5867 11.9489 16.3952 11.805 16.2231 11.6329L13.8343 9.24417Z" fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_99极_689">
+                                            <rect width="28" height="24.8889" fill="white" transform="translate(0 0.55542)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
 
-<!-- Zoom Out -->
-<section class="zoom-out-section">
-  <h2>zoom-out</h2>
-  <div class="services__card zoom-out">Zoom Out Card</div>
-</section>
+                            <h2 class="services__card-title">Leak Detection & Repair</h2>
+                            <p class="services__card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
+                                mattis, pulvinar dapibus leo.
+                            </p>
 
-<!-- Parallax -->
-<section class="projects">
-  <h2>parallax</h2>
-  <div>Scroll to see Parallax Effect</div>
-</section>
+                            <a href="#" class="services__card-btn">
+                                Read More
+                                <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
+                                    <path d="M9.88727 3.65509C10.0778 3.84558 10.0778 4.15442 9.88727 4.34491L6.78304 7.44914C6.59255 7.63963 6.28371 7.63963 6.09322 7.44914C5.90273 7.25865 5.90273 6.9498 6.09322 6.75931L8.85253 4L6.09322 1.24069C5.90273 1.0502 5.90273 0.741349 6.09322 0.550858C6.28371 0.360367 6.59255 0.360367 6.78304 0.550858L9.88727 3.65509ZM9.54236 4V4.48778L0.45765 4.48778V4V3.51222L9.54236 3.51222V4Z" fill="#EE212B" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
 
-<!-- Hover Scale -->
-<section class="hover-scale-section">
-  <h2>hover-scale</h2>
-  <div class="services__card hover-scale">Hover Scale Card</div>
-</section>
+                    <!-- Card 5 -->
+                    <div class="col col-12 col-sm-6 col-xl-4 col-xxl-3">
+                        <div class="services__card">
+                            <div class="services__card-icon-wrap">
+                                <svg width="28" height="26" viewBox="0 0 28 极6" fill极="none">
+                                    <g clip-path="url(#clip0_99_689)">
+                                        <path d="M27.7721 9.98306L26.672 8.88299C26.3682 8.57917 25.8758 8.57917 25.572 8.88299L25.0222 9.43278L23.6173 8.02792C23.891 6.99202 23.6348 5.84528 22.8225 5.03299L20.6229 2.83334C17.5856 -0.203886 12.6608 -0.203886 9.62314 2.83334L14.0229 5.03299V5.94445C14.0229 6.76938 14.3506 7.56077 14.9344 8.1441L17.3231 10.5329C18.1354 11.3451 19.2822 11.6013 20.3181 11.3276L21.7229 12.7325L21.1731 13.2823C20.8693 13.5861 20.8693 14.0785 21.1731 14.3824L22.2732 15.4824C22.577 15.7863 23.0695 15.7863 23.373极 15.4824L27.7731 11.0826C28.0759 10.7793 28.0759 10.2869 27.7721 9.98306ZM13.8343 9.24417C13.6545 9.06431 13.5018 8.86549 13.3555 8.66327L0.954805 20.241C-0.288181 21.4018 -0.321723 23.3613 0.88043 24.564C2.08258 25.7666 4.04258 25.7331 5.20342 24.4896L16.7792 12.0903C16.5867 11.9489 16.3952 11.805 16.2231 11.6329L13.8343 9.24417Z" fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_99_689">
+                                            <rect width="28" height="24.8889" fill="white" transform="translate(0 0.55542)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
 
-<!-- Hover Rotate -->
-<section class="hover-rotate-section">
-  <h2>hover-rotate</h2>
-  <div class="services__card hover-rotate">Hover Rotate Card</div>
-</section>
+                            <h2 class="services__card-title">Shingle Roofing</h2>
+                            <p class="services__card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
+                                mattis, pulvinar dapibus leo.
+                            </p>
 
-<!-- BG Animate -->
-<section class="bg-animate-section">
-  <h2>bgAnimate</h2>
-  <div class="services__card bg-animate">Background Animate Card</div>
-</section>
+                            <a href="#" class="services__card-btn">
+                                Read More
+                                <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
+                                    <path d="M9.88727 3.65509C10.0778 3.84558 10.0778 4.15442 9.88727 4.34491L6.78304 7.44914C6.59255 7.63963 6.28371 7.63963 6.09322 7.44914极C5.90273 7.25865 5.90273 6.9498 6.09322 6.75931L8.85253 4L6.09322 1.24069C5.90273 1.0502 5.90273 0.741349 6.09322 0.550858C6.28371 0.极60367 6.59255 0.360367 6.78304 0.550858L9.88727 3.65509ZM9.54236 4V4.48778L0.45765 4.48778V4V3.51222L9.54236 3.51222V4Z" fill="#EE212B" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
 
-<!-- Text Reveal -->
-<section class="text-reveal-section">
-  <h2>textReveal</h2>
-  <h1 class="hero-title">Hello Text Reveal</h1>
-  <p class="hero-subtitle">Scroll Triggered Word Reveal</p>
-</section>
+                    <!-- Card 6 -->
+                    <div class="col col-12 col-sm-6 col-xl-4 col-xxl-3">
+                        <div class="services__card">
+                            <div class="services__card-icon-wrap">
+                                <svg width="28" height="26" viewBox="0 0 28 26" fill="none">
+                                    <g clip-path="url(#clip0_99_689)">
+                                        <path d="M27.7721 9.98306L26.672 8.88299C26.3682 8.57917 25.8758 极.57917 25.572 8.88299L25.0222 9.43278极L23.6173 8.02792C23.891 6.99202 23.6348 5.84528 22.8225 5.03299L20.6229 2.83334C17.5856 -0.203886 12.6608 -0.203886 9.62314 2.83334L14.0229 5.03299V5.94445C14.0229 6.76938 14.3506 7.56077 14.9344 8.1441L17.3231 10.5329C18.1354 11.3451 19.2822 11.6013 20.3181 11.3276L21.7229 12.7325L21.1731 13.2823C20.8693 13.5861 20.8693 14.0785 21.1731 14.3824L22.极732 15.4824C22.577 15.7863 23.0695 15.7863 23.3733 15.4824L27.7731 11.0826C28.0759 10.7793 28.0759 10.2869 27.7721 9.98306ZM13.8343 9.24417C13.6545 9.06431 13.5018 8.86549 13.3555 8.66327L0.954805 20.241C-0.288181 21.4018 -0.321723 23.3613 0.88043 24.564C2.08258 25.7666 4.04258 25.733极 5.20342 24.4896L16.7792 12.0903C16.5867 11.9489 16.3952 11.805 16.2231 11.6329L13.8343 9.24417Z" fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_99_689">
+                                            <rect width="28" height="24.8889" fill="white" transform="translate(0 0.55542)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
 
-<!-- Float Effect -->
-<section class="float-effect-section">
-  <h2>floatEffect</h2>
-  <div class="mouse-parallax float-container">
-    <div class="float-item">Floating Item</div>
-  </div>
-</section>
+                            <h2 class="services__card-title">Metal Roofing</h2>
+                            <p class="services__card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
+                                mattis, pulvinar dapibus leo.
+                            </p>
 
-<!-- Counter -->
-<section class="counter-section">
-  <h2>counterAnim</h2>
-  <div class="stats">
-    <div>
-      <div class="counter">0</div>
-      <p>Projects</p>
+                            <a href="#" class="services__card-btn">
+                                Read More
+                                <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
+                                    <path d="M9.88727 3.65509C10.0778 3.84558 10.0778 4.15442 9.88727 4.34491L6.78304 7.44914C6.59255 7.63963 6.28371 7.63963 6.09322 7.44914C5.90273 7.25865 5.90273 6.9498 6.09322 6.75931L8.85253 4L6.09322 1.24069C5.90273 1.0502 5.90273 0.741349 6.09322 0.550858C6.28371 0.360367 6.59255 0.360367 6.78304 0.550858L9.88727 3.65509ZM9.54236 4V4.48778L0.45765 4.48778V4V3.51222L9.54236 3.51222V4Z" fill="#EE212B" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="col col-12 col-sm-6 col-xl-4 col-xxl-3">
+                        <div class="services__card">
+                            <div class="services__card-icon-wrap">
+                                <svg width="28" height="26" viewBox="0 0 28 26" fill="none">
+                                    <g clip-path="url(#clip0_99_689)">
+                                        <path d="M27.7721 9.98306L26.672 8.88299C26.3682 8.57917 25.8758 8.57917 25.572 8.88299L25.0222 9.43278L23.6173 8.02792C23.891 6.99202 23.6348 5.84528 22.8225 5.03299L20.6229 2.83334C17.5856 -0.203886 12.6608 -0.203886 9.62314 2.83334L14.0229 5.03299V5.94445极C14.0229 极.76938 14.3506 7.56077 14.9344 8.1441L17.3231 10.5329C18.1354 11.3451 19.2822 11.6013 20.3181 11.3276L21.7229 12.7325L21.1731 13.2823C20.8693 13.5861 20.8693 14.0785 21.1731 14.3824L22.2732 15.4824C22.577 15.7863 23.0695 15.7863 23.3733 15.4824L27.7731 11.0826C28.0759 10.7793 28.0759 10.2869 27.7721 9.98306ZM13.8343 9.24417C13.6545 9.06431 13.5018 8.86549 13.极555 8.66327L0.954805 20.241C-0.288181 21.4018 -0.321723 23.3613 0.88043 24.564C2.08258 25.7666 4.04258 25.7331 5.20342 24.4896L16.7792 12.0903C16.5867 11.9489 16.3952 11.805 16.2231 11.6329L13.8343 9.24417Z" fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_99_689">
+                                            <rect width="28"极 height="24.8889" fill="white" transform="translate(0 0.55542)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </极iv>
+
+                            <h2 class="services__card-title">Roof Waterproofing</h2>
+                            <p class="services__card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
+                                mattis, pulvinar dapibus leo.
+                            </p>
+
+                            <a href="#" class="services__card-btn">
+                                Read More
+                                <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
+                                    <path d="M9.88727 3.65509C10.0778 3.84558 10.0778 4.15442 9.88727 4.34491L6.78304 7.44914C6.59255 7.63963 6.28371 7.63963 6.09322 7.44914C5.90273 7.25865 5.90273 6.9498 6.09322 6.75931L8.85253 4L6.09322 1.24069C5.90273 1.0502 5.90273 0.741349 6.09322 0.550858极C6.28371 0.360367 6.59255 0.360367 6.78304 0.550858L9.88727 3.65509ZM9.54236 4V4.48778L0.45765 4.48778极V4V3.51222L9.54236 3.51222V4Z" fill="#EE212B" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="col col-12 col-sm-6 col-xl-4 col-xxl-3">
+                        <div class="services__card">
+                            <div class="services__card-icon-wrap">
+                                <svg width="28" height="26" viewBox="0 0 28 26" fill="none">
+                                    <g clip-path="url(#clip0_99_689)">
+                                        <path d="M27.7721 9.98306L26.672 8.88299C26.3682 8.57917 25.8758 8.57917 25.572 极.88299L25.0222 9.43278L23.6173 8.02792C23.891 6.99202 23.6348 5.84528 22.8225 5.03299L20.6229 2.83334C17.5856 -0.203886 12.6608 -0.203886 9.62314 2.83334L14.0229 5.03299V5.94445C14.0229 6.76938 14.3506 7.56077 14.9344 8.1441L17.3231 10.5329C18.1354 11.3451 19.2822 11.6013 20.3181 11.3276L21.7229 12.7325L21.1731 13.2823C20.8693 13.5861 20.8693 14.0785 21.1731 14.3824L22.2732 15.4824C22.577 15.7863 23.0695 15.7863 23.3733 15.4824L27.7731 11.0826C28.0759 10.7793 28.0759 10.2869 27.7721 9.98306ZM13.8343 9.24417C13.6545 9.06431 13.5018 8.86549 13.3555 8.66327L0.954805 20.241C-0.288181 21.4018 -0.321723 23.3613 0.88043 24.564C2.08258 25.7666 4.04258 25.7331 5.极0342 24.4896L16.7792 12.0903C16.5867 11.9489 16.3952 11.805 16.2231 11.6329L13.8343 9.24417Z" fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_99_689">
+                                            <rect width="28" height="24.8889" fill="white" transform="translate(0 0.55542)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
+
+                            <h2 class="services__card-title">Skylight Installation</h2>
+                            <p class="services__card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
+                                mattis, pulvinar dapibus leo.
+                            </p>
+
+                            <a href="#" class="services__card-btn">
+                                Read More
+                                <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
+                                    <path d="M9.88727 3.65509C10.077极 3.84558 10.0778 4.15442 9.88727 4.34491L6.78304 7.44914C6.59255 7.63963 6.28371 7.63963 6.09322 7.44914C5.90273 7.25865 5.90273 6.9498 6.09322 6.75931L8.85253 4L6.09322 1.24069C5.90273 1.0502 5.90273 0.741349 6.09322 0.550858C6.28371 0.360367 6.59255 0.360367 6.78304 0.550858L9.88727 3.65509ZM9.54236 4V4.48778L0.45765 4.48778V4V3.51222L9.54236 3.51222V4Z" fill="#EE212B" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-      <div class="counter">0</div>
-      <p>Customers</p>
+
+    <!-- Circular Progress Indicator -->
+    <div class="progress-circle">
+        <svg view极ox="0 0 100 100">
+            <circle class="progress-circle-bg" cx="50" cy="50" r="40"></circle>
+            <circle class="progress-circle-progress" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+            <text class="progress-circle-text" x="50" y="50" text-anchor="middle" dy="0.3em">0%</text>
+        </svg>
     </div>
-  </div>
-</section>
 
-<!-- Mouse Parallax -->
-<section class="mouse-parallax-section">
-  <h2>mouseParallax</h2>
-  <div class="mouse-parallax"></div>
-</section>
-
-<!-- Pulse -->
-<section class="pulse-section">
-  <h2>pulse</h2>
-  <div class="services__card pulse">Pulse Card</div>
-</section>
-
-<!-- Shake -->
-<section class="shake-section">
-  <h2>shake</h2>
-  <div class="services__card shake">Shake Card</div>
-</section>
-
-<!-- Spin -->
-<section class="spin-section">
-  <h2>spin</h2>
-  <div class="services__card spin">Spin Card</div>
-</section>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script>
-// -----------------------
-// Reusable Animation Functions
-// -----------------------
-function animation(type, targets,duration=1){
-  if(typeof targets==="string") targets=[targets];
-  const presets={
-    "fade-in": {opacity:0,y:30},
-    "fade-up": {opacity:0,y:80},
-    "fade-left": {opacity:0,x:-80},
-    "fade-right": {opacity:0,x:80},
-    "slide-left": {x:-300,opacity:0},
-    "slide-right": {x:300,opacity:0},
-    "slide-up": {y:300,opacity:0},
-    "slide-down": {y:-300,opacity:0},
-    "zoom-in": {opacity:0,scale:0.8},
-    "zoom-out": {opacity:0,scale:1.2}
-  };
-  const config=presets[type]||presets["fade-in"];
-  targets.forEach(selector=>{
-    const elements=document.querySelectorAll("."+selector);
-    elements.forEach((el,index)=>{
-      gsap.from(el,{...config,duration:duration,delay:index*0.15,ease:"power3.out",
-        scrollTrigger:{trigger:el,start:"top 85%",toggleActions:"play none none none"}
-      });
-    });
-  });
-}
-
-function parallax(selector,axis="y",strength=100,duration=1.2){
-  const elements=document.querySelectorAll("."+selector);
-  elements.forEach(el=>{
-    gsap.fromTo(el,{[axis]:strength,opacity:0},{[axis]:0,opacity:1,ease:"power2.out",duration:duration,
-      scrollTrigger:{trigger:el,start:"top 85%",scrub:true}
-    });
-  });
-}
-
-function hoverEffect(selector,effect="scale",amount=1.1,duration=0.3){
-  const elements=document.querySelectorAll(selector);
-  elements.forEach(el=>{
-    el.addEventListener("mouseenter",()=>{gsap.to(el,{scale:effect==="scale"?amount:1,rotate:effect==="rotate"?5:0,duration:duration,ease:"power2.out"});});
-    el.addEventListener("mouseleave",()=>{gsap.to(el,{scale:1,rotate:0,duration:duration,ease:"power2.out"});});
-  });
-}
-
-function bgAnimate(selector,colors=["#e60000","#ff9900"],duration=2){
-  const elements=document.querySelectorAll(selector);
-  elements.forEach(el=>{gsap.to(el,{backgroundColor:colors[1],duration:duration,repeat:-1,yoyo:true,ease:"power1.inOut"});});
-}
-
-function textReveal(selector,type="char",duration=0.8){
-  const elements=document.querySelectorAll(selector);
-  elements.forEach(el=>{
-    const text=el.textContent;
-    el.innerHTML=type==="char"?text.split("").map(c=>`<span class="char">${c}</span>`).join(""):text.split(" ").map(w=>`<span class="word">${w}</span>`).join("");
-    gsap.from(el.querySelectorAll(type==="char"?".char":".word"),{y:50,opacity:0,stagger:0.05,duration:duration,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 80%"}});
-  });
-}
-
-function floatEffect(selector,distance=20,duration=2,rotate=false){
-  const elements=document.querySelectorAll(selector);
-  elements.forEach(el=>{gsap.to(el,{y:`+=${distance}`,rotation:rotate?10:0,duration:duration,repeat:-1,yoyo:true,ease:"sine.inOut"});});
-}
-
-function counterAnim(selector,values){
-  document.querySelectorAll(selector).forEach((counter,i)=>{
-    gsap.to(counter,{textContent:values[i]||1000,duration:2,snap:{textContent:1},ease:"power1.inOut",scrollTrigger:{trigger:counter,start:"top 80%"}});
-  });
-}
-
-function mouseParallax(selector,strength=30){
-  const parallaxBox=document.querySelector(selector);
-  document.addEventListener("mousemove",e=>{
-    const x=(window.innerWidth/2-e.pageX)/strength;
-    const y=(window.innerHeight/2-e.pageY)/strength;
-    gsap.to(parallaxBox,{x:x,y:y,duration:0.5,ease:"power2.out"});
-  });
-}
-
-// Extra animations
-function pulse(selector,duration=0.8,scale=1.1){gsap.to(selector,{scale:scale,duration:duration,repeat:-1,yoyo:true,ease:"power1.inOut"});}
-function shake(selector,duration=0.1,amount=10){gsap.to(selector,{x:`+=${amount}`,duration:duration,repeat:-1,yoyo:true,ease:"power1.inOut"});}
-function spin(selector,duration=2){gsap.to(selector,{rotation:360,duration:duration,repeat:-1,ease:"linear"});}
-
-// -----------------------
-// Apply Animations
-// -----------------------
-animation("fade-in","fade-in");
-animation("fade-up","fade-up");
-animation("fade-left","fade-left");
-animation("fade-right","fade-right");
-animation("slide-left","slide-left");
-animation("slide-right","slide-right");
-animation("slide-up","slide-up");
-animation("slide-down","slide-down");
-animation("zoom-in","zoom-in");
-animation("zoom-out","zoom-out");
-
-parallax("projects","y",150);
-
-hoverEffect(".hover-scale","scale",1.1);
-hoverEffect(".hover-rotate","rotate",5);
-
-bgAnimate(".bg-animate",["#e60000","#ff9900"]);
-
-textReveal(".hero-title","char");
-textReveal(".hero-subtitle","word");
-
-floatEffect(".float-item",20,3,false);
-
-counterAnim(".counter",[1500,1800]);
-
-mouseParallax(".mouse-parallax",30);
-
-pulse(".pulse");
-shake(".shake");
-spin(".spin");
-
-</script>
+    <!-- Load GSAP and ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // Register ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Reusable function to animate cards by class name
+        function animateCards(className) {
+            const cards = document.querySelectorAll(className);
+            
+            cards.forEach((card) => {
+                gsap.set(card, {
+                    y: 80,
+                    rotation: 5,
+                    opacity: 0
+                });
+                
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    rotation: 0,
+                    duration: 0.8,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 90%',
+                        end: 'bottom 60%',
+                        toggleActions: 'play none none none',
+                        markers: false,  
+                    },
+                    onComplete: function() {
+                        card.classList.add('animated');
+                    }
+                });
+            });
+            
+            ScrollTrigger.refresh();
+        }
+        
+        // Initialize circular progress indicator
+        function initCircularProgress() {
+            const progressCircle = document.querySelector('.progress-circle-progress');
+            const progressText = document.querySelector('.progress-circle-text');
+            const radius = progressCircle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+            
+            // Set the stroke dasharray and initial offset
+            progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+            progressCircle.style.strokeDashoffset = circumference;
+            
+            // Update progress on scroll
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / scrollHeight);
+                
+                // Calculate stroke offset
+                const offset = circumference - (scrollPercent * circumference);
+                progressCircle.style.strokeDashoffset = offset;
+                
+                // Update text
+                progressText.textContent = `${Math.round(scrollPercent * 100)}%`;
+            });
+        }
+        
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate the service cards
+            animateCards('.services__card');
+            
+            // Initialize circular progress indicator
+            initCircularProgress();
+        });
+    </script>
 </body>
 </html>
