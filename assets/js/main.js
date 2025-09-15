@@ -585,20 +585,33 @@ document.addEventListener('DOMContentLoaded', function () {
 * 20. Info Panel
 ============================= */
 document.addEventListener("DOMContentLoaded", function () {
-  const toggleBtn = document.getElementById("info-toggle");
-  const infoPanel = document.getElementById("info-panel");
-  const closeBtn = document.getElementById("offcanvas-toggle-close");  
+  const toggleBtn = document.getElementById("info-toggle"); // main toggle
+  const toggleBtnClose = document.getElementById("info-toggle-close"); // secondary toggle/close
+  const closeBtn = document.getElementById("offcanvas-toggle-close"); // inside panel close button
+  const infoPanel = document.getElementById("info-panel"); // the panel itself
 
-  if (toggleBtn && infoPanel) {
-    // Toggle panel with main button
-    toggleBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      infoPanel.classList.toggle("active");
-    });
+  if (infoPanel) {
 
-    // Close panel with close button
+    // Open/Toggle panel with main button
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        infoPanel.classList.toggle("active");
+      });
+    }
+
+    // Close panel with secondary toggle button
+    if (toggleBtnClose) {
+      toggleBtnClose.addEventListener("click", function (e) {
+        e.stopPropagation();
+        infoPanel.classList.remove("active");
+      });
+    }
+
+    // Close panel with inside close button
     if (closeBtn) {
-      closeBtn.addEventListener("click", function () {
+      closeBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
         infoPanel.classList.remove("active");
       });
     }
@@ -608,14 +621,13 @@ document.addEventListener("DOMContentLoaded", function () {
       e.stopPropagation();
     });
 
-    // Close when clicking outside
+    // Close panel when clicking outside
     document.addEventListener("click", function () {
-      if (infoPanel.classList.contains("active")) {
-        infoPanel.classList.remove("active");
-      }
+      infoPanel.classList.remove("active");
     });
   }
 });
+
 
 /* =============================
 * 20. Nav Arrow Toggle
