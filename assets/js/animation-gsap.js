@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
     * 5. Project One Area
     ============================= */
     if (elementExists(['projects--style-1'])) {
-        fadeAnimation('fade-up', ['projects__subtitle-wrap', 'projects__title', 'projects__desc', 'projects__btn']);
+        fadeAnimation('fade-up', ['projects__filter-item','projects__subtitle-wrap', 'projects__title', 'projects__desc', 'projects__btn']);
     }
 
     /* =============================
