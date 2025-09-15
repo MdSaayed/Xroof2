@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
     * 3. Services One Area
     ============================= */
     if (elementExists(['services--style-1'])) {
-        fadeAnimation('fade-up', ['services__top-subtitle-wrap', 'services__top-title', 'services__top-desc', 'services__card']);
+        fadeAnimation('fade-up', ['services__top-subtitle-wrap', 'services__top-title', 'services__top-desc', 'services__card','service__desc']);
     }
 
     /* =============================
