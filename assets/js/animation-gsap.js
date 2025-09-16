@@ -12,9 +12,49 @@ JS INDEX
 
 1. Reuseable Animation
 2. Card Stagger
-3. Hero One Area
-4. 
-
+3. Fade Animation
+4. Helper Function
+5. Hero One Area
+6. About One Area
+7. Services One Area
+8. Why Choose Us One Area
+9. Project One Area
+10. Achievement One Area
+11. Team One Area
+12. Testimonials One Area
+13. Pricing One Area
+14. Faq One Area
+15. Blog One Area
+16. Footer One Area
+17. Heo Two Area
+18. About Two Area
+19. Services Two Area
+20. Services Two Area
+21. Started One Area
+22. Work Process One Area
+23. Team Two Area
+24. testimonials Two Area
+25. Services three Area
+26. Blog Two Area
+27. Hero Three Area
+28. About Three Area
+29. Services Four Area
+30. Project Three Area
+31. Work Process Two Area
+31. Team Three Area
+32. Team Three Area
+33. Contact One Area
+34. Blog Three Area
+35. Blog Three Area
+36. Services Details
+37. Project Details
+38. Blog Details Content
+39. Contact Two
+40. Sidebar Services
+41. Appointment Card
+42. Sidebar Project Details
+43. Sidebar Post
+44. Sidebar Post
 
 ------------------------------------------------------------------*/
 gsap.registerPlugin(ScrollTrigger);
@@ -56,8 +96,9 @@ function fadeAnimation(type, selectors, options = {}) {
                     x: 0,
                     y: 0,
                     scale: 1,
-                    duration: 1,
-                    ease: "power3.out",
+                    duration: 0.7,
+                    // ease: "power3.out",
+                    ease: 'back.out',
                     delay: index * 0.1,
                     scrollTrigger: {
                         trigger: el,
@@ -95,67 +136,55 @@ function elementMove(selectors) {
     });
 }
 
-function animateCards(className) {
-    const cards = document.querySelectorAll('.' + className);
-    if (!cards || cards.length === 0) return;
-
-    gsap.set(cards, {
-        opacity: 0,
-        y: 80,
+function animateCards(classNames) {
+  classNames.forEach((className) => {
+    gsap.utils.toArray("." + className).forEach((el) => {
+      gsap.fromTo(el, 
+        { opacity: 0, y: 60 }, 
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top bottom-=100", 
+            toggleActions: "play none none none",
+            once: true
+          }
+        }
+      );
     });
-
-    cards.forEach((card) => {
-        gsap.to(card, {
-            opacity: 1,
-            y: 0,
-            rotation: 0,
-            duration: 0.5,
-            ease: "none",
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 95%',
-                toggleActions: 'play none none none',
-                markers: false
-            },
-            onComplete: () => card.classList.add('animated')
-        });
-    });
-
-    ScrollTrigger.refresh();
+  });
 }
 
 /* =============================
 * 2. Card Stagger
 ============================= */
 document.addEventListener('DOMContentLoaded', function () {
-    [
-        'services__card',
-        'why-choose-us__card',
-        'projects__card',
-        'team__member',
-        'testimonials__card',
-        'faq__item',
-        'blog-card',
-        'pricing__card',
-        'services__item',
-        'blog__card',
-        'process-item',
-        'blog__list-item'
-    ].forEach(className => animateCards(className));
-
-    setTimeout(() => ScrollTrigger.refresh(), 300);
-
-    window.addEventListener('resize', () => ScrollTrigger.refresh());
-    window.addEventListener('orientationchange', () => ScrollTrigger.refresh());
+  animateCards([
+    'services__card',
+    'why-choose-us__card',
+    'projects__card',
+    'team__member',
+    'testimonials__card',
+    'faq__item',
+    'blog-card',
+    'pricing__card',
+    'services__item',
+    'blog__card',
+    'process-item',
+    'blog__list-item'
+  ]);
 });
 
 /* =============================
-* 20. Fade Animation
+* 3. Fade Animation
 ============================= */
 document.addEventListener('DOMContentLoaded', function () {
 
     /* =============================
-    * Helper Function
+    * 4. Helper Function
     ============================= */
     function elementExists(classNames) {
         if (!Array.isArray(classNames)) classNames = [classNames];
@@ -163,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 1. Hero One Area
+    * 5. Hero One Area
     ============================= */
     if (elementExists(['hero--style-1'])) {
         fadeAnimation('fade-up', ['hero__title', 'hero__desc', 'hero__btn', 'hero__subtitle-wrap', 'hero__img-wrap', 'hero__form-wrap', 'hero__stats-item']);
@@ -171,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 2. About One Area
+    * 6. About One Area
     ============================= */
     if (elementExists(['about--style-1'])) {
         fadeAnimation('fade-left', ['about__img-wrap', 'about__stat']);
@@ -179,14 +208,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 3. Services One Area
+    * 7. Services One Area
     ============================= */
     if (elementExists(['services--style-1'])) {
-        fadeAnimation('fade-up', ['services__top-subtitle-wrap', 'services__top-title', 'services__top-desc', 'services__card', 'service__desc']);
+        fadeAnimation('fade-up', ['services__top-subtitle-wrap', 'services__top-title', 'services__top-desc', 'service__desc']);
     }
 
     /* =============================
-    * 4. Why Choose Us One Area
+    * 8. Why Choose Us One Area
     ============================= */
     if (elementExists(['why-choose-us--style-1'])) {
         fadeAnimation('fade-up', ['why-choose-us__subtitle-wrap', 'why-choose-us__title', 'why-choose-us__desc', 'why-choose-us__btn-wrap']);
@@ -194,14 +223,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 5. Project One Area
+    * 9. Project One Area
     ============================= */
     if (elementExists(['projects--style-1'])) {
-        fadeAnimation('fade-up', ['projects__filter-item','projects__subtitle-wrap', 'projects__title', 'projects__desc', 'projects__btn']);
+        fadeAnimation('fade-up', ['projects__filter-item', 'projects__subtitle-wrap', 'projects__title', 'projects__desc', 'projects__btn']);
     }
 
     /* =============================
-    * 6. Achievement One Area
+    * 10. Achievement One Area
     ============================= */
     if (elementExists(['achievement--style-1'])) {
         fadeAnimation('fade-up', ['achievement__left', 'achievement__subtitle-wrap', 'achievement__title', 'achievement__desc', 'achievement__stats', 'achievement__btn']);
@@ -209,49 +238,49 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 7. Team One Area
+    * 11. Team One Area
     ============================= */
     if (elementExists(['team--style-1'])) {
         fadeAnimation('fade-up', ['team__subtitle-wrap', 'team__title', 'team__desc', 'team__btn']);
     }
 
     /* =============================
-    * 8. Testimonials One Area
+    * 12. Testimonials One Area
     ============================= */
     if (elementExists(['testimonials--style-1'])) {
         fadeAnimation('fade-up', ['testimonials__subtitle-wrap', 'testimonials__title', 'testimonials__desc']);
     }
 
     /* =============================
-    * 9. Pricing One Area
+    * 13. Pricing One Area
     ============================= */
     if (elementExists(['pricing--style-1'])) {
         fadeAnimation('fade-up', ['pricing__subtitle-wrap', 'pricing__title', 'pricing__desc']);
     }
 
     /* =============================
-    * 10. Faq One Area
+    * 14. Faq One Area
     ============================= */
     if (elementExists(['faq'])) {
         fadeAnimation('fade-up', ['faq__subtitle-wrap', 'faq__title', 'faq__desc']);
     }
 
     /* =============================
-    * 11. Blog One Area
+    * 15. Blog One Area
     ============================= */
     if (elementExists(['blog--style-1'])) {
         fadeAnimation('fade-up', ['blog__subtitle-wrap', 'blog__title', 'blog__desc', 'blog__btn']);
     }
 
     /* =============================
-    * 12. Footer One Area
+    * 16. Footer One Area
     ============================= */
     if (elementExists(['footer--style-1'])) {
         fadeAnimation('fade-up', ['footer__cta-title', 'footer__cta-desc', 'footer__cta-btn', 'footer__cta-bg']);
     }
 
     /* =============================
-    * 12. Heo Two Area
+    * 17. Heo Two Area
     ============================= */
     if (elementExists(['hero--style-2'])) {
         fadeAnimation('fade-up', ['hero__stat', 'hero__nav', 'hero__img-wrapper']);
@@ -267,14 +296,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 12. About Two Area
+    * 18. About Two Area
     ============================= */
     if (elementExists(['about--style-2'])) {
         fadeAnimation('fade-up', ['about__title', 'about__desc', 'about__solution-text', 'about__feature']);
     }
 
     /* =============================
-    * 12. Services Two Area
+    * 19. Services Two Area
     ============================= */
     if (elementExists(['services--style-2'])) {
         fadeAnimation('fade-up', ['services__subtitle', 'services__title', 'services__desc', 'stat__number', 'stat__text']);
@@ -290,42 +319,42 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 12. Services Two Area
+    * 20. Services Two Area
     ============================= */
     if (elementExists(['projects--style-2'])) {
         fadeAnimation('fade-up', ['projects__subtitle', 'projects__title', 'projects__desc', 'projects__slider', 'slider__nav']);
     }
 
     /* =============================
-    * 12. Started One Area
+    * 21. Started One Area
     ============================= */
     if (elementExists(['started--style-1'])) {
         fadeAnimation('fade-up', ['started__title', 'statistics__item']);
     }
 
     /* =============================
-    * 12. Work Process One Area
+    * 22. Work Process One Area
     ============================= */
     if (elementExists(['work-process--style-1'])) {
         fadeAnimation('fade-up', ['work-process__title', 'work-process__desc', 'step-card']);
     }
 
     /* =============================
-    * 12. Team Two Area
+    * 23. Team Two Area
     ============================= */
     if (elementExists(['team--style-2'])) {
         fadeAnimation('fade-up', ['team__title', 'team__desc', 'team__right']);
     }
 
     /* =============================
-    * 12. testimonials Two Area
+    * 24. testimonials Two Area
     ============================= */
     if (elementExists(['testimonials--style-2'])) {
         fadeAnimation('fade-up', ['testimonials__subtitle', 'testimonials__title', 'testimonials__desc', 'testimonials__right']);
     }
 
     /* =============================
-    * 12. Services three Area
+    * 25. Services three Area
     ============================= */
     if (elementExists(['services--style-3'])) {
         fadeAnimation('fade-left', ['services__top ']);
@@ -336,14 +365,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 12. Blog Two Area
+    * 26. Blog Two Area
     ============================= */
     if (elementExists(['blog--style-2'])) {
         fadeAnimation('fade-up', ['blog__title', 'blog__desc', 'blog__btn',]);
     }
 
     /* =============================
-    * 12. Hero Three Area
+    * 27. Hero Three Area
     ============================= */
     if (elementExists(['hero--style-3'])) {
         const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
@@ -372,21 +401,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 12. About Three Area
+    * 28. About Three Area
     ============================= */
     if (elementExists(['about--style-3'])) {
         fadeAnimation('fade-up', ['about__title', 'about__desc', 'about__btn-wrap', 'about__solution', 'about__img', 'year__img-wrap', 'about__stat']);
     }
 
     /* =============================
-    * 12. Services Four Area
+    * 29. Services Four Area
     ============================= */
     if (elementExists(['services--style-4'])) {
         fadeAnimation('fade-up', ['services__title', 'services__desc', 'services__btn-all']);
     }
 
     /* =============================
-    * 12. Project Three Area
+    * 30. Project Three Area
     ============================= */
     if (elementExists(['projects--style-3'])) {
         fadeAnimation('fade-up', ['projects__title', 'projects__desc', 'projects__header-btn']);
@@ -394,7 +423,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 12. Work Process Two Area
+    * 31. Work Process Two Area
     ============================= */
     if (elementExists(['work-process--style-2'])) {
         fadeAnimation('fade-up', ['work-process__title']);
@@ -402,104 +431,105 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* =============================
-    * 12. Team Three Area
+    * 31. Team Three Area
     ============================= */
     if (elementExists(['team--style-3'])) {
         fadeAnimation('fade-up', ['team__title', 'team__desc', 'team__header-right', 'team-slider']);
     }
 
     /* =============================
-    * 12. Team Three Area
+    * 32. Team Three Area
     ============================= */
     if (elementExists(['award--style-1'])) {
         fadeAnimation('fade-up', ['award__subtitle', 'award__title', 'award__desc', 'award__btn', 'award__list']);
     }
 
     /* =============================
-    * 12. Contact One Area
+    * 33. Contact One Area
     ============================= */
     if (elementExists(['contact--style-1'])) {
         fadeAnimation('fade-up', ['contact__title', 'contact__form-wrap', 'contact__info-title', 'contact__info-text', 'info-card']);
     }
 
     /* =============================
-    * 12. Blog Three Area
+    * 34. Blog Three Area
     ============================= */
     if (elementExists(['blog--style-3'])) {
         fadeAnimation('fade-up', ['blog__title', 'blog__desc']);
     }
 
     /* =============================
-    * 12. Blog Three Area
+    * 35. Blog Three Area
     ============================= */
     if (elementExists(['breadcrumbs'])) {
         fadeAnimation('fade-up', ['breadcrumbs__title', 'breadcrumbs__list']);
     }
 
     /* =============================
-      * 12. Services Details
+      * 36. Services Details
        ============================= */
     if (elementExists(['services-details__highlight-thumb'])) {
-        fadeAnimation('fade-up', ['services-details__highlight-thumb','services-details__highlight-title','services-details__text']);
+        fadeAnimation('fade-up', ['services-details__highlight-thumb', 'services-details__highlight-title', 'services-details__text']);
     }
 
     /* =============================
-      * 12. Project Details
+      * 37. Project Details
        ============================= */
     if (elementExists(['project-details'])) {
-        fadeAnimation('fade-up', ['project-details__highlight-title','project-details__text','project-details__highlight-thumb','project-details__quote']);
+        fadeAnimation('fade-up', ['project-details__highlight-title', 'project-details__text', 'project-details__highlight-thumb', 'project-details__quote']);
     }
 
     /* =============================
-      * 12. Blog Details Content
+      * 38. Blog Details Content
        ============================= */
     if (elementExists(['blog-details__content'])) {
-        fadeAnimation('fade-up', ['blog-details__text','blog-details__highlight-title','blog-details__highlight-text','blog-details__list-item','blog-details__share']);
-        fadeAnimation('zoom-in',['blog-details__highlight-thumb'])
+        fadeAnimation('fade-up', ['blog-details__text', 'blog-details__highlight-title', 'blog-details__highlight-text', 'blog-details__list-item', 'blog-details__share']);
+        fadeAnimation('zoom-in', ['blog-details__highlight-thumb'])
     }
 
     /* =============================
-      * 12. Contact Two
+      * 39. Contact Two
        ============================= */
     if (elementExists(['contact--style-2'])) {
-        fadeAnimation('fade-up', ['contact__title','contact__desc','contact__card','contact-form']);
-        fadeAnimation('zoom-in',['contact__map'])
+        fadeAnimation('fade-up', ['contact__title', 'contact__desc', 'contact__card', 'contact-form']);
+        fadeAnimation('zoom-in', ['contact__map'])
     }
 
     /* =============================
-      * 12. Sidebar Services
+      * 40. Sidebar Services
       ============================= */
     if (elementExists(['sidebar__services'])) {
         fadeAnimation('fade-up', ['sidebar__services', 'sidebar__title', 'sidebar__item']);
     }
 
     /* =============================
-      * 12. Appointment Card
+      * 41. Appointment Card
       ============================= */
     if (elementExists(['sidebar__appointment-card'])) {
         fadeAnimation('fade-up', ['sidebar__appointment-card', 'appointment-card__heading', 'appointment-card__description', 'appointment-card__actions']);
     }
 
     /* =============================
-      * 12. Sidebar Project Details
+      * 42. Sidebar Project Details
       ============================= */
     if (elementExists(['sidebar__project-details'])) {
-        fadeAnimation('fade-up', ['sidebar__project-details','sidebar__title', 'project-details__item']);
+        fadeAnimation('fade-up', ['sidebar__project-details', 'sidebar__title', 'project-details__item']);
     }
 
     /* =============================
-      * 12. Sidebar Post
+      * 43. Sidebar Post
       ============================= */
     if (elementExists(['sidebar__posts'])) {
-        fadeAnimation('fade-up', ['sidebar__posts','sidebar-post','sidebar__subtitle']);
+        fadeAnimation('fade-up', ['sidebar__posts', 'sidebar-post', 'sidebar__subtitle']);
     }
 
     /* =============================
-      * 12. Sidebar Post
-      ============================= */
+    * 44. Sidebar Post
+    ============================= */
     if (elementExists(['gallery'])) {
-        fadeAnimation('zoom-in', ['sidebar__subtitle','gallery__item']);
+        fadeAnimation('zoom-in', ['sidebar__subtitle', 'gallery__item']);
     }
+
 });
 
 

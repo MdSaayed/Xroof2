@@ -11,14 +11,27 @@ JS INDEX
 ===================
 
 1. Preloader
-
+2. Dynamically set BG
+3. Hero Bg Slider Home Two
+4. Counter
+5. Glightbox
+6. Faq
+7. Hero Two Slider
+8. Projects Two Slider
+9. Team Two
+10. Team Three
+11. Award Area
+12. Contact form input date
+13. Offcanvas
+14. Info Panel
+15. Nav Arrow Toggle
+16. Services Video
+17. Scroll Progress Circle
+18. Hero Two bg Animation
 
 ------------------------------------------------------------------*/
 
-
 "use strict";
-
-
 
 /* =============================
 * 1. Preloader
@@ -109,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* =============================
-* 20. Pure Counter
+* 4. Counter
 ============================= */
 document.addEventListener('DOMContentLoaded', () => {
   const counters = document.querySelectorAll('[data-start][data-end]');
@@ -164,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* =============================
-* 20. Glightbox
+* 5. Glightbox
 ============================= */
 const lightbox = GLightbox({
   selector: '.glightbox',
@@ -172,7 +185,7 @@ const lightbox = GLightbox({
 });
 
 /* =============================
-* 20. Faq
+* 6. Faq
 ============================= */
 document.querySelectorAll('.faq__item').forEach(item => {
   const button = item.querySelector('.faq__question-wrap');
@@ -194,7 +207,7 @@ document.querySelectorAll('.faq__item').forEach(item => {
 });
 
 /* =============================
-* 20. Hero Two Slider
+* 7. Hero Two Slider
 ============================= */
 const hero_two_slider = document.querySelector('#hero-two-slider');
 
@@ -215,7 +228,7 @@ if (hero_two_slider) {
 }
 
 /* =============================
-* 20. Projects Two Slider
+* 8. Projects Two Slider
 ============================= */
 document.addEventListener("DOMContentLoaded", function () {
   const slider = document.querySelector('#project-slider-1');
@@ -308,7 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* =============================
-* 20. Team Two
+* 9. Team Two
 ============================= */
 const team_slider_element = document.querySelector('#team-2');
 document.addEventListener("DOMContentLoaded", function () {
@@ -446,7 +459,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* =============================
-* 20. Team Three
+* 10. Team Three
 ============================= */
 const team_slider_three = document.querySelector('#team-slider-3');
 
@@ -475,7 +488,7 @@ if (team_slider_three) {
 }
 
 /* =============================
-* 20. Award Area
+* 11. Award Area
 ============================= */
 const awardItems = document.querySelectorAll('.award__item');
 
@@ -489,7 +502,7 @@ if (awardItems) {
 }
 
 /* =============================
-* 20. Contact form input date
+* 12. Contact form input date
 ============================= */
 document.addEventListener('DOMContentLoaded', function () {
   const today = new Date().toISOString().split("T")[0];
@@ -501,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* =============================
-* 20. Offcanvas
+* 13. Offcanvas
 ============================= */
 document.addEventListener('DOMContentLoaded', function () {
   const offcanvas = document.querySelector('.offcanvas');
@@ -582,7 +595,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* =============================
-* 20. Info Panel
+* 14. Info Panel
 ============================= */
 document.addEventListener("DOMContentLoaded", function () {
   const toggleBtn = document.getElementById("info-toggle"); // main toggle
@@ -628,80 +641,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
 /* =============================
-* 20. Nav Arrow Toggle
+* 15. Nav Arrow Toggle
 ============================= */
-// document.addEventListener("DOMContentLoaded", function () {
-//   const arrow = document.querySelector('.nav__arrow');
-//   const menuWrap = document.querySelector('.nav__menu');
-
-//   if (!arrow || !menuWrap) return;
-
-//   let lastKnownWidth = 0;  
-
-//   const setMenuWidth = () => {
-//     menuWrap.style.width = 'auto';
-//     lastKnownWidth = menuWrap.scrollWidth;
-//     menuWrap.style.width = lastKnownWidth + 'px';
-//   };
-
-//   menuWrap.style.transition = 'width 0.5s ease, padding 0.5s ease';
-//   menuWrap.style.visibility = 'visible';
-//   menuWrap.style.overflow = 'visible';
-//   menuWrap.classList.remove('hide');
-//   menuWrap.style.padding = '0 2rem';
-//   setMenuWidth(); // Calculate initial width
-
-//   arrow.addEventListener('click', () => {
-//     if (!menuWrap.classList.contains('hide')) {
-//       // Hide menu
-//       lastKnownWidth = menuWrap.scrollWidth; // Capture width before hiding
-//       menuWrap.style.overflow = 'hidden';
-//       menuWrap.style.width = '0';
-//       menuWrap.style.padding = '0';
-//       setTimeout(() => {
-//         menuWrap.style.visibility = 'hidden';
-//         menuWrap.classList.add('hide');
-//       }, 500);
-//     } else {
-//       // Show menu
-//       menuWrap.style.visibility = 'visible';
-//       menuWrap.classList.remove('hide');
-//       menuWrap.style.overflow = 'hidden';
-//       menuWrap.style.width = '0';
-//       menuWrap.style.padding = '0';
-
-//       requestAnimationFrame(() => {
-//         menuWrap.style.width = lastKnownWidth + 'px';
-//         menuWrap.style.padding = '0 2rem';
-//       });
-
-//       setTimeout(() => {
-//         menuWrap.style.overflow = 'visible';
-//       }, 500);
-//     }
-//   });
-
-//   // Recalculate width on resize
-//   window.addEventListener('resize', () => {
-//     if (!menuWrap.classList.contains('hide')) {
-//       // If visible, recalculate and apply the width
-//       setMenuWidth();
-//     } else {
-//       menuWrap.style.visibility = 'visible';
-//       menuWrap.style.overflow = 'visible';
-//       setMenuWidth();
-//       menuWrap.style.visibility = 'hidden';
-//       menuWrap.style.overflow = 'hidden';
-//     }
-//   });
-// });
-
 document.addEventListener("DOMContentLoaded", function () {
   const arrow = document.querySelector('.nav__arrow');
   const menuWrap = document.querySelector('.nav__menu');
-  const breakpoint = 768; // Adjust this breakpoint as needed
+  const breakpoint = 768; 
 
   if (!arrow || !menuWrap) return;
 
@@ -723,9 +669,7 @@ document.addEventListener("DOMContentLoaded", function () {
       menuWrap.style.width = '0';
       menuWrap.style.padding = '0';
       menuWrap.style.visibility = 'hidden';
-      // The arrow will always be visible
     } else {
-      // If the screen is larger than the breakpoint, show the menu
       menuWrap.classList.remove('hide');
       menuWrap.style.visibility = 'visible';
       menuWrap.style.overflow = 'visible';
@@ -740,7 +684,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   arrow.addEventListener('click', () => {
     if (menuWrap.classList.contains('hide')) {
-      // Show menu
       menuWrap.style.visibility = 'visible';
       menuWrap.classList.remove('hide');
       menuWrap.style.overflow = 'hidden';
@@ -772,9 +715,8 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener('resize', handleResize);
 });
 
-
 /* =============================
-* 20. Services Video Section
+* 16. Services Video
 ============================= */
 document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("bgVideo");
@@ -805,7 +747,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
 
 /* =============================
 * 20. Project filter
@@ -840,34 +781,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* =============================
-* 20. Progress Bar
+* 17. Scroll Progress Circle
 ============================= */
-// function initCircularProgress() {
-//   const progressCircle = document.querySelector('.progress-circle-progress');
-//   const progressText = document.querySelector('.progress-circle-text');
-//   const radius = progressCircle.r.baseVal.value;
-//   const circumference = 2 * Math.PI * radius;
-
-//   // Set the stroke dasharray and initial offset
-//   progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-//   progressCircle.style.strokeDashoffset = circumference;
-
-//   // Update progress on scroll
-//   window.addEventListener('scroll', () => {
-//     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-//     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-//     const scrollPercent = (scrollTop / scrollHeight);
-
-//     // Calculate stroke offset
-//     const offset = circumference - (scrollPercent * circumference);
-//     progressCircle.style.strokeDashoffset = offset;
-
-//     // Update text
-//     progressText.textContent = `${Math.round(scrollPercent * 100)}%`;
-//   });
-// }
-
-function initCircularProgress() {
+ function initCircularProgress() {
   // Create container div
   const container = document.createElement('div');
   container.classList.add('progress-circle');
@@ -928,7 +844,7 @@ function initCircularProgress() {
 initCircularProgress();
 
 /* =============================
-* 20. Hero Two bg Animation
+* 18. Hero Two bg Animation
 ============================= */
 document.addEventListener("DOMContentLoaded", function () {
   if (typeof particlesJS !== "undefined" && document.getElementById("hero-particles")) {

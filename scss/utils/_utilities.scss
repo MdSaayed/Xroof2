@@ -105,41 +105,9 @@
      }
    }
 
-   //  ===================================
-
-   //  .btn-phn {
-   //    @include btn-phn;
-   //  }
-
-   //  .btn-phn-white {
-   //    @include btn-phn($bg: $color-white, $icon: $color-primary);
-   //  }
-
    .btn-primary {
      @include button($color-primary, $color-white, transparent, $color-primary);
    }
-
-   //  .btn-secondary {
-   //    @include button('#fff', $color-white);
-   //  }
-
-   //  .btn-icon {
-   //    @include button($color-primary, $color-white, transparent, $color-primary);
-   //    padding-right: 14px;
-   //  }
-
-   //  .btn-icon-left {
-   //    @include button($color-primary, $color-white, transparent, $color-primary);
-   //    padding-left: 0px;
-
-   //    svg {
-   //      margin-right: 12px;
-   //    }
-   //  }
-
-   //  .btn-light {
-   //    @include button($color-white, $color-primary);
-   //  }
 
    .flex-items-center {
      display: flex;
@@ -156,16 +124,6 @@
 
    .title-hidden{
     display: none;
-   }
-
-   //  For equal height
-   .row>[class*="col"] {
-     //  display: flex;
-     //  flex-direction: column;
-
-     >* {
-       //  height: 100%;
-     }
    }
 
    .main {

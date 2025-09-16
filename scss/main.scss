@@ -1,8 +1,11 @@
 @use '../node_modules/bootstrap/scss/bootstrap' as *;
 
-@use './components/services-card';
 @use './utils/index' as *;
+
+@use './components/services-card';
 @use './components/lists';  
+@use './components/preloader'; 
+
 @use './layout/header';
 @use './layout/hero';
 @use './layout/about';
@@ -17,17 +20,14 @@
 @use './layout/blog';
 @use './layout/blog-details';
 @use './layout/footer';
-
 @use './layout/keywords';
 @use './layout/started'; 
 @use './layout/work-process'; 
 @use './layout/award'; 
 @use './layout/contact'; 
-
 @use './layout/services-details';    
 @use './layout/project-details';    
 @use './layout/sidebar';    
 @use './layout/breadcrumbs';    
 @use './layout/error'; 
-@use './layout/offcanvas'; 
-@use './components/preloader'; 
+@use './layout/offcanvas';  
