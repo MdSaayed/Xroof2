@@ -1,3 +1,44 @@
+/*------------------------------------------------------------------
+Template Name: 
+Template URL:  
+Description:  
+Author:
+Author URL: 
+Version: 1.0
+-------------------------------------------------------------------
+
+SCSS INDEX
+===================
+
+1. Header Area 
+2. Hero Area 
+3. About Area 
+4. Services Area 
+5. Why Choose Area 
+6. Project Area 
+7. Achievement Area 
+8. Team Area 
+9. Testimonials Area 
+10. Pricing Area 
+11. Faq Area 
+12. Blog Area 
+13. Blog Details Area 
+14. Footer Area 
+15. Keywords Area 
+16. Started Area 
+17. Work Process Area 
+18. Award Area 
+19. Contact Area 
+20. Services Details Area 
+21. Project Details Area   
+22. Sidebar Area 
+23. Breadcrumbs Area 
+24. Error Area 
+25. Offcanvas Area 
+
+------------------------------------------------------------------*/
+
+
 @use '../node_modules/bootstrap/scss/bootstrap' as *;
 
 @use './utils/index' as *;
@@ -5,29 +46,55 @@
 @use './components/services-card';
 @use './components/lists';  
 @use './components/preloader'; 
+@use './components/progress-circle'; 
 
+/* 1. Header Area */
 @use './layout/header';
+/* 2. Hero Area */
 @use './layout/hero';
+/* 3. About Area */
 @use './layout/about';
+/* 4. Services Area */
 @use './layout/services';
+/* 5. Why Choose Area */
 @use './layout/why-choose-us';
+/* 6. Project Area */
 @use './layout/project';
+/* 7. Achievement Area */
 @use './layout/achievement';
+/* 8. Team Area */
 @use './layout/team';
+/* 9. Testimonials Area */
 @use './layout/testimonials';
+// 10. Pricing Area */
 @use './layout/pricing';
+/* 11. Faq Area */
 @use './layout/faq';
+/* 12. Blog Area */
 @use './layout/blog';
+/* 13. Blog Details Area */
 @use './layout/blog-details';
+/* 14. Footer Area */
 @use './layout/footer';
+/* 15. Keywords Area */
 @use './layout/keywords';
+/* 16. Started Area */
 @use './layout/started'; 
+/* 17. Work Process Area */
 @use './layout/work-process'; 
+/* 18. Award Area */
 @use './layout/award'; 
+/* 19. Contact Area */
 @use './layout/contact'; 
-@use './layout/services-details';    
+/* 20. Services Details Area */
+@use './layout/services-details';  
+/* 21. Project Details Area */  
 @use './layout/project-details';    
-@use './layout/sidebar';    
-@use './layout/breadcrumbs';    
+/* 22. Sidebar Area */
+@use './layout/sidebar';   
+/* 23. Breadcrumbs Area */
+@use './layout/breadcrumbs';  
+/* 24. Error Area */  
 @use './layout/error'; 
+/* 25. Offcanvas Area */
 @use './layout/offcanvas';  

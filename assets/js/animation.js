@@ -57,11 +57,50 @@ JS INDEX
 44. Sidebar Post
 
 ------------------------------------------------------------------*/
-gsap.registerPlugin(ScrollTrigger);
 
 /* =============================
 * 1. Reuseable Animation
 ============================= */
+
+// Move Element
+function elementMove(selectors) {
+    if (typeof selectors === "string") {
+        selectors = [selectors];
+    }
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                el.style.animation = 'elementMoveY 2s ease-in-out infinite alternate';
+                obs.unobserve(el);
+            }
+        });
+    }, observerOptions);
+
+    selectors.forEach(selector => {
+        document.querySelectorAll("." + selector).forEach(el => {
+            observer.observe(el);
+        });
+    });
+}
+
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes elementMoveY {
+    0% { transform: translateY(-5px); }
+    100% { transform: translateY(5px); }
+}
+`;
+document.head.appendChild(style);
+
+// Fade Animation
 function fadeAnimation(type, selectors, options = {}) {
     const selectorArray = Array.isArray(selectors) ? selectors : [selectors];
 
@@ -78,104 +117,44 @@ function fadeAnimation(type, selectors, options = {}) {
         "zoom-out": { opacity: 0, scale: 1.2 }
     };
 
-    const fromConfig = presets[type] || presets["fade-in"];
+    const fromConfig = presets[type] || presets["fade-up"];
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                el.style.transition = `opacity ${options.duration || 0.7}s ${options.easing || 'ease-out'}, transform ${options.duration || 0.7}s ${options.easing || 'ease-out'}`;
+                el.style.opacity = 1;
+                el.style.transform = 'translateX(0) translateY(0) scale(1)';
+                obs.unobserve(el);
+            }
+        });
+    }, observerOptions);
 
     selectorArray.forEach(selector => {
-        const elements = document.querySelectorAll("." + selector);
-        if (!elements.length) return;
-
-        elements.forEach((el, index) => {
-            gsap.fromTo(
-                el,
-                {
-                    ...fromConfig,
-                    ...options.from
-                },
-                {
-                    opacity: 1,
-                    x: 0,
-                    y: 0,
-                    scale: 1,
-                    duration: 0.7,
-                    // ease: "power3.out",
-                    ease: 'back.out',
-                    delay: index * 0.1,
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 90%",
-                        toggleActions: "play none none none",
-                        ...options.scrollTrigger
-                    },
-                    ...options.to
-                }
-            );
+        document.querySelectorAll('.' + selector).forEach((el, index) => {
+            el.style.opacity = fromConfig.opacity;
+            el.style.transform = `translateX(${fromConfig.x || 0}px) translateY(${fromConfig.y || 0}px) scale(${fromConfig.scale || 1})`;
+            if (options.delay) {
+                el.style.transitionDelay = `${index * options.delay}s`;
+            }
+            observer.observe(el);
         });
     });
 }
 
-function elementMove(selectors) {
-    // Check if single string diya hoy, array e convert koro
-    if (typeof selectors === "string") {
-        selectors = [selectors];
-    }
-
-    selectors.forEach(selector => {
-        const elements = document.querySelectorAll("." + selector);
-        elements.forEach(el => {
-            gsap.fromTo(el,
-                { y: -5 },
-                {
-                    y: 5,
-                    duration: 1,
-                    ease: "power1.inOut",
-                    repeat: -1,
-                    yoyo: true
-                }
-            );
-        });
-    });
-}
-
-function animateCards(classNames) {
-  classNames.forEach((className) => {
-    gsap.utils.toArray("." + className).forEach((el) => {
-      gsap.fromTo(el, 
-        { opacity: 0, y: 60 }, 
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.6,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top bottom-=100", 
-            toggleActions: "play none none none",
-            once: true
-          }
-        }
-      );
-    });
-  });
-}
-
-/* =============================
-* 2. Card Stagger
-============================= */
-document.addEventListener('DOMContentLoaded', function () {
-  animateCards([
-    'services__card',
-    'why-choose-us__card',
-    'projects__card',
-    'team__member',
-    'testimonials__card',
-    'faq__item',
-    'blog-card',
-    'pricing__card',
-    'services__item',
-    'blog__card',
-    'process-item',
-    'blog__list-item'
-  ]);
+// Init AOS
+AOS.init({
+    offset: 100,
+    duration: 700,
+    easing: 'ease-out-cubic',
+    once: true
 });
 
 /* =============================
@@ -283,14 +262,16 @@ document.addEventListener('DOMContentLoaded', function () {
     * 17. Heo Two Area
     ============================= */
     if (elementExists(['hero--style-2'])) {
-        fadeAnimation('fade-up', ['hero__stat', 'hero__nav', 'hero__img-wrapper']);
+        fadeAnimation('fade-up', ['hero__title', 'hero__desc', 'hero__stat', 'hero__nav', 'hero__img-wrapper']);
         fadeAnimation('zoom-out', ['hero__bg-text'], {
             to: {
-                duration: 2,
-                ease: "power1.inOut"
+                duration: 6,
+                ease: "power2.out",
+                scale: 2
             },
             scrollTrigger: {
-                start: "top 80%"
+                start: "top 80%",
+                toggleActions: "play none none none"
             }
         });
     }
@@ -375,29 +356,24 @@ document.addEventListener('DOMContentLoaded', function () {
     * 27. Hero Three Area
     ============================= */
     if (elementExists(['hero--style-3'])) {
-        const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
-
         // Top area
-        tl.from(".hero__subtitle", { y: -30, opacity: 0 })
-            .from(".hero__review-area", { y: -30, opacity: 0 }, "-=0.5");
+        fadeAnimation('fade-up', ['hero__subtitle'], { duration: 1, delay: 0.1 });
+        fadeAnimation('fade-up', ['hero__review-area'], { duration: 1, delay: 0.2 });
 
         // Headings
-        tl.from(".hero__title", { scale: 0.8, opacity: 0, stagger: 0.3 }, "-=0.3");
+        fadeAnimation('zoom-in', ['hero__title'], { duration: 1.2, delay: 0.3 });
 
         // Description + Button
-        tl.from(".hero__desc", { y: 40, opacity: 0 }, "-=0.5")
-            .from(".hero__btn", { y: 40, opacity: 0 }, "-=0.7");
+        fadeAnimation('fade-up', ['hero__desc'], { duration: 1, delay: 0.4 });
+        fadeAnimation('fade-right', ['hero__btn-wrap'], { duration: 1, delay: 0.5 });
 
         // Video thumbnail
-        tl.from(".hero__video-wrap", { scale: 0.7, opacity: 0, duration: 1.2 }, "-=0.5");
+        fadeAnimation('zoom-out', ['hero__video-wrap'], { duration: 2, delay: 0.4 });
 
         // Social icons stagger
-        tl.fromTo(
-            ".hero__socials-link",
-            { x: 40, opacity: 0 },   // starting state
-            { x: 0, opacity: 1, stagger: 0.2, duration: 0.6 }, // ending state
-            "-=0.5"
-        );
+        fadeAnimation('fade-left', ['hero__socials-link'], { duration: 2, delay: 0.3 });
+
+        elementMove(['hero__video-play-btn']);
     }
 
     /* =============================
@@ -532,4 +508,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+/* =============================
+* 3. Cards Animation
+============================= */
+fadeAnimation('fade-up', ['services__card',
+    'why-choose-us__card',
+    'projects__card',
+    'team__member',
+    'testimonials__card',
+    'faq__item',
+    'blog-card',
+    'pricing__card',
+    'services__item',
+    'blog__card',
+    'process-item',
+    'blog__list-item',
+    'contact__card'
+]);
 

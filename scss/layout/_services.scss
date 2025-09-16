@@ -6,9 +6,9 @@
     &--secondary {
         & .services__container {
             transform: translateY(280px);
-            margin-top: -300px;
+            margin-top: -320px;
 
-            &--global{
+            &--global {
                 transform: none;
                 margin-top: 0;
             }
@@ -21,9 +21,9 @@
             border-radius: 10px;
             background: transparent;
             box-shadow: none;
-            flex-wrap: wrap;
             position: relative;
             height: 100%;
+            overflow: hidden;
 
             &::after {
                 content: "";
@@ -36,8 +36,8 @@
                 z-index: 10;
             }
 
-            @include bp.respond-to(x2l) {
-                flex-direction: column;
+            @include bp.respond-to(md) {
+                flex-direction: column-reverse;
             }
 
             &-icon-wrap {
@@ -47,7 +47,6 @@
 
                 svg path {
                     fill: $color-primary;
-
                 }
             }
 
@@ -56,6 +55,9 @@
             }
 
             &-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
                 flex: 1;
                 color: $color-white;
                 background: $color-black;
@@ -91,17 +93,21 @@
                 margin-bottom: 1.5rem;
             }
 
+            &-btn {
+                width: fit-content;
+            }
+
             &-image {
                 flex-shrink: 0;
                 flex-grow: 1;
                 max-width: 300px;
-                max-height: 380px;
-                width: 100%;
+                max-height: 320px;
                 position: relative;
                 z-index: 15;
 
-                @include bp.respond-to(x2l) {
+                @include bp.respond-to(md) {
                     max-width: 100% !important;
+                    width: 100%;
                 }
 
                 img {
@@ -109,6 +115,18 @@
                     height: 100%;
                     object-fit: cover;
                 }
+            }
+        }
+
+        @include bp.respond-to(xxl) {
+            .services__grid>.col-12.col-xxl-6:nth-child(2) .services__card {
+                flex-direction: row-reverse;
+            }
+        }
+
+        @include bp.respond-to(md) {
+            .services__grid>.col-12.col-xxl-6:nth-child(2) .services__card {
+                flex-direction: column-reverse;
             }
         }
     }
@@ -249,8 +267,8 @@
                     }
                 }
 
-                &:hover &-icon-wrap {
-                    background: $color-primary;
+                &:hover .services__card-icon-wrap {
+                    background: $color-primary !important;
 
                     svg path {
                         fill: $color-white;

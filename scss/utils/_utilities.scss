@@ -52,7 +52,6 @@
      @include body-text;
    }
 
-   //  ===================================
    .btn-icon-left-primary {
      @include button($color-primary, $color-white, transparent, $color-primary);
      padding-left: 0px;
@@ -118,12 +117,12 @@
      max-width: 510px !important;
    }
 
-   .bg-light-pink{
-    background: #FFF4F5 !important;
+   .bg-light-pink {
+     background: #FFF4F5 !important;
    }
 
-   .title-hidden{
-    display: none;
+   .title-hidden {
+     display: none;
    }
 
    .main {
@@ -135,49 +134,8 @@
      visibility: hidden;
    }
 
-   /* Circular Progress Indicator */
-   .progress-circle {
-     position: fixed;
-     bottom: 30px;
-     right: 30px;
-     width: 80px;
-     height: 80px;
-     z-index: 9999;
-   }
 
-   .progress-circle-bg {
-     fill: none;
-     stroke: rgba(17, 19, 20, 0.2);
-     stroke-width: 4;
-   }
-
-   .progress-circle-progress {
-     fill: none;
-     stroke: $color-primary;
-     stroke-width: 4;
-     stroke-linecap: round;
-     transform: rotate(-90deg);
-     transform-origin: 50% 50%;
-     transition: stroke-dashoffset 0.2s;
-
-     /* Always visible */
-     filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
-   }
-
-   .progress-circle-text {
-     font-size: 16px;
-     font-weight: bold;
-     fill: $color-primary;
-
-     /* Text shadow for contrast */
-     text-shadow:
-       0 0 3px rgba(0, 0, 0, 0.8),
-       0 0 2px rgba(255, 255, 255, 0.6);
-   }
-
-
-
-
+   // Hero Two Animation
    #hero-particles {
      position: absolute;
      top: 0;
@@ -187,3 +145,13 @@
      z-index: 9999;
      pointer-events: none;
    }
+
+
+
+
+
+
+
+
+
+ 
