@@ -100,7 +100,6 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
-// Fade Animation
 function fadeAnimation(type, selectors, options = {}) {
     const selectorArray = Array.isArray(selectors) ? selectors : [selectors];
 
@@ -119,31 +118,33 @@ function fadeAnimation(type, selectors, options = {}) {
 
     const fromConfig = presets[type] || presets["fade-up"];
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                el.style.transition = `opacity ${options.duration || 0.7}s ${options.easing || 'ease-out'}, transform ${options.duration || 0.7}s ${options.easing || 'ease-out'}`;
-                el.style.opacity = 1;
-                el.style.transform = 'translateX(0) translateY(0) scale(1)';
-                obs.unobserve(el);
-            }
-        });
-    }, observerOptions);
-
     selectorArray.forEach(selector => {
-        document.querySelectorAll('.' + selector).forEach((el, index) => {
+        const elements = document.querySelectorAll('.' + selector);
+        if (!elements.length) return;
+
+        elements.forEach((el, index) => {
+            // Set initial state
             el.style.opacity = fromConfig.opacity;
             el.style.transform = `translateX(${fromConfig.x || 0}px) translateY(${fromConfig.y || 0}px) scale(${fromConfig.scale || 1})`;
-            if (options.delay) {
-                el.style.transitionDelay = `${index * options.delay}s`;
-            }
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const duration = options.duration || 0.7;
+                        const easing = options.easing || 'ease-out';
+                        const delay = options.delay ? index * options.delay : 0;
+
+                        setTimeout(() => {
+                            el.style.transition = `opacity ${duration}s ${easing}, transform ${duration}s ${easing}`;
+                            el.style.opacity = 1;
+                            el.style.transform = 'translateX(0) translateY(0) scale(1)';
+                        }, delay * 1000);
+
+                        obs.unobserve(el);
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.1 });
+
             observer.observe(el);
         });
     });
@@ -174,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
     * 5. Hero One Area
     ============================= */
     if (elementExists(['hero--style-1'])) {
-        fadeAnimation('fade-up', ['hero__title', 'hero__desc', 'hero__btn', 'hero__subtitle-wrap', 'hero__img-wrap', 'hero__form-wrap', 'hero__stats-item']);
+        fadeAnimation('fade-up', ['hero__title', 'hero__desc', 'hero__btn-wrap', 'hero__subtitle-wrap', 'hero__img', 'hero__form-wrap', 'hero__stats-item']);
         elementMove(['hero__shape-arrow']);
     }
 
@@ -361,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fadeAnimation('fade-up', ['hero__review-area'], { duration: 1, delay: 0.2 });
 
         // Headings
-        fadeAnimation('zoom-in', ['hero__title'], { duration: 1.2, delay: 0.3 });
+        fadeAnimation('zoom-in', ['hero__title'], { duration: 1.2, delay: 0.5 });
 
         // Description + Button
         fadeAnimation('fade-up', ['hero__desc'], { duration: 1, delay: 0.4 });
@@ -371,9 +372,9 @@ document.addEventListener('DOMContentLoaded', function () {
         fadeAnimation('zoom-out', ['hero__video-wrap'], { duration: 2, delay: 0.4 });
 
         // Social icons stagger
-        fadeAnimation('fade-left', ['hero__socials-link'], { duration: 2, delay: 0.3 });
+        fadeAnimation('fade-left', ['hero__socials'], { duration: 2, delay: 0.3 });
 
-        elementMove(['hero__video-play-btn']);
+        elementMove(['hero__socials-link']);
     }
 
     /* =============================
