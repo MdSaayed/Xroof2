@@ -58,6 +58,8 @@ JS INDEX
 
 ------------------------------------------------------------------*/
 
+"use strict";
+
 /* =============================
 * 1. Reuseable Animation
 ============================= */
@@ -381,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function () {
     * 28. About Three Area
     ============================= */
     if (elementExists(['about--style-3'])) {
-        fadeAnimation('fade-up', ['about__title', 'about__desc', 'about__btn-wrap', 'about__solution', 'about__img', 'year__img-wrap', 'about__stat']);
+        fadeAnimation('fade-up', ['about__title', 'about__desc', 'about__btn-wrap', 'about__solution', 'about__img', 'year__text', 'about__stat']);
     }
 
     /* =============================

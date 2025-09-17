@@ -29909,6 +29909,50 @@ a {
         flex-wrap: wrap;
   }
 }
+.about--style-3 .year__text-wrap {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  max-width: 165px;
+  margin-left: 30px;
+  height: 100%;
+  margin-top: -130px;
+  -webkit-transform-origin: right bottom;
+          transform-origin: right bottom;
+}
+@media (max-width: 1600px) {
+  .about--style-3 .year__text-wrap {
+    max-width: 90px;
+  }
+}
+@media (max-width: 1200px) {
+  .about--style-3 .year__text-wrap {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+    margin-top: 0;
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+.about--style-3 .year__text-wrap h4 {
+  font-family: "Outfit", sans-serif;
+  color: #0F0E0E;
+  font-size: clamp(4rem, 12vw, 200px);
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -2px;
+  margin: 0;
+}
+@media (max-width: 1600px) {
+  .about--style-3 .year__text-wrap h4 {
+    font-size: clamp(4rem, 8vw, 200px);
+  }
+}
+@media (max-width: 1200px) {
+  .about--style-3 .year__text-wrap h4 {
+    font-size: clamp(4rem, 12vw, 200px);
+  }
+}
 
 /* 4. Services Area */
 .services--secondary .services__container {
