@@ -1,9 +1,10 @@
 /*------------------------------------------------------------------
-Template Name: 
-Template URL:  
-Description:  
-Author:
-Author URL: 
+Template Name: XRoof — Roofing Services HTML Template
+Template URL: https://xroof.netlify.app
+Description:  XRoof — Roofing Services HTML Template is a clean, modern, and fully responsive template designed specifically for roofing companies, contractors, and construction businesses. Built with the latest technologies, XRoof helps you showcase your services, projects, and team in a professional way that builds trust with customers.
+Whether you’re a roofing contractor, construction service provider, or repair specialist, XRoof provides all the essential pages and components to launch your website quickly and easily. With a well-structured codebase, developers can customize it effortlessly, while end-users enjoy a smooth, fast, and mobile-friendly browsing experience.
+Author: RoxThemes
+Author URL: https://kits.roxthemes.com/babio
 Version: 1.0
 -------------------------------------------------------------------
 
