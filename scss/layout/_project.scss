@@ -8,7 +8,8 @@
 
     &__card {
         background: $color-white;
-        border-radius: 0 0 4px 4px;
+        border-radius: 4px;
+        overflow: hidden;
         
         &-thumb {
             width: 100%;

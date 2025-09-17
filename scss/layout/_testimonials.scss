@@ -8,7 +8,11 @@
     background-attachment: fixed !important;
 
     &--style-1 {
-        margin-bottom: 280px;
+        margin-bottom: 220px;
+
+        @include respond-to(xl){
+            margin-bottom:280px;
+        }
     }
 
     &__title,

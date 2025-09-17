@@ -73,21 +73,35 @@
 
     &__award {
         @include card-centered;
-        max-width: 120px;
-        max-height: 115px;
-        z-index: 15;
+        position: static !important;
+        width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 5px;
         align-items: center;
 
-        @include bp.respond-to(sm) {
-            display: none;
+
+        &-area {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin-top: 0;
+            padding: 0;
+            background: transparent;
+            max-width: 95px;
+            max-height: 78px;
+            z-index: 15;
+
+            @include bp.respond-to(sm) {
+                display: none;
+            }
         }
 
         &-title {
             font-size: 10px;
             font-weight: 500;
+            margin-bottom: 0;
             letter-spacing: 0.1px;
             line-height: $line-height-heading;
             text-align: center;

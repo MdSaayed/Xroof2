@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
     * 17. Heo Two Area
     ============================= */
     if (elementExists(['hero--style-2'])) {
-        fadeAnimation('fade-up', ['hero__title', 'hero__desc', 'hero__stat', 'hero__nav', 'hero__img-wrapper']);
+        fadeAnimation('fade-up', ['hero__title', 'hero__desc', 'hero__stat', 'hero__nav', 'hero__img']);
         fadeAnimation('zoom-out', ['hero__bg-text'], {
             to: {
                 duration: 6,
