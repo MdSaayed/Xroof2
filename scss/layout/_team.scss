@@ -3,9 +3,10 @@
 @use '../utils/mixin' as *;
 
 .team {
-    &__desc{
+    &__desc {
         max-width: 510px;
     }
+
     &__member {
         max-height: 460px;
         position: relative;
@@ -114,6 +115,10 @@
             }
 
         }
+    }
+
+    &--style-1 {
+        background-color: $color-light-pink;
     }
 
     &--style-2 {
